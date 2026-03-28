@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__Claude_Preview__preview_start",
+      "Bash(where node:*)",
+      "Bash(where npm:*)",
+      "Bash(where npx:*)",
+      "Bash(where python:*)",
+      "Bash(where python3:*)",
+      "Bash(npm --version)",
+      "Bash(py --version)",
+      "Bash(deno --version)",
+      "Bash(bun --version)",
+      "Bash(php --version)",
+      "Bash(npx --version)",
+      "Read(//usr/local/bin/**)",
+      "Read(//usr/bin/**)",
+      "Bash(cmd.exe /c \"where node\")",
+      "Bash(cmd.exe /c \"node --version\")",
+      "Bash(cmd.exe /c \"node --version && npx --version && where npx\")",
+      "Bash(gh auth:*)",
+      "Bash(cmd.exe /c \"gh auth status\")",
+      "Bash(cmd.exe /c \"git --version\")",
+      "Bash(GIT=\"/c/Program Files/Git/bin/git.exe\")",
+      "Bash(\"$GIT\" --version)",
+      "Bash(\"$GIT\" config:*)"
+    ]
+  }
+}

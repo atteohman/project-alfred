@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PROJECT ALFRED — Mission Control</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background-color: #0d1117;
+      color: #e6edf3;
+      min-height: 100vh;
+      padding-bottom: 56px;
+    }
+
+    /* ── HEADER ────────────────────────────────────────── */
+    .header {
+      background: #161b22;
+      border-bottom: 1px solid #30363d;
+      padding: 0 32px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .header-badge {
+      background: #58a6ff;
+      color: #0d1117;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      padding: 3px 9px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .header-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #e6edf3;
+      text-transform: uppercase;
+    }
+
+    .disconnect-btn {
+      background: transparent;
+      border: 1px solid #30363d;
+      color: #8b949e;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+
+    .disconnect-btn:hover {
+      border-color: #f85149;
+      color: #f85149;
+      background: rgba(248,81,73,0.07);
+    }
+
+    /* ── MAIN CONTENT ──────────────────────────────────── */
+    .main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 48px 32px;
+    }
+
+    /* ── WELCOME SECTION ───────────────────────────────── */
+    .welcome-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: #58a6ff;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .welcome-heading {
+      font-size: 28px;
+      font-weight: 700;
+      color: #e6edf3;
+      letter-spacing: 0.01em;
+      margin-bottom: 10px;
+    }
+
+    .welcome-desc {
+      font-size: 13.5px;
+      color: #8b949e;
+      line-height: 1.65;
+      max-width: 560px;
+      margin-bottom: 44px;
+    }
+
+    /* ── SECTION TITLE ─────────────────────────────────── */
+    .section-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: #8b949e;
+      text-transform: uppercase;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #21262d;
+      margin-bottom: 24px;
+    }
+
+    /* ── CARD GRID ─────────────────────────────────────── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+    }
+
+    /* ── MODULE CARD ───────────────────────────────────── */
+    .module-card {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 10px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.22s, background 0.22s, transform 0.22s;
+      text-decoration: none;
+      display: block;
+      cursor: pointer;
+    }
+
+    .module-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.22s;
+    }
+
+    .module-card:hover::before {
+      opacity: 1;
+    }
+
+    .module-card:hover {
+      border-color: var(--accent);
+      background: #1c2128;
+      transform: translateY(-2px);
+    }
+
+    .module-card.locked {
+      cursor: not-allowed;
+      opacity: 0.45;
+    }
+
+    .module-card.locked:hover {
+      border-color: #30363d;
+      background: #161b22;
+      transform: none;
+    }
+
+    .module-card.locked::before {
+      opacity: 0 !important;
+    }
+
+    /* COMING SOON badge */
+    .coming-soon-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(139,148,158,0.15);
+      border: 1px solid #30363d;
+      color: #8b949e;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    /* Card icon */
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: var(--icon-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 18px;
+      line-height: 1;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #e6edf3;
+      letter-spacing: 0.01em;
+      margin-bottom: 10px;
+    }
+
+    .card-desc {
+      font-size: 12.5px;
+      color: #8b949e;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .card-link {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .card-link.muted {
+      color: #8b949e;
+      cursor: not-allowed;
+    }
+
+    /* ── STATUS BAR ────────────────────────────────────── */
+    .status-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 36px;
+      background: #161b22;
+      border-top: 1px solid #30363d;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 100;
+    }
+
+    .status-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: #8b949e;
+      letter-spacing: 0.04em;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.35; }
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background: #2ea043;
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+
+    .status-right {
+      font-size: 10px;
+      color: #30363d;
+      letter-spacing: 0.07em;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-left">
+      <span class="header-badge">ALFRED</span>
+      <span class="header-title">Project Alfred</span>
+    </div>
+    <button class="disconnect-btn" id="disconnectBtn">&#x2715; Disconnect</button>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- Welcome -->
+    <div class="welcome-label">Mission Control</div>
+    <h2 class="welcome-heading">Select Intelligence Module</h2>
+    <p class="welcome-desc">
+      Access classified geopolitical intelligence modules below. Each module provides
+      real-time analysis and strategic data for field reconnaissance operations.
+      Locked modules are currently in development.
+    </p>
+
+    <!-- Section title -->
+    <div class="section-title">Available Modules</div>
+
+    <!-- Card grid -->
+    <div class="card-grid">
+
+      <!-- Card 1: Global Tension Index -->
+      <a
+        class="module-card"
+        href="political-tension-map.html"
+        style="--accent: #e76f51; --icon-bg: rgba(231,111,81,0.10);"
+      >
+        <div class="card-icon">&#x1F321;&#xFE0F;</div>
+        <div class="card-title">Global Tension Index</div>
+        <p class="card-desc">
+          Interactive world map showing political tension levels across 80+ countries,
+          with detailed analysis of causes and current leadership.
+        </p>
+        <span class="card-link">Launch Module &rarr;</span>
+      </a>
+
+      <!-- Card 2: Alliance Network -->
+      <a
+        class="module-card"
+        href="political-alliances.html"
+        style="--accent: #58a6ff; --icon-bg: rgba(88,166,255,0.10);"
+      >
+        <div class="card-icon">&#x1F578;&#xFE0F;</div>
+        <div class="card-title">Alliance Network</div>
+        <p class="card-desc">
+          Force-directed network map of global political and military alliances — NATO,
+          CSTO, SCO, BRICS, ASEAN and more — with historical context.
+        </p>
+        <span class="card-link">Launch Module &rarr;</span>
+      </a>
+
+      <!-- Card 3: Economic Power Index (LOCKED) -->
+      <div
+        class="module-card locked"
+        style="--accent: #52b788; --icon-bg: rgba(82,183,136,0.10);"
+      >
+        <span class="coming-soon-badge">Coming Soon</span>
+        <div class="card-icon">&#x1F4B0;</div>
+        <div class="card-title">Economic Power Index</div>
+        <p class="card-desc">
+          GDP, trade dependencies, sanctions exposure, and sovereign debt analysis
+          across major economies.
+        </p>
+        <span class="card-link muted">Classified</span>
+      </div>
+
+      <!-- Card 4: Nuclear Capability Assessment (LOCKED) -->
+      <div
+        class="module-card locked"
+        style="--accent: #9d0208; --icon-bg: rgba(157,2,8,0.10);"
+      >
+        <span class="coming-soon-badge">Coming Soon</span>
+        <div class="card-icon">&#x2622;&#xFE0F;</div>
+        <div class="card-title">Nuclear Capability Assessment</div>
+        <p class="card-desc">
+          Strategic nuclear posture, delivery systems, and deterrence frameworks
+          for declared and suspected nuclear states.
+        </p>
+        <span class="card-link muted">Classified</span>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- STATUS BAR -->
+  <footer class="status-bar">
+    <div class="status-left">
+      <span class="status-dot"></span>
+      System Online &bull; All modules operational
+    </div>
+    <div class="status-right">Project Alfred v2.4.1 &bull; Authorized Access Only</div>
+  </footer>
+
+  <script>
+    (function () {
+      if (sessionStorage.getItem('alfred_auth') !== 'true') {
+        window.location.replace('index.html');
+        return;
+      }
+
+      document.getElementById('disconnectBtn').addEventListener('click', function () {
+        sessionStorage.removeItem('alfred_auth');
+        window.location.replace('index.html');
+      });
+    })();
+  </script>
+
+</body>
+</html>
