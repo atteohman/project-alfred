@@ -272,6 +272,33 @@
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #30363d; border-radius: 3px; }
+
+    /* News section */
+    .news-toggle-btn {
+      display: flex; align-items: center; gap: 7px;
+      width: 100%; margin-top: 18px;
+      padding: 9px 14px;
+      background: rgba(88,166,255,0.07);
+      border: 1px solid rgba(88,166,255,0.2);
+      border-radius: 6px;
+      color: #58a6ff;
+      font-size: 0.73rem; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      cursor: pointer; font-family: inherit;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .news-toggle-btn:hover { background: rgba(88,166,255,0.14); border-color: rgba(88,166,255,0.45); }
+    .news-section { margin-top: 10px; }
+    .news-section.hidden { display: none; }
+    .news-loading { text-align: center; color: #8b949e; font-size: 0.78rem; padding: 14px 0; }
+    .news-item { padding: 10px 0; border-bottom: 1px solid #21262d; }
+    .news-item:last-child { border-bottom: none; }
+    .news-item a { font-size: 0.82rem; font-weight: 600; color: #e6edf3; text-decoration: none; line-height: 1.45; display: block; margin-bottom: 4px; }
+    .news-item a:hover { color: #58a6ff; }
+    .news-meta { font-size: 0.68rem; color: #484f58; }
+    .news-meta .news-section-tag { color: #58a6ff; margin-right: 6px; }
+    .news-trail { font-size: 0.75rem; color: #8b949e; line-height: 1.5; margin-top: 3px; }
+    .news-empty { font-size: 0.78rem; color: #8b949e; padding: 10px 0; }
   </style>
 </head>
 <body>
@@ -323,6 +350,14 @@
     <div class="panel-summary" id="panel-summary"></div>
     <div class="panel-section-title">Key Tension Factors</div>
     <ul class="reasons-list" id="panel-reasons"></ul>
+
+    <button class="news-toggle-btn" id="news-toggle-btn" onclick="toggleNews()">
+      &#x1F4F0; Latest News
+    </button>
+    <div class="news-section hidden" id="news-section">
+      <div class="news-loading" id="news-loading">Loading news&hellip;</div>
+      <div id="news-list"></div>
+    </div>
   </div>
 
   <div class="zoom-controls">
@@ -531,12 +566,70 @@ async function openPanel(d) {
     document.getElementById("panel-reasons").innerHTML = "";
   }
 
+  // Reset news for new country
+  currentNewsQuery = name;
+  newsLoaded = false;
+  document.getElementById("news-section").classList.add("hidden");
+  document.getElementById("news-list").innerHTML = "";
+
   infoPanel.classList.add("open");
 }
 
 function closePanel() {
   infoPanel.classList.remove("open");
   if (selectedEl) { d3.select(selectedEl).classed("selected", false); selectedEl = null; }
+  // Reset news section
+  document.getElementById("news-section").classList.add("hidden");
+  document.getElementById("news-list").innerHTML = "";
+}
+
+// ─── News ─────────────────────────────────────────────────────────────────────
+let currentNewsQuery = "";
+let newsLoaded = false;
+
+function toggleNews() {
+  const section = document.getElementById("news-section");
+  if (section.classList.contains("hidden")) {
+    section.classList.remove("hidden");
+    if (!newsLoaded) fetchNews(currentNewsQuery);
+  } else {
+    section.classList.add("hidden");
+  }
+}
+
+async function fetchNews(query) {
+  const listEl = document.getElementById("news-list");
+  const loadEl = document.getElementById("news-loading");
+  loadEl.style.display = "block";
+  listEl.innerHTML = "";
+  newsLoaded = false;
+
+  try {
+    const url = `https://content.guardianapis.com/search?q=${encodeURIComponent(query)}&show-fields=trailText&order-by=newest&page-size=5&api-key=test`;
+    const res  = await fetch(url);
+    const data = await res.json();
+    const results = data?.response?.results || [];
+    loadEl.style.display = "none";
+    newsLoaded = true;
+
+    if (results.length === 0) {
+      listEl.innerHTML = `<div class="news-empty">No recent news found for "${query}".</div>`;
+      return;
+    }
+    results.forEach(item => {
+      const date = new Date(item.webPublicationDate).toLocaleDateString("en-GB", { day:"numeric", month:"short", year:"numeric" });
+      const trail = item.fields?.trailText ? `<div class="news-trail">${item.fields.trailText.replace(/<[^>]+>/g,"")}</div>` : "";
+      listEl.innerHTML += `
+        <div class="news-item">
+          <a href="${item.webUrl}" target="_blank" rel="noopener">${item.webTitle}</a>
+          ${trail}
+          <div class="news-meta"><span class="news-section-tag">${item.sectionName}</span>${date}</div>
+        </div>`;
+    });
+  } catch {
+    loadEl.style.display = "none";
+    listEl.innerHTML = `<div class="news-empty">Could not load news. Check your connection.</div>`;
+  }
 }
 
 document.getElementById("panel-close-btn").addEventListener("click", closePanel);
