@@ -340,7 +340,6 @@
       <div class="leader-info">
         <div class="leader-name" id="leader-name"></div>
         <div class="leader-title-text" id="leader-title-el"></div>
-        <a class="leader-wiki-link" id="leader-wiki-link" href="#" target="_blank" rel="noopener"></a>
       </div>
     </div>
 
@@ -508,26 +507,20 @@ async function openPanel(d) {
   // Leader section
   const leaderNameEl  = document.getElementById("leader-name");
   const leaderTitleEl = document.getElementById("leader-title-el");
-  const leaderWikiLink = document.getElementById("leader-wiki-link");
 
   if (lData) {
     leaderNameEl.textContent  = lData.name;
     leaderTitleEl.textContent = lData.title;
     if (lData.wiki) {
-      leaderWikiLink.href        = `https://en.wikipedia.org/wiki/${encodeURIComponent(lData.wiki)}`;
-      leaderWikiLink.textContent = "Wikipedia";
-      leaderWikiLink.style.display = "inline";
       showLeaderLoading();
       const src = await fetchWikiImage(lData.wiki);
       showLeaderImage(src);
     } else {
-      leaderWikiLink.style.display = "none";
       showLeaderImage(null);
     }
   } else {
     leaderNameEl.innerHTML  = '<span class="no-leader-note">No data available</span>';
     leaderTitleEl.textContent = "";
-    leaderWikiLink.style.display = "none";
     imgSpinner.classList.add("hidden");
     leaderImg.style.display = "none";
     leaderPlaceholder.style.display = "flex";
@@ -567,7 +560,7 @@ async function openPanel(d) {
   }
 
   // Reset news for new country
-  currentNewsQuery = name;
+  currentNewsQuery = name + " politics OR conflict OR government OR military";
   newsLoaded = false;
   document.getElementById("news-section").classList.add("hidden");
   document.getElementById("news-list").innerHTML = "";
@@ -605,7 +598,7 @@ async function fetchNews(query) {
   newsLoaded = false;
 
   try {
-    const url = `https://content.guardianapis.com/search?q=${encodeURIComponent(query)}&show-fields=trailText&order-by=newest&page-size=5&api-key=test`;
+    const url = `https://content.guardianapis.com/search?q=${encodeURIComponent(query)}&show-fields=trailText&order-by=newest&page-size=5&section=world|politics|us-news&api-key=test`;
     const res  = await fetch(url);
     const data = await res.json();
     const results = data?.response?.results || [];

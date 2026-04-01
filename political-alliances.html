@@ -416,7 +416,7 @@ function openAlliancePanel(id) {
   });
 
   // Reset news
-  currentNewsQuery = a.fullName;
+  currentNewsQuery = a.label + " " + a.fullName + " alliance OR military OR diplomacy";
   newsLoaded = false;
   document.getElementById("news-section").classList.add("hidden");
   document.getElementById("news-list").innerHTML = "";
@@ -461,7 +461,7 @@ function openCountryPanel(code) {
   });
 
   // Reset news
-  currentNewsQuery = c.name;
+  currentNewsQuery = c.name + " alliance OR military OR foreign policy OR diplomacy";
   newsLoaded = false;
   document.getElementById("news-section").classList.add("hidden");
   document.getElementById("news-list").innerHTML = "";
@@ -498,7 +498,7 @@ async function fetchNews(query) {
   listEl.innerHTML = "";
   newsLoaded = false;
   try {
-    const url = `https://content.guardianapis.com/search?q=${encodeURIComponent(query)}&show-fields=trailText&order-by=newest&page-size=5&api-key=test`;
+    const url = `https://content.guardianapis.com/search?q=${encodeURIComponent(query)}&show-fields=trailText&order-by=newest&page-size=5&section=world|politics|us-news&api-key=test`;
     const res  = await fetch(url);
     const data = await res.json();
     const results = data?.response?.results || [];

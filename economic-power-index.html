@@ -646,7 +646,7 @@ function openPanel(id) {
   document.getElementById('panel-summary').textContent = d.summary;
 
   // Reset news
-  currentNewsQuery = d.name + ' economy';
+  currentNewsQuery = d.name + ' economy OR trade OR GDP OR sanctions OR inflation';
   newsLoaded = false;
   document.getElementById('news-section').classList.add('hidden');
   document.getElementById('news-list').innerHTML = '';
@@ -686,7 +686,7 @@ async function fetchNews(query) {
   listEl.innerHTML = '';
   newsLoaded = false;
   try {
-    const url = `https://content.guardianapis.com/search?q=${encodeURIComponent(query)}&show-fields=trailText&order-by=newest&page-size=5&api-key=test`;
+    const url = `https://content.guardianapis.com/search?q=${encodeURIComponent(query)}&show-fields=trailText&order-by=newest&page-size=5&section=business|money&api-key=test`;
     const res  = await fetch(url);
     const data = await res.json();
     const results = data?.response?.results || [];
