@@ -440,9 +440,10 @@ function openAlliancePanel(id) {
     tl.appendChild(item);
   });
 
-  // Build query from alliance name + keywords from recent events
+  // Alliances have no country tag — use name + recent event keywords as q=
+  currentNewsTag = "";
   const eventTerms = (a.events || []).slice(-3).map(e => e.e).join(" ");
-  currentNewsQuery = '"' + a.label + '" OR "' + a.fullName + '" ' + extractKeywords(eventTerms);
+  currentNewsTopicQ = extractKeywords(eventTerms) || "military OR alliance OR diplomacy";
   currentNewsCountry = a.fullName;
   newsLoaded = false;
   closeNewsPanel();
@@ -487,9 +488,10 @@ function openCountryPanel(code) {
     chips.appendChild(chip);
   });
 
-  // Build query: country name + its alliance names for context
+  // Use Guardian country tag + alliance names as topic keywords
+  currentNewsTag = GUARDIAN_TAGS[c.name] || "";
   const allianceNames = c.a.map(aid => ALLIANCES[aid].label).join(" OR ");
-  currentNewsQuery = '"' + c.name + '" (' + allianceNames + ' OR military OR diplomacy OR foreign policy)';
+  currentNewsTopicQ = allianceNames + " OR military OR diplomacy OR foreign policy";
   currentNewsCountry = c.name;
   newsLoaded = false;
   closeNewsPanel();
@@ -514,22 +516,51 @@ function extractKeywords(text) {
   });
   return Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,4).map(([w])=>w).join(" OR ");
 }
+const GUARDIAN_TAGS = {
+  "Afghanistan":"world/afghanistan","Albania":"world/albania","Algeria":"world/algeria",
+  "Angola":"world/angola","Argentina":"world/argentina","Armenia":"world/armenia",
+  "Australia":"world/australia","Austria":"world/austria","Azerbaijan":"world/azerbaijan",
+  "Bangladesh":"world/bangladesh","Belarus":"world/belarus","Belgium":"world/belgium",
+  "Bolivia":"world/bolivia","Brazil":"world/brazil","Bulgaria":"world/bulgaria",
+  "Cambodia":"world/cambodia","Cameroon":"world/cameroon","Canada":"world/canada",
+  "Chile":"world/chile","China":"world/china","Colombia":"world/colombia",
+  "Croatia":"world/croatia","Cuba":"world/cuba",
+  "DR Congo":"world/democratic-republic-of-congo","Ecuador":"world/ecuador",
+  "Egypt":"world/egypt","Ethiopia":"world/ethiopia","Finland":"world/finland",
+  "France":"world/france","Germany":"world/germany","Ghana":"world/ghana",
+  "Greece":"world/greece","Hungary":"world/hungary","India":"world/india",
+  "Indonesia":"world/indonesia","Iran":"world/iran","Iraq":"world/iraq",
+  "Ireland":"world/ireland","Israel":"world/israel","Italy":"world/italy",
+  "Japan":"world/japan","Jordan":"world/jordan","Kazakhstan":"world/kazakhstan",
+  "Kenya":"world/kenya","Libya":"world/libya","Malaysia":"world/malaysia",
+  "Mexico":"world/mexico","Morocco":"world/morocco","Myanmar":"world/myanmar",
+  "Netherlands":"world/netherlands","Nigeria":"world/nigeria",
+  "North Korea":"world/north-korea","Norway":"world/norway","Pakistan":"world/pakistan",
+  "Philippines":"world/philippines","Poland":"world/poland","Portugal":"world/portugal",
+  "Romania":"world/romania","Russia":"world/russia","Saudi Arabia":"world/saudi-arabia",
+  "Serbia":"world/serbia","South Africa":"world/southafrica",
+  "South Korea":"world/south-korea","Spain":"world/spain","Sri Lanka":"world/sri-lanka",
+  "Sweden":"world/sweden","Switzerland":"world/switzerland","Syria":"world/syria",
+  "Taiwan":"world/taiwan","Thailand":"world/thailand","Turkey":"world/turkey",
+  "Ukraine":"world/ukraine","United Arab Emirates":"world/united-arab-emirates",
+  "United Kingdom":"world/unitedkingdom","United States":"world/usa",
+  "Venezuela":"world/venezuela","Vietnam":"world/vietnam","Yemen":"world/yemen",
+  "Zimbabwe":"world/zimbabwe"
+};
+
 const newsPanel = document.getElementById("news-panel");
-let currentNewsQuery = "";
+let currentNewsTag = "";
+let currentNewsTopicQ = "";
 let currentNewsCountry = "";
 let newsLoaded = false;
 
 function toggleNewsPanel() {
-  if (newsPanel.classList.contains("open")) {
-    closeNewsPanel();
-  } else {
-    openNewsPanel();
-  }
+  if (newsPanel.classList.contains("open")) { closeNewsPanel(); } else { openNewsPanel(); }
 }
 function openNewsPanel() {
   newsPanel.classList.add("open");
   document.getElementById("news-tab-btn").classList.add("active");
-  if (!newsLoaded) fetchNews(currentNewsQuery, currentNewsCountry);
+  if (!newsLoaded) fetchNews(currentNewsTag, currentNewsTopicQ, currentNewsCountry);
 }
 function closeNewsPanel() {
   newsPanel.classList.remove("open");
@@ -537,7 +568,7 @@ function closeNewsPanel() {
   if (btn) btn.classList.remove("active");
 }
 
-async function fetchNews(query, label) {
+async function fetchNews(tag, topicQ, label) {
   const listEl = document.getElementById("news-list");
   const loadEl = document.getElementById("news-loading");
   document.getElementById("news-panel-country").textContent = label;
@@ -545,10 +576,19 @@ async function fetchNews(query, label) {
   listEl.innerHTML = "";
   newsLoaded = false;
   try {
-    const url = `https://content.guardianapis.com/search?q=${encodeURIComponent(query)}&show-fields=trailText&order-by=newest&page-size=8&section=world|politics|us-news&api-key=test`;
+    let url;
+    if (tag) {
+      url = `https://content.guardianapis.com/search?tag=${encodeURIComponent(tag)}&q=${encodeURIComponent(topicQ||"military OR diplomacy OR politics")}&show-fields=trailText&order-by=newest&page-size=8&api-key=test`;
+    } else {
+      url = `https://content.guardianapis.com/search?q=${encodeURIComponent('"'+label+'" '+(topicQ||"military OR alliance OR diplomacy"))}&show-fields=trailText&order-by=newest&page-size=8&section=world|politics&api-key=test`;
+    }
     const res  = await fetch(url);
     const data = await res.json();
-    const results = data?.response?.results || [];
+    let results = data?.response?.results || [];
+    if (results.length === 0 && tag && topicQ) {
+      const fb = await fetch(`https://content.guardianapis.com/search?tag=${encodeURIComponent(tag)}&show-fields=trailText&order-by=newest&page-size=8&api-key=test`);
+      results = (await fb.json())?.response?.results || [];
+    }
     loadEl.style.display = "none";
     newsLoaded = true;
     if (results.length === 0) {

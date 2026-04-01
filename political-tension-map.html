@@ -604,9 +604,9 @@ async function openPanel(d) {
     document.getElementById("panel-reasons").innerHTML = "";
   }
 
-  // Build targeted query: country name + keywords extracted from tension reasons
-  const tensionKeywords = tData ? extractKeywords(tData.reasons) : "politics conflict government";
-  currentNewsQuery = '"' + name + '" ' + tensionKeywords;
+  // Use Guardian country tag for precise filtering + topic keywords from tension reasons
+  currentNewsTag = GUARDIAN_TAGS[name] || "";
+  currentNewsTopicQ = tData ? extractKeywords(tData.reasons) : "politics OR conflict OR government";
   currentNewsCountry = name;
   newsLoaded = false;
   closeNewsPanel();
@@ -622,8 +622,44 @@ function closePanel() {
 }
 
 // ─── News Panel ───────────────────────────────────────────────────────────────
+// Guardian country tags — articles must be explicitly filed under that country
+const GUARDIAN_TAGS = {
+  "Afghanistan":"world/afghanistan","Albania":"world/albania","Algeria":"world/algeria",
+  "Angola":"world/angola","Argentina":"world/argentina","Armenia":"world/armenia",
+  "Australia":"world/australia","Austria":"world/austria","Azerbaijan":"world/azerbaijan",
+  "Bangladesh":"world/bangladesh","Belarus":"world/belarus","Belgium":"world/belgium",
+  "Bolivia":"world/bolivia","Bosnia and Herzegovina":"world/bosnia-and-herzegovina",
+  "Brazil":"world/brazil","Bulgaria":"world/bulgaria","Cambodia":"world/cambodia",
+  "Cameroon":"world/cameroon","Canada":"world/canada",
+  "Central African Republic":"world/central-african-republic",
+  "Chile":"world/chile","China":"world/china","Colombia":"world/colombia",
+  "Croatia":"world/croatia","Cuba":"world/cuba","DR Congo":"world/democratic-republic-of-congo",
+  "Ecuador":"world/ecuador","Egypt":"world/egypt","Ethiopia":"world/ethiopia",
+  "Finland":"world/finland","France":"world/france","Germany":"world/germany",
+  "Ghana":"world/ghana","Greece":"world/greece","Hungary":"world/hungary",
+  "India":"world/india","Indonesia":"world/indonesia","Iran":"world/iran",
+  "Iraq":"world/iraq","Ireland":"world/ireland","Israel":"world/israel",
+  "Italy":"world/italy","Japan":"world/japan","Jordan":"world/jordan",
+  "Kazakhstan":"world/kazakhstan","Kenya":"world/kenya","Libya":"world/libya",
+  "Malaysia":"world/malaysia","Mexico":"world/mexico","Morocco":"world/morocco",
+  "Myanmar":"world/myanmar","Netherlands":"world/netherlands","Nigeria":"world/nigeria",
+  "North Korea":"world/north-korea","Norway":"world/norway","Pakistan":"world/pakistan",
+  "Philippines":"world/philippines","Poland":"world/poland","Portugal":"world/portugal",
+  "Romania":"world/romania","Russia":"world/russia","Saudi Arabia":"world/saudi-arabia",
+  "Serbia":"world/serbia","Somalia":"world/somalia","South Africa":"world/southafrica",
+  "South Korea":"world/south-korea","Spain":"world/spain","Sri Lanka":"world/sri-lanka",
+  "Sudan":"world/sudan","Sweden":"world/sweden","Switzerland":"world/switzerland",
+  "Syria":"world/syria","Taiwan":"world/taiwan","Thailand":"world/thailand",
+  "Turkey":"world/turkey","Ukraine":"world/ukraine",
+  "United Arab Emirates":"world/united-arab-emirates",
+  "United Kingdom":"world/unitedkingdom","United States":"world/usa",
+  "Venezuela":"world/venezuela","Vietnam":"world/vietnam","Yemen":"world/yemen",
+  "Zimbabwe":"world/zimbabwe","Cuba":"world/cuba","Belarus":"world/belarus",
+  "Palestine":"world/palestinian-territories","Palestinian Authority":"world/palestinian-territories"
+};
+
 // Extract the most meaningful political/conflict terms from reason strings
-const STOP_WORDS = new Set(["the","a","an","and","or","of","in","to","with","for","on","at","by","from","is","are","has","have","been","its","over","under","into","that","this","their","after","against","between","within","without","despite","amid","as","due","up","no","not","through","since"]);
+const STOP_WORDS = new Set(["the","a","an","and","or","of","in","to","with","for","on","at","by","from","is","are","has","have","been","its","over","under","into","that","this","their","after","against","between","within","without","despite","amid","as","due","up","no","not","through","since","first","also","more","most","was","were","who","which","when","new","than","but","while","both"]);
 function extractKeywords(reasons) {
   const counts = {};
   (reasons || []).forEach(r => {
@@ -631,38 +667,30 @@ function extractKeywords(reasons) {
       if (w.length > 4 && !STOP_WORDS.has(w)) counts[w] = (counts[w] || 0) + 1;
     });
   });
-  return Object.entries(counts)
-    .sort((a,b) => b[1]-a[1])
-    .slice(0,4)
-    .map(([w]) => w)
-    .join(" OR ");
+  return Object.entries(counts).sort((a,b) => b[1]-a[1]).slice(0,4).map(([w]) => w).join(" OR ");
 }
+
 const newsPanel = document.getElementById("news-panel");
-let currentNewsQuery = "";
+let currentNewsTag = "";
+let currentNewsTopicQ = "";
 let currentNewsCountry = "";
 let newsLoaded = false;
 
 function toggleNewsPanel() {
-  if (newsPanel.classList.contains("open")) {
-    closeNewsPanel();
-  } else {
-    openNewsPanel();
-  }
+  if (newsPanel.classList.contains("open")) { closeNewsPanel(); } else { openNewsPanel(); }
 }
-
 function openNewsPanel() {
   newsPanel.classList.add("open");
   document.getElementById("news-tab-btn").classList.add("active");
-  if (!newsLoaded) fetchNews(currentNewsQuery, currentNewsCountry);
+  if (!newsLoaded) fetchNews(currentNewsTag, currentNewsTopicQ, currentNewsCountry);
 }
-
 function closeNewsPanel() {
   newsPanel.classList.remove("open");
   const btn = document.getElementById("news-tab-btn");
   if (btn) btn.classList.remove("active");
 }
 
-async function fetchNews(query, countryName) {
+async function fetchNews(tag, topicQ, countryName) {
   const listEl = document.getElementById("news-list");
   const loadEl = document.getElementById("news-loading");
   document.getElementById("news-panel-country").textContent = countryName;
@@ -670,10 +698,23 @@ async function fetchNews(query, countryName) {
   listEl.innerHTML = "";
   newsLoaded = false;
   try {
-    const url = `https://content.guardianapis.com/search?q=${encodeURIComponent(query)}&show-fields=trailText&order-by=newest&page-size=8&section=world|politics|us-news&api-key=test`;
+    let url;
+    if (tag) {
+      // Tag-based: only articles explicitly filed under this country
+      url = `https://content.guardianapis.com/search?tag=${encodeURIComponent(tag)}&q=${encodeURIComponent(topicQ || "politics OR conflict OR government")}&show-fields=trailText&order-by=newest&page-size=8&api-key=test`;
+    } else {
+      // Fallback for countries without a tag mapping
+      url = `https://content.guardianapis.com/search?q=${encodeURIComponent('"'+countryName+'" '+topicQ)}&show-fields=trailText&order-by=newest&page-size=8&section=world|politics&api-key=test`;
+    }
     const res  = await fetch(url);
     const data = await res.json();
-    const results = data?.response?.results || [];
+    let results = data?.response?.results || [];
+    // If tag query returned nothing, retry without topic filter
+    if (results.length === 0 && tag && topicQ) {
+      const fallback = await fetch(`https://content.guardianapis.com/search?tag=${encodeURIComponent(tag)}&show-fields=trailText&order-by=newest&page-size=8&api-key=test`);
+      const fallData = await fallback.json();
+      results = fallData?.response?.results || [];
+    }
     loadEl.style.display = "none";
     newsLoaded = true;
     if (results.length === 0) {
