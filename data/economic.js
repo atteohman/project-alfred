@@ -6,11 +6,11 @@
 // gdp: billions USD | gdpPerCap: USD | growth: % | debt: % of GDP
 // tradeBalance: billions USD (positive = surplus, negative = deficit)
 const ECON_DATA = {
-  840: { name:"United States", gdp:29800, gdpPerCap:88300, growth:1.9, debt:124.5, tradeBalance:-1050,
+  840: { name:"United States", gdp:29800, gdpPerCap:88300, growth:2.4, debt:124.5, tradeBalance:-1050,
     exports:["Technology","Aerospace","Pharmaceuticals","Financial Services","Agriculture","Petroleum"],
     partners:["Canada","Mexico","EU","Japan","UK"],
     sanctions:false,
-    summary:"World's largest nominal economy. The second Trump administration's broad tariff programme — including 10–25% universal tariffs and escalating levies on Chinese goods — has reshaped trade flows and introduced supply-chain uncertainty. Growth moderated but remains resilient, underpinned by AI-driven investment and a tight labour market." },
+    summary:"World's largest nominal economy. Growth is projected at 2.4% for 2026 (IMF, January 2026), supported by the One Big Beautiful Bill Act tax incentives, AI-driven investment, and a partial trade truce with China agreed in November 2025. Tariff pass-through to consumer prices is gradually materialising but has been slower than feared. Core inflation is expected to return to 2% in 2027." },
 
   156: { name:"China", gdp:19200, gdpPerCap:13650, growth:4.5, debt:86.8, tradeBalance:920,
     exports:["Electronics","Machinery","EVs","Steel","Chemicals","Solar Equipment"],
@@ -346,13 +346,13 @@ const ECON_DATA = {
     exports:["Petroleum","Gold","Bauxite","Agricultural Products"],
     partners:["China","Cuba","Russia","Turkey","Colombia"],
     sanctions:true,
-    summary:"Partial recovery from the catastrophic 2014–2021 GDP collapse (~75%) continues. Partial dollarisation has reduced hyperinflation. Maduro declared victory in the disputed July 2024 election amid widespread fraud allegations. US sanctions have been periodically relaxed and tightened as negotiations over political prisoners and oil licences fluctuate." },
+    summary:"In January 2026, the US captured Nicolás Maduro; Acting President Delcy Rodríguez has assumed power under contested legitimacy. Trump has declared intent to open Venezuela's oil sector to US companies, which could structurally reshape the economy if political stability is established. Partial dollarisation continues; hyperinflation has moderated but underlying economic dysfunction persists." },
 
   364: { name:"Iran", gdp:720, gdpPerCap:8000, growth:3.5, debt:31.0, tradeBalance:26,
     exports:["Crude Oil","Petroleum Products","Petrochemicals","Pistachios","Carpets"],
     partners:["China","Iraq","Turkey","UAE","Russia"],
     sanctions:true,
-    summary:"Economy operating under extensive Western sanctions, with oil exports redirected almost entirely to China. Reform president Pezeshkian, elected in 2024, has pursued diplomatic opening, including a nuclear deal framework. The rial has partially stabilised. Iran's strategic weapons support for Russia has deepened its alignment with sanctioned states." },
+    summary:"Economy operating under extensive Western sanctions, with oil exports redirected almost entirely to China. The assassination of Supreme Leader Ali Khamenei in February 2026 and the subsequent IRGC-backed accession of Mojtaba Khamenei has thrown Iran into a political crisis. Any diplomatic opening pursued by reform president Pezeshkian is now indefinitely suspended. Economic outlook extremely uncertain." },
 
   408: { name:"North Korea", gdp:18, gdpPerCap:665, growth:0.8, debt:0, tradeBalance:0,
     exports:["Coal","Iron","Textiles","Armaments","Cyber Services"],
@@ -497,7 +497,7 @@ const ECON_DATA = {
     exports:["Natural Gas","Zinc","Gold","Soybeans","Tin"],
     partners:["Brazil","Argentina","Colombia","United States","China"],
     sanctions:false,
-    summary:"Landlocked Andean economy with significant natural gas (declining production) and one of the world's largest lithium reserves in the Salar de Uyuni. A 2024 coup attempt by sections of the military failed and was quickly reversed. Lithium production is ramping up through state-private partnerships." },
+    summary:"New right-wing President Rodrigo Paz Pereira took office in November 2025, ending 20 years of MAS government. He is pursuing radical fiscal austerity — a 30%+ spending cut — to address exhausted foreign currency reserves and fuel shortages inherited from the Arce government. Lithium production remains a long-term asset; private-sector partnerships are being expanded." },
 
   // DR Congo
   180: { name:"DR Congo", gdp:76, gdpPerCap:764, growth:6.8, debt:24.0, tradeBalance:7,
