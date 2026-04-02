@@ -18,13 +18,13 @@ const ECON_DATA = {
     sanctions:false,
     summary:"World's second-largest economy facing a prolonged property sector correction and US tariff escalation. Growth has stabilised around 4.5%, supported by manufacturing exports — particularly EVs and clean energy equipment — and government stimulus. De-risking by Western multinationals continues to redirect some supply chains." },
 
-  392: { name:"Japan", gdp:4380, gdpPerCap:35400, growth:1.1, debt:257.0, tradeBalance:-42,
+  392: { name:"Japan", gdp:4380, gdpPerCap:35400, growth:0.6, debt:257.0, tradeBalance:-42,
     exports:["Vehicles","Machinery","Electronics","Precision Instruments","Chemicals"],
     partners:["United States","China","South Korea","Australia","EU"],
     sanctions:false,
     summary:"Highly developed economy under PM Sanae Takaichi (Japan's first female PM, since October 2025), who launched a ¥13.9 trillion stimulus package. The Bank of Japan has gradually raised rates from negative territory; yen weakness has boosted export earnings. Demographic contraction and record public debt remain long-term structural challenges." },
 
-  276: { name:"Germany", gdp:4450, gdpPerCap:53200, growth:1.4, debt:65.0, tradeBalance:268,
+  276: { name:"Germany", gdp:4450, gdpPerCap:53200, growth:0.9, debt:65.0, tradeBalance:268,
     exports:["Vehicles","Machinery","Chemicals","Pharmaceuticals","Electronics"],
     partners:["United States","France","Netherlands","China","Italy"],
     sanctions:false,
