@@ -121,7 +121,7 @@ const ALLIANCES = {
   brics: {
     id: "brics", label: "BRICS+", fullName: "Brazil–Russia–India–China–South Africa (+ Partners)",
     color: "#c8873a", xf: 0.62, yf: 0.60,
-    founded: "June 16, 2009 (First BRIC Summit)", hq: "No permanent HQ (rotating presidency)", memberCount: 10,
+    founded: "June 16, 2009 (First BRIC Summit)", hq: "No permanent HQ (rotating presidency)", memberCount: 11,
     summary: "BRICS began as a Goldman Sachs investment thesis — the acronym coined in 2001 by economist Jim O'Neill to describe fast-growing emerging economies. The countries formalized it as a political grouping in 2009. In 2010 South Africa joined (making it BRICS). At the 2023 Johannesburg Summit, the group invited six new members, expanding to represent 40%+ of global oil production. BRICS's central ambition is reducing dollar dominance in global trade and challenging Western-led financial institutions like the IMF and World Bank.",
     events: [
       { y: 2001, e: "Goldman Sachs economist Jim O'Neill coins the 'BRIC' acronym in a research paper on emerging markets." },
@@ -131,7 +131,8 @@ const ALLIANCES = {
       { y: 2015, e: "NDB begins lending; Contingent Reserve Arrangement (CRA) created to stabilize member currencies." },
       { y: 2022, e: "Russia's Ukraine invasion strains group cohesion; India and China refuse to condemn Moscow." },
       { y: 2023, e: "Johannesburg Summit invites UAE, Egypt, Ethiopia, Iran, Saudi Arabia, Argentina to join." },
-      { y: 2024, e: "Saudi Arabia, UAE, Iran, Egypt, Ethiopia join. Argentina declines under new president Milei." }
+      { y: 2024, e: "Saudi Arabia, UAE, Iran, Egypt, Ethiopia join. Argentina declines under new president Milei." },
+      { y: 2025, e: "Indonesia joins as the 11th full member, becoming the first Southeast Asian nation in BRICS." }
     ]
   },
   quad: {
@@ -259,7 +260,7 @@ const COUNTRIES = {
   ARE: { name: "UAE",               a: ["brics","gcc","arab_league"] },
   EGY: { name: "Egypt",             a: ["brics","arab_league"] },
   ETH: { name: "Ethiopia",          a: ["brics"] },
-  IDN: { name: "Indonesia",         a: ["asean"] },
+  IDN: { name: "Indonesia",         a: ["asean","brics"] },
   MYS: { name: "Malaysia",          a: ["asean"] },
   PHL: { name: "Philippines",       a: ["asean"] },
   SGP: { name: "Singapore",         a: ["asean"] },

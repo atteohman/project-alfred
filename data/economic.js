@@ -22,7 +22,7 @@ const ECON_DATA = {
     exports:["Vehicles","Machinery","Electronics","Precision Instruments","Chemicals"],
     partners:["United States","China","South Korea","Australia","EU"],
     sanctions:false,
-    summary:"Highly developed economy navigating a cautious monetary normalisation after decades of ultra-loose policy. The Bank of Japan has gradually raised rates from negative territory; yen weakness has boosted export earnings. Demographic contraction and record public debt remain long-term structural challenges." },
+    summary:"Highly developed economy under PM Sanae Takaichi (Japan's first female PM, since October 2025), who launched a ¥13.9 trillion stimulus package. The Bank of Japan has gradually raised rates from negative territory; yen weakness has boosted export earnings. Demographic contraction and record public debt remain long-term structural challenges." },
 
   276: { name:"Germany", gdp:4450, gdpPerCap:53200, growth:1.4, debt:65.0, tradeBalance:268,
     exports:["Vehicles","Machinery","Chemicals","Pharmaceuticals","Electronics"],
