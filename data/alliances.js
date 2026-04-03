@@ -131,8 +131,8 @@ const ALLIANCES = {
       { y: 2015, e: "NDB begins lending; Contingent Reserve Arrangement (CRA) created to stabilize member currencies." },
       { y: 2022, e: "Russia's Ukraine invasion strains group cohesion; India and China refuse to condemn Moscow." },
       { y: 2023, e: "Johannesburg Summit invites UAE, Egypt, Ethiopia, Iran, Saudi Arabia, Argentina to join." },
-      { y: 2024, e: "Saudi Arabia, UAE, Iran, Egypt, Ethiopia join. Argentina declines under new president Milei." },
-      { y: 2025, e: "Indonesia joins as the 11th full member, becoming the first Southeast Asian nation in BRICS." }
+      { y: 2024, e: "UAE, Iran, Egypt, Ethiopia join as full members. Argentina declines under new president Milei." },
+      { y: 2025, e: "Indonesia joins in January as the 10th member. Saudi Arabia formally joins in July at the Rio Summit, bringing BRICS to 11 full members." }
     ]
   },
   quad: {

@@ -24,7 +24,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Highly developed economy under PM Sanae Takaichi (Japan's first female PM, since October 2025), who launched a ¥13.9 trillion stimulus package. The Bank of Japan has gradually raised rates from negative territory; yen weakness has boosted export earnings. Demographic contraction and record public debt remain long-term structural challenges." },
 
-  276: { name:"Germany", gdp:4450, gdpPerCap:53200, growth:1.1, debt:65.0, tradeBalance:268,
+  276: { name:"Germany", gdp:4450, gdpPerCap:53200, growth:0.7, debt:65.0, tradeBalance:268,
     exports:["Vehicles","Machinery","Chemicals","Pharmaceuticals","Electronics"],
     partners:["United States","France","Netherlands","China","Italy"],
     sanctions:false,
@@ -42,7 +42,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Highly service-driven economy anchored by London's global financial centre. The Labour government that took office in 2024 has focused on fiscal consolidation and public investment. A partial trade reset with the EU has reduced some post-Brexit friction, supporting modest growth recovery." },
 
-  250: { name:"France", gdp:3150, gdpPerCap:47800, growth:1.2, debt:113.2, tradeBalance:-105,
+  250: { name:"France", gdp:3150, gdpPerCap:47800, growth:0.8, debt:113.2, tradeBalance:-105,
     exports:["Aerospace","Pharmaceuticals","Luxury Goods","Vehicles","Agriculture"],
     partners:["Germany","United States","Italy","Belgium","Spain"],
     sanctions:false,
