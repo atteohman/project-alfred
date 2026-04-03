@@ -6,37 +6,37 @@
 // gdp: billions USD | gdpPerCap: USD | growth: % | debt: % of GDP
 // tradeBalance: billions USD (positive = surplus, negative = deficit)
 const ECON_DATA = {
-  840: { name:"United States", gdp:29800, gdpPerCap:88300, growth:2.4, debt:124.5, tradeBalance:-1050,
+  840: { name:"United States", gdp:31800, gdpPerCap:94400, growth:2.4, debt:124.5, tradeBalance:-1050,
     exports:["Technology","Aerospace","Pharmaceuticals","Financial Services","Agriculture","Petroleum"],
     partners:["Canada","Mexico","EU","Japan","UK"],
     sanctions:false,
     summary:"World's largest nominal economy. Growth is projected at 2.4% for 2026 (IMF, January 2026), supported by the One Big Beautiful Bill Act tax incentives, AI-driven investment, and a partial trade truce with China agreed in November 2025. Tariff pass-through to consumer prices is gradually materialising but has been slower than feared. Core inflation is expected to return to 2% in 2027." },
 
-  156: { name:"China", gdp:19200, gdpPerCap:13650, growth:4.5, debt:86.8, tradeBalance:920,
+  156: { name:"China", gdp:20700, gdpPerCap:14700, growth:4.5, debt:86.8, tradeBalance:920,
     exports:["Electronics","Machinery","EVs","Steel","Chemicals","Solar Equipment"],
     partners:["ASEAN","EU","United States","Japan","South Korea"],
     sanctions:false,
     summary:"World's second-largest economy facing a prolonged property sector correction and US tariff escalation. Growth has stabilised around 4.5%, supported by manufacturing exports — particularly EVs and clean energy equipment — and government stimulus. De-risking by Western multinationals continues to redirect some supply chains." },
 
-  392: { name:"Japan", gdp:4380, gdpPerCap:35400, growth:0.6, debt:257.0, tradeBalance:-42,
+  392: { name:"Japan", gdp:4460, gdpPerCap:36000, growth:0.7, debt:257.0, tradeBalance:-42,
     exports:["Vehicles","Machinery","Electronics","Precision Instruments","Chemicals"],
     partners:["United States","China","South Korea","Australia","EU"],
     sanctions:false,
     summary:"Highly developed economy under PM Sanae Takaichi (Japan's first female PM, since October 2025), who launched a ¥13.9 trillion stimulus package. The Bank of Japan has gradually raised rates from negative territory; yen weakness has boosted export earnings. Demographic contraction and record public debt remain long-term structural challenges." },
 
-  276: { name:"Germany", gdp:4450, gdpPerCap:53200, growth:0.9, debt:65.0, tradeBalance:268,
+  276: { name:"Germany", gdp:4450, gdpPerCap:53200, growth:1.1, debt:65.0, tradeBalance:268,
     exports:["Vehicles","Machinery","Chemicals","Pharmaceuticals","Electronics"],
     partners:["United States","France","Netherlands","China","Italy"],
     sanctions:false,
     summary:"Europe's largest economy is recovering from a two-year contraction. The new CDU-led government that won the February 2025 election reformed the constitutional debt brake to unlock a €500B defence and infrastructure fund. Automotive sector restructuring continues as EV adoption accelerates; export competitiveness is gradually improving." },
 
-  356: { name:"India", gdp:4270, gdpPerCap:2955, growth:6.5, debt:82.5, tradeBalance:-250,
+  356: { name:"India", gdp:4500, gdpPerCap:3130, growth:6.5, debt:82.5, tradeBalance:-250,
     exports:["Petroleum Products","Pharmaceuticals","IT Services","Textiles","Machinery"],
     partners:["United States","UAE","China","Saudi Arabia","EU"],
     sanctions:false,
     summary:"World's third-largest economy by nominal GDP and its fastest-growing major economy. A young workforce, digital public infrastructure (UPI, ONDC), and manufacturing diversification underpin strong growth. India is attracting significant supply-chain relocation from China in electronics and pharmaceuticals." },
 
-  826: { name:"United Kingdom", gdp:3430, gdpPerCap:49500, growth:1.4, debt:100.5, tradeBalance:-185,
+  826: { name:"United Kingdom", gdp:3430, gdpPerCap:49500, growth:1.3, debt:100.5, tradeBalance:-185,
     exports:["Financial Services","Pharmaceuticals","Machinery","Vehicles","Aerospace"],
     partners:["United States","EU","China","India","UAE"],
     sanctions:false,
@@ -54,7 +54,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Third-largest eurozone economy with chronic high debt. The Meloni government has managed fiscal pressures while maintaining EU relationships and accessing Next Generation EU funds. Italy has emerged as a key hub for transatlantic energy infrastructure following reduced Russian gas flows." },
 
-  76:  { name:"Brazil", gdp:2280, gdpPerCap:10500, growth:2.5, debt:91.0, tradeBalance:110,
+  76:  { name:"Brazil", gdp:2280, gdpPerCap:10500, growth:1.6, debt:91.0, tradeBalance:110,
     exports:["Soybeans","Iron Ore","Petroleum","Poultry","Sugar","Vehicles"],
     partners:["China","United States","Argentina","Netherlands","EU"],
     sanctions:false,
@@ -66,7 +66,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Resource-rich economy facing pressure from US tariffs on steel, aluminium, and autos under the Trump trade policy. Canada has responded with retaliatory measures while seeking USMCA renegotiation. Energy exports to Asia are growing as pipelines to the Pacific come online." },
 
-  643: { name:"Russia", gdp:2250, gdpPerCap:15500, growth:1.5, debt:18.0, tradeBalance:180,
+  643: { name:"Russia", gdp:2250, gdpPerCap:15500, growth:1.0, debt:18.0, tradeBalance:180,
     exports:["Petroleum","Natural Gas","Metals","Wheat","Chemicals","Arms"],
     partners:["China","India","Turkey","Iran","Kazakhstan"],
     sanctions:true,
