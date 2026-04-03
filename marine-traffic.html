@@ -459,8 +459,9 @@
       <button class="ais-modal-cancel" onclick="closeAISModal()">Cancel</button>
     </div>
     <div class="ais-modal-note">
-      &#x1F512; Your API key is stored only in your browser (localStorage) and never transmitted anywhere except directly to AISStream.io over a secure WebSocket connection.<br><br>
-      &#x1F30D; Subscribes to 8 key maritime regions (Baltic, Black Sea, Bosphorus, Persian Gulf, Hormuz, Malacca, Red Sea, Mediterranean) and matches incoming AIS transmissions against all tracked vessels by MMSI and vessel name. Positions update in real-time and AIS gaps are detected automatically.
+      &#x1F512; Key stored in browser only — sent exclusively to AISStream.io over WSS.<br><br>
+      &#x26A0;&#xFE0F; <strong style="color:#e6edf3">Getting your key:</strong> Go to <a href="https://aisstream.io" target="_blank" rel="noopener" style="color:#58a6ff">aisstream.io</a> → sign in with GitHub → click <em>API Keys</em> → <em>Generate Key</em>. Copy the full key and paste it above.<br><br>
+      &#x1F30D; Subscribes to 10 maritime regions simultaneously (Baltic, Black Sea, Bosphorus, Persian Gulf, Hormuz, Malacca, Red Sea, Mediterranean, Barents, Indian Ocean). Matches live AIS transmissions against tracked vessels by MMSI and name in real-time.
     </div>
   </div>
 </div>
@@ -1300,42 +1301,80 @@ function _doConnect(key) {
   ws = new WebSocket('wss://stream.aisstream.io/v0/stream');
 
   ws.onopen = () => {
+    // Field name is "Apikey" (lowercase k) per AISStream.io JS docs
     const sub = {
-      APIKey: key,
+      Apikey: key,
       BoundingBoxes: AIS_BOXES,
       FilterMessageTypes: ['PositionReport', 'ShipStaticData'],
     };
     ws.send(JSON.stringify(sub));
-    wsConnected = true;
-    setBtn('connected', 'AIS Live ✓');
-    setStatusBar(true, 'Connected — streaming live AIS data', '#2ea043');
-    console.log('[ALFRED AIS] Connected and subscribed to', AIS_BOXES.length, 'maritime regions');
+    // Don't set connected=true yet — wait for first data or error from server
+    setStatusBar(true, 'Authenticating with AISStream.io…', '#e3b341');
+    console.log('[ALFRED AIS] Socket open, subscription sent');
   };
 
   ws.onmessage = (event) => {
     try {
       const msg = JSON.parse(event.data);
+
+      // AISStream sends plain error strings or {error:...} objects on bad auth
+      if (typeof msg === 'string' || msg.error || msg.Error || msg.message?.toLowerCase().includes('error')) {
+        const errText = msg.error || msg.Error || msg.message || msg;
+        console.error('[ALFRED AIS] Server error:', errText);
+        setBtn('error', 'AIS Auth Failed — click to retry');
+        setStatusBar(true, `Auth error: ${errText}`, '#f85149');
+        wsConnected = false;
+        ws.close(1000);
+        return;
+      }
+
+      // First valid data packet — mark as connected
+      if (!wsConnected) {
+        wsConnected = true;
+        setBtn('connected', 'AIS Live ✓');
+        setStatusBar(true, 'Connected — streaming live AIS data', '#2ea043');
+        console.log('[ALFRED AIS] Authenticated — receiving data');
+      }
+
       handleAISMessage(msg);
-    } catch(e) { /* malformed packet, ignore */ }
+    } catch(e) {
+      // Non-JSON message — likely plain-text error from server
+      console.warn('[ALFRED AIS] Non-JSON message:', event.data);
+      if (!wsConnected) {
+        setBtn('error', 'AIS Error — click to retry');
+        setStatusBar(true, `Server: ${String(event.data).slice(0,80)}`, '#f85149');
+      }
+    }
   };
 
   ws.onerror = (err) => {
     console.error('[ALFRED AIS] WebSocket error', err);
     setBtn('error', 'AIS Error — click to retry');
-    setStatusBar(true, 'Connection error', '#f85149');
+    setStatusBar(true, 'WebSocket connection error — check console', '#f85149');
   };
 
   ws.onclose = (evt) => {
     wsConnected = false;
+    console.log('[ALFRED AIS] Closed — code:', evt.code, 'reason:', evt.reason);
+
     if (evt.code === 1000) {
-      // Clean close (user-initiated)
+      // Clean close (user-initiated disconnect)
       setBtn('', 'Connect Live AIS');
       setStatusBar(false);
       return;
     }
-    console.warn('[ALFRED AIS] Disconnected (code', evt.code, ') — reconnecting in 10s');
+    // Code 1006 = abnormal / auth rejected; 1008 = policy violation
+    if (evt.code === 1006 || evt.code === 1008) {
+      setBtn('error', 'AIS Auth Failed — click to retry');
+      setStatusBar(true,
+        'Authentication failed — check your API key at aisstream.io/profile',
+        '#f85149');
+      return; // Don't auto-reconnect on auth failure
+    }
+    // Any other code = network drop — reconnect
+    console.warn('[ALFRED AIS] Reconnecting in 10s (code', evt.code, ')');
     setBtn('error', 'Reconnecting…');
-    setStatusBar(true, 'Disconnected — reconnecting in 10s…', '#e3b341');
+    setStatusBar(true, `Disconnected (${evt.code}) — reconnecting in 10s…`, '#e3b341');
     wsReconnectTimer = setTimeout(() => {
       const k = localStorage.getItem('alfred_ais_key');
       if (k) _doConnect(k);
