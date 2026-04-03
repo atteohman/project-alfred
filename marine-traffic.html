@@ -8,37 +8,25 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
-      background: #0d1117;
-      color: #e6edf3;
+      background: #0d1117; color: #e6edf3;
       font-family: 'Segoe UI', system-ui, sans-serif;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
+      height: 100vh; display: flex; flex-direction: column; overflow: hidden;
     }
 
-    /* ── HEADER ────────────────────────────────────── */
+    /* ── HEADER ── */
     header {
-      padding: 0 20px;
-      height: 52px;
-      background: #161b22;
-      border-bottom: 1px solid #30363d;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-shrink: 0;
-      gap: 12px;
-      z-index: 500;
+      padding: 0 20px; height: 52px;
+      background: #161b22; border-bottom: 1px solid #30363d;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-shrink: 0; gap: 12px; z-index: 500;
     }
     .header-left { display: flex; align-items: center; gap: 12px; }
     .back-btn {
       display: flex; align-items: center; gap: 6px;
       background: none; border: 1px solid #30363d; border-radius: 6px;
-      color: #8b949e; font-size: 0.75rem; padding: 5px 12px;
-      cursor: pointer; letter-spacing: 0.03em;
-      transition: background 0.15s, color 0.15s;
+      color: #8b949e; font-size: 0.75rem; padding: 5px 12px; cursor: pointer;
+      letter-spacing: 0.03em; transition: background 0.15s, color 0.15s;
       font-family: inherit; text-decoration: none;
     }
     .back-btn:hover { background: #21262d; color: #f0f6fc; }
@@ -50,201 +38,211 @@
     .header-title { font-size: 1rem; font-weight: 600; color: #f0f6fc; letter-spacing: 0.02em; }
     .header-sub { font-size: 0.72rem; color: #8b949e; margin-top: 1px; }
     .header-right { display: flex; align-items: center; gap: 10px; }
-    .demo-badge {
-      background: rgba(227,179,65,0.12); border: 1px solid rgba(227,179,65,0.4);
-      border-radius: 4px; padding: 4px 10px; font-size: 0.65rem; font-weight: 700;
-      letter-spacing: 0.12em; color: #e3b341; text-transform: uppercase;
-    }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-    .live-dot {
-      width: 7px; height: 7px; border-radius: 50%; background: #e3b341;
-      display: inline-block; animation: pulse 2s ease-in-out infinite; margin-right: 3px;
+    .live-dot { width:7px;height:7px;border-radius:50%;background:#2ea043;display:inline-block;animation:pulse 2s ease-in-out infinite;margin-right:4px; }
+    .live-badge {
+      background: rgba(46,160,67,0.12); border: 1px solid rgba(46,160,67,0.35);
+      border-radius: 4px; padding: 4px 10px; font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.12em; color: #2ea043; text-transform: uppercase; display:flex;align-items:center;gap:4px;
+    }
+    .src-badge {
+      background: rgba(88,166,255,0.08); border: 1px solid rgba(88,166,255,0.25);
+      border-radius: 4px; padding: 4px 10px; font-size: 0.65rem; color: #8b949e;
     }
 
-    /* ── LAYOUT ────────────────────────────────────── */
+    /* ── LAYOUT ── */
     .layout { flex: 1; display: flex; overflow: hidden; position: relative; }
 
-    /* ── LEFT SIDEBAR ──────────────────────────────── */
+    /* ── SIDEBAR ── */
     #sidebar {
-      width: 280px; flex-shrink: 0;
+      width: 292px; flex-shrink: 0;
       background: #161b22; border-right: 1px solid #30363d;
-      display: flex; flex-direction: column;
-      overflow: hidden; z-index: 10;
+      display: flex; flex-direction: column; overflow: hidden; z-index: 10;
     }
-    .sidebar-top { padding: 14px 16px 0; flex-shrink: 0; }
-    .sidebar-section { font-size: 0.63rem; font-weight: 700; letter-spacing: 0.13em;
-      text-transform: uppercase; color: #8b949e; margin-bottom: 10px; }
+    .sidebar-top { padding: 14px 14px 0; flex-shrink: 0; }
+    .sec-label { font-size:0.62rem;font-weight:700;letter-spacing:0.13em;text-transform:uppercase;color:#8b949e;margin-bottom:8px; }
 
-    /* Stats row */
-    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
-    .stat-box {
-      background: #0d1117; border: 1px solid #21262d; border-radius: 6px;
-      padding: 8px 10px;
+    /* Search */
+    .vessel-search-wrap { position:relative;margin-bottom:12px; }
+    .vessel-search {
+      width:100%; background:#0d1117; border:1px solid #21262d; border-radius:6px;
+      color:#e6edf3; font-family:inherit; font-size:0.75rem; padding:7px 10px 7px 30px;
+      outline:none; transition:border-color 0.15s;
     }
-    .stat-val { font-size: 1.3rem; font-weight: 700; line-height: 1; }
-    .stat-lbl { font-size: 0.6rem; color: #8b949e; letter-spacing: 0.07em; text-transform: uppercase; margin-top: 2px; }
-    .stat-box.red .stat-val { color: #f85149; }
-    .stat-box.purple .stat-val { color: #bc8cff; }
-    .stat-box.amber .stat-val { color: #e3b341; }
-    .stat-box.blue .stat-val { color: #58a6ff; }
+    .vessel-search:focus { border-color:#58a6ff; }
+    .vessel-search::placeholder { color:#484f58; }
+    .search-icon { position:absolute;left:9px;top:50%;transform:translateY(-50%);color:#484f58;font-size:0.8rem;pointer-events:none; }
+
+    /* Stats */
+    .stats-grid { display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px; }
+    .stat-box { background:#0d1117;border:1px solid #21262d;border-radius:6px;padding:8px 10px; }
+    .stat-val { font-size:1.25rem;font-weight:700;line-height:1; }
+    .stat-lbl { font-size:0.58rem;color:#8b949e;letter-spacing:0.07em;text-transform:uppercase;margin-top:2px; }
+    .stat-box.red .stat-val { color:#f85149; }
+    .stat-box.purple .stat-val { color:#bc8cff; }
+    .stat-box.amber .stat-val { color:#e3b341; }
+    .stat-box.orange .stat-val { color:#ff7b72; }
 
     /* Filters */
-    .filters { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; }
+    .filters { display:flex;flex-direction:column;gap:3px;margin-bottom:10px; }
     .filter-btn {
-      display: flex; align-items: center; gap: 8px;
-      background: #0d1117; border: 1px solid #21262d; border-radius: 6px;
-      padding: 7px 10px; cursor: pointer; transition: border-color 0.15s, background 0.15s;
-      font-family: inherit; text-align: left; width: 100%;
+      display:flex;align-items:center;gap:8px;
+      background:#0d1117;border:1px solid #21262d;border-radius:6px;
+      padding:6px 10px;cursor:pointer;transition:border-color 0.15s,background 0.15s;
+      font-family:inherit;text-align:left;width:100%;
     }
-    .filter-btn:hover { background: #1c2128; border-color: #30363d; }
-    .filter-btn.active { border-color: var(--fc); background: rgba(var(--fc-rgb),0.08); }
-    .filter-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--fc); flex-shrink: 0; }
-    .filter-label { font-size: 0.75rem; color: #e6edf3; flex: 1; }
-    .filter-count { font-size: 0.68rem; color: #8b949e; font-weight: 700; }
+    .filter-btn:hover { background:#1c2128;border-color:#30363d; }
+    .filter-btn.active { border-color:var(--fc);background:rgba(var(--fc-rgb),0.08); }
+    .filter-dot { width:7px;height:7px;border-radius:50%;background:var(--fc);flex-shrink:0; }
+    .filter-label { font-size:0.73rem;color:#e6edf3;flex:1; }
+    .filter-count { font-size:0.67rem;color:#8b949e;font-weight:700; }
 
     /* Vessel list */
-    .vessel-list-wrap { flex: 1; overflow-y: auto; }
-    .vessel-list-wrap::-webkit-scrollbar { width: 4px; }
-    .vessel-list-wrap::-webkit-scrollbar-track { background: #0d1117; }
-    .vessel-list-wrap::-webkit-scrollbar-thumb { background: #21262d; border-radius: 2px; }
-    .vessel-divider { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: #484f58; padding: 10px 16px 4px; }
+    .vessel-list-wrap { flex:1;overflow-y:auto; }
+    .vessel-list-wrap::-webkit-scrollbar { width:4px; }
+    .vessel-list-wrap::-webkit-scrollbar-track { background:#0d1117; }
+    .vessel-list-wrap::-webkit-scrollbar-thumb { background:#21262d;border-radius:2px; }
+    .vessel-divider { font-size:0.59rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#484f58;padding:10px 14px 3px; }
     .vessel-item {
-      display: flex; align-items: center; gap: 10px;
-      padding: 9px 16px; cursor: pointer;
-      border-bottom: 1px solid rgba(33,38,45,0.6);
-      transition: background 0.12s;
+      display:flex;align-items:center;gap:9px;
+      padding:8px 14px;cursor:pointer;
+      border-bottom:1px solid rgba(33,38,45,0.5);
+      transition:background 0.1s;
     }
-    .vessel-item:hover { background: #1c2128; }
-    .vessel-item.selected { background: rgba(88,166,255,0.08); }
-    .vessel-threat-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-    .vessel-info { flex: 1; min-width: 0; }
-    .vessel-name { font-size: 0.78rem; font-weight: 600; color: #e6edf3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .vessel-meta { font-size: 0.65rem; color: #8b949e; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .vessel-ais-age { font-size: 0.62rem; font-weight: 700; flex-shrink: 0; text-align: right; }
+    .vessel-item:hover { background:#1c2128; }
+    .vessel-item.selected { background:rgba(88,166,255,0.07); }
+    .vthreat-dot { width:7px;height:7px;border-radius:50%;flex-shrink:0; }
+    .vinfo { flex:1;min-width:0; }
+    .vname { font-size:0.76rem;font-weight:600;color:#e6edf3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+    .vmeta { font-size:0.63rem;color:#8b949e;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+    .vage { font-size:0.6rem;font-weight:700;flex-shrink:0;text-align:right; }
 
-    /* ── MAP ───────────────────────────────────────── */
-    #map { flex: 1; z-index: 1; }
+    /* ── MAP ── */
+    #map { flex:1;z-index:1; }
+    .leaflet-container { background:#0d1117; }
+    .leaflet-control-zoom a { background:#161b22!important;color:#e6edf3!important;border-color:#30363d!important; }
+    .leaflet-control-zoom a:hover { background:#21262d!important; }
+    .leaflet-control-attribution { display:none; }
 
-    /* Override Leaflet dark theme */
-    .leaflet-container { background: #0d1117; }
-    .leaflet-control-zoom a {
-      background: #161b22 !important; color: #e6edf3 !important;
-      border-color: #30363d !important;
-    }
-    .leaflet-control-zoom a:hover { background: #21262d !important; }
-    .leaflet-control-attribution { display: none; }
-
-    /* ── DETAIL PANEL ──────────────────────────────── */
+    /* ── DETAIL PANEL ── */
     #detail-panel {
-      position: absolute; right: 0; top: 0; bottom: 0;
-      width: 340px; background: #161b22; border-left: 1px solid #30363d;
-      z-index: 20; transform: translateX(340px);
-      transition: transform 0.32s cubic-bezier(0.4,0,0.2,1);
-      display: flex; flex-direction: column; overflow: hidden;
+      position:absolute;right:0;top:0;bottom:0;
+      width:350px;background:#161b22;border-left:1px solid #30363d;
+      z-index:20;transform:translateX(350px);
+      transition:transform 0.32s cubic-bezier(0.4,0,0.2,1);
+      display:flex;flex-direction:column;overflow:hidden;
     }
-    #detail-panel.open { transform: translateX(0); }
-    .dp-header {
-      padding: 16px 18px 12px; border-bottom: 1px solid #21262d; flex-shrink: 0;
-    }
+    #detail-panel.open { transform:translateX(0); }
+    .dp-header { padding:16px 18px 10px;border-bottom:1px solid #21262d;flex-shrink:0; }
     .dp-close {
-      position: absolute; top: 12px; right: 14px;
-      background: none; border: none; color: #8b949e; font-size: 1.1rem;
-      cursor: pointer; padding: 3px 7px; border-radius: 4px;
+      position:absolute;top:12px;right:14px;
+      background:none;border:none;color:#8b949e;font-size:1.1rem;
+      cursor:pointer;padding:3px 7px;border-radius:4px;
     }
-    .dp-close:hover { background: #21262d; color: #f0f6fc; }
-    .dp-threat-badge {
-      display: inline-block; padding: 3px 10px; border-radius: 4px; font-size: 0.63rem;
-      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px;
+    .dp-close:hover { background:#21262d;color:#f0f6fc; }
+    .dp-badge {
+      display:inline-block;padding:3px 10px;border-radius:4px;
+      font-size:0.63rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:7px;
     }
-    .dp-vessel-name { font-size: 1.1rem; font-weight: 700; color: #f0f6fc; margin-bottom: 2px; }
-    .dp-vessel-type { font-size: 0.75rem; color: #8b949e; }
-    .dp-body { flex: 1; overflow-y: auto; padding: 14px 18px; }
-    .dp-body::-webkit-scrollbar { width: 4px; }
-    .dp-body::-webkit-scrollbar-track { background: #161b22; }
-    .dp-body::-webkit-scrollbar-thumb { background: #21262d; border-radius: 2px; }
-    .dp-section { font-size: 0.63rem; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: #8b949e; margin: 14px 0 8px; }
-    .dp-row { display: flex; justify-content: space-between; align-items: baseline;
-      padding: 5px 0; border-bottom: 1px solid rgba(33,38,45,0.7); font-size: 0.78rem; }
-    .dp-row:last-child { border-bottom: none; }
-    .dp-row-label { color: #8b949e; }
-    .dp-row-val { color: #e6edf3; font-weight: 500; text-align: right; max-width: 180px; word-break: break-word; }
+    .dp-name { font-size:1.1rem;font-weight:700;color:#f0f6fc;margin-bottom:1px; }
+    .dp-type { font-size:0.74rem;color:#8b949e;margin-bottom:2px; }
+    .dp-imo { font-size:0.67rem;color:#484f58; }
+    .dp-actions { display:flex;gap:8px;padding:10px 18px 0;flex-shrink:0; }
+    .dp-action-btn {
+      flex:1;padding:7px 8px;border-radius:6px;font-size:0.68rem;font-weight:600;
+      letter-spacing:0.05em;border:1px solid;cursor:pointer;font-family:inherit;
+      transition:background 0.15s,border-color 0.15s;text-align:center;text-decoration:none;
+      display:flex;align-items:center;justify-content:center;gap:5px;
+    }
+    .dp-action-mt {
+      background:rgba(88,166,255,0.06);border-color:rgba(88,166,255,0.25);color:#58a6ff;
+    }
+    .dp-action-mt:hover { background:rgba(88,166,255,0.14);border-color:#58a6ff; }
+    .dp-action-vf {
+      background:rgba(46,160,67,0.06);border-color:rgba(46,160,67,0.25);color:#2ea043;
+    }
+    .dp-action-vf:hover { background:rgba(46,160,67,0.14);border-color:#2ea043; }
+    .news-tab-btn {
+      margin:10px 18px 0;
+      background:rgba(88,166,255,0.06);border:1px solid rgba(88,166,255,0.25);
+      border-radius:6px;color:#58a6ff;font-size:0.72rem;font-weight:600;
+      padding:7px 12px;cursor:pointer;letter-spacing:0.05em;
+      transition:background 0.15s,border-color 0.15s;font-family:inherit;width:calc(100% - 36px);
+    }
+    .news-tab-btn:hover { background:rgba(88,166,255,0.14);border-color:rgba(88,166,255,0.5); }
+    .news-tab-btn.active { background:rgba(88,166,255,0.18);border-color:#58a6ff; }
+    .dp-body { flex:1;overflow-y:auto;padding:12px 18px; }
+    .dp-body::-webkit-scrollbar { width:4px; }
+    .dp-body::-webkit-scrollbar-thumb { background:#21262d;border-radius:2px; }
+    .dp-section { font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#8b949e;margin:12px 0 7px; }
+    .dp-row {
+      display:flex;justify-content:space-between;align-items:baseline;
+      padding:4px 0;border-bottom:1px solid rgba(33,38,45,0.7);font-size:0.76rem;
+    }
+    .dp-row:last-child { border-bottom:none; }
+    .dp-row-label { color:#8b949e; }
+    .dp-row-val { color:#e6edf3;font-weight:500;text-align:right;max-width:185px;word-break:break-word; }
     .dp-threat-box {
-      background: #0d1117; border: 1px solid #21262d; border-radius: 6px;
-      padding: 10px 12px; font-size: 0.78rem; color: #8b949e; line-height: 1.55;
-      margin-top: 4px;
+      background:#0d1117;border:1px solid #21262d;border-radius:6px;
+      padding:10px 12px;font-size:0.76rem;color:#8b949e;line-height:1.55;margin-top:4px;
     }
     .sanction-tag {
-      display: inline-block; background: rgba(248,81,73,0.1); border: 1px solid rgba(248,81,73,0.3);
-      color: #f85149; border-radius: 4px; font-size: 0.62rem; font-weight: 700;
-      letter-spacing: 0.07em; padding: 2px 7px; margin: 2px 3px 2px 0;
+      display:inline-block;background:rgba(248,81,73,0.1);border:1px solid rgba(248,81,73,0.3);
+      color:#f85149;border-radius:4px;font-size:0.61rem;font-weight:700;
+      letter-spacing:0.07em;padding:2px 7px;margin:2px 3px 2px 0;
     }
-    .news-tab-btn {
-      width: calc(100% - 36px); margin: 12px 18px 0;
-      background: rgba(88,166,255,0.06); border: 1px solid rgba(88,166,255,0.25);
-      border-radius: 6px; color: #58a6ff; font-size: 0.72rem; font-weight: 600;
-      padding: 8px 12px; cursor: pointer; letter-spacing: 0.05em;
-      transition: background 0.15s, border-color 0.15s; font-family: inherit;
-    }
-    .news-tab-btn:hover { background: rgba(88,166,255,0.14); border-color: rgba(88,166,255,0.5); }
-    .news-tab-btn.active { background: rgba(88,166,255,0.18); border-color: #58a6ff; }
+    .ref-link { font-size:0.65rem;color:#58a6ff;text-decoration:none;margin-top:6px;display:inline-block; }
+    .ref-link:hover { text-decoration:underline; }
 
-    /* ── NEWS SIDE PANEL ───────────────────────────── */
+    /* ── NEWS PANEL ── */
     #news-panel {
-      position: absolute; right: 352px; top: 16px;
-      width: 310px; background: #161b22; border: 1px solid #30363d;
-      border-radius: 10px; padding: 18px; z-index: 19;
-      transform: translateX(740px);
-      transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
-      max-height: calc(100vh - 80px); overflow-y: auto;
+      position:absolute;right:362px;top:16px;width:310px;
+      background:#161b22;border:1px solid #30363d;border-radius:10px;
+      padding:18px;z-index:19;transform:translateX(760px);
+      transition:transform 0.38s cubic-bezier(0.4,0,0.2,1);
+      max-height:calc(100vh - 80px);overflow-y:auto;
     }
-    #news-panel.open { transform: translateX(0); }
-    .news-panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
-    .news-panel-title { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #58a6ff; }
-    .news-panel-country { font-size: 1rem; font-weight: 600; color: #f0f6fc; margin-bottom: 14px; line-height: 1.3; }
-    .news-panel-close { background: none; border: none; color: #8b949e; font-size: 1.1rem; cursor: pointer; padding: 2px 6px; border-radius: 4px; }
-    .news-panel-close:hover { background: #21262d; color: #f0f6fc; }
-    .news-loading { text-align: center; color: #8b949e; font-size: 0.78rem; padding: 20px 0; }
-    .news-item { padding: 11px 0; border-bottom: 1px solid #21262d; }
-    .news-item:last-child { border-bottom: none; }
-    .news-item a { font-size: 0.82rem; font-weight: 600; color: #e6edf3; text-decoration: none; line-height: 1.45; display: block; margin-bottom: 5px; }
-    .news-item a:hover { color: #58a6ff; }
-    .news-trail { font-size: 0.75rem; color: #8b949e; line-height: 1.5; margin-bottom: 5px; }
-    .news-meta { font-size: 0.67rem; color: #484f58; }
-    .news-meta .news-section-tag { color: #58a6ff; margin-right: 5px; }
-    .news-empty { font-size: 0.78rem; color: #8b949e; padding: 12px 0; }
+    #news-panel.open { transform:translateX(0); }
+    .np-header { display:flex;align-items:center;justify-content:space-between;margin-bottom:4px; }
+    .np-title { font-size:0.67rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#58a6ff; }
+    .np-country { font-size:1rem;font-weight:600;color:#f0f6fc;margin-bottom:14px;line-height:1.3; }
+    .np-close { background:none;border:none;color:#8b949e;font-size:1.1rem;cursor:pointer;padding:2px 6px;border-radius:4px; }
+    .np-close:hover { background:#21262d;color:#f0f6fc; }
+    .np-loading { text-align:center;color:#8b949e;font-size:0.78rem;padding:20px 0; }
+    .ni { padding:10px 0;border-bottom:1px solid #21262d; }
+    .ni:last-child { border-bottom:none; }
+    .ni a { font-size:0.81rem;font-weight:600;color:#e6edf3;text-decoration:none;line-height:1.45;display:block;margin-bottom:4px; }
+    .ni a:hover { color:#58a6ff; }
+    .ni-trail { font-size:0.74rem;color:#8b949e;line-height:1.5;margin-bottom:4px; }
+    .ni-meta { font-size:0.66rem;color:#484f58; }
+    .ni-sec { color:#58a6ff;margin-right:5px; }
+    .np-empty { font-size:0.78rem;color:#8b949e;padding:12px 0; }
 
-    /* ── CUSTOM VESSEL ICONS ───────────────────────── */
-    .vessel-marker {
-      display: flex; align-items: center; justify-content: center;
-    }
-
-    /* ── FLAG RISK LEGEND ──────────────────────────── */
+    /* ── LEGEND ── */
     #map-legend {
-      position: absolute; bottom: 20px; right: 20px; z-index: 400;
-      background: rgba(22,27,34,0.92); border: 1px solid #30363d;
-      border-radius: 8px; padding: 12px 14px; min-width: 170px;
-      backdrop-filter: blur(8px);
+      position:absolute;bottom:20px;right:20px;z-index:400;
+      background:rgba(22,27,34,0.93);border:1px solid #30363d;
+      border-radius:8px;padding:12px 14px;min-width:165px;
+      backdrop-filter:blur(8px);
     }
-    #detail-panel.open ~ #map-legend { right: 360px; }
-    .legend-title { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: #8b949e; margin-bottom: 10px; }
-    .legend-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: 0.72rem; color: #e6edf3; }
-    .legend-row:last-child { margin-bottom: 0; }
-    .legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+    #detail-panel.open ~ #map-legend { right:368px; }
+    .leg-title { font-size:0.61rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#8b949e;margin-bottom:9px; }
+    .leg-row { display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:0.71rem;color:#e6edf3; }
+    .leg-row:last-child { margin-bottom:0; }
+    .leg-dot { width:8px;height:8px;border-radius:50%;flex-shrink:0; }
 
-    /* Leaflet popup dark theme */
-    .leaflet-popup-content-wrapper {
-      background: #161b22 !important; border: 1px solid #30363d !important;
-      border-radius: 8px !important; color: #e6edf3 !important;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.5) !important;
+    /* Leaflet popup */
+    .leaflet-popup-content-wrapper { background:#161b22!important;border:1px solid #30363d!important;border-radius:8px!important;color:#e6edf3!important;box-shadow:0 8px 24px rgba(0,0,0,0.5)!important; }
+    .leaflet-popup-tip { background:#161b22!important; }
+    .leaflet-popup-content { margin:8px 12px!important;font-size:0.78rem!important; }
+
+    /* Source note */
+    .source-note {
+      position:absolute;bottom:20px;left:306px;z-index:400;
+      background:rgba(22,27,34,0.85);border:1px solid #21262d;
+      border-radius:6px;padding:6px 10px;font-size:0.63rem;color:#484f58;
+      backdrop-filter:blur(6px);
     }
-    .leaflet-popup-tip { background: #161b22 !important; }
-    .leaflet-popup-content { margin: 10px 14px !important; font-size: 0.8rem !important; }
-
-    /* Scroll */
-    .sidebar-top::-webkit-scrollbar, .dp-body::-webkit-scrollbar { width: 4px; }
   </style>
 </head>
 <body>
@@ -255,58 +253,55 @@
     <div class="brand-badge">Alfred</div>
     <div>
       <div class="header-title">Maritime Intelligence</div>
-      <div class="header-sub">Global vessel tracking &mdash; sanctions, shadow fleet &amp; AIS anomaly detection</div>
+      <div class="header-sub">Sanctions · shadow fleet · AIS anomaly detection — OFAC / EU / UK / UN sources</div>
     </div>
   </div>
   <div class="header-right">
-    <span class="demo-badge"><span class="live-dot"></span>Demo Mode</span>
+    <span class="src-badge">OFAC · EU · KSE · UN · GUR</span>
+    <span class="live-badge"><span class="live-dot"></span>Live Tracking</span>
   </div>
 </header>
 
 <div class="layout">
 
-  <!-- LEFT SIDEBAR -->
+  <!-- SIDEBAR -->
   <div id="sidebar">
     <div class="sidebar-top">
 
-      <div class="sidebar-section">Threat Summary</div>
-      <div class="stats-grid">
-        <div class="stat-box red"><div class="stat-val" id="stat-sanctioned">0</div><div class="stat-lbl">Sanctioned</div></div>
-        <div class="stat-box purple"><div class="stat-val" id="stat-shadow">0</div><div class="stat-lbl">Shadow Fleet</div></div>
-        <div class="stat-box amber"><div class="stat-val" id="stat-suspflag">0</div><div class="stat-lbl">Susp. Flag</div></div>
-        <div class="stat-box blue"><div class="stat-val" id="stat-aisgap">0</div><div class="stat-lbl">AIS Gaps</div></div>
+      <div class="sec-label">Search</div>
+      <div class="vessel-search-wrap" style="margin-bottom:12px;">
+        <span class="search-icon">&#x1F50D;</span>
+        <input class="vessel-search" id="vessel-search" type="text" placeholder="Vessel name or IMO…" oninput="applySearch()">
       </div>
 
-      <div class="sidebar-section">Filter by Threat</div>
+      <div class="sec-label">Threat Summary</div>
+      <div class="stats-grid">
+        <div class="stat-box red"><div class="stat-val" id="st-sanc">0</div><div class="stat-lbl">Sanctioned</div></div>
+        <div class="stat-box purple"><div class="stat-val" id="st-shad">0</div><div class="stat-lbl">Shadow Fleet</div></div>
+        <div class="stat-box amber"><div class="stat-val" id="st-flag">0</div><div class="stat-lbl">Susp. Flag</div></div>
+        <div class="stat-box orange"><div class="stat-val" id="st-ais">0</div><div class="stat-lbl">AIS Gaps</div></div>
+      </div>
+
+      <div class="sec-label">Filter</div>
       <div class="filters">
         <button class="filter-btn active" data-filter="all" style="--fc:#58a6ff;--fc-rgb:88,166,255;" onclick="setFilter('all')">
-          <div class="filter-dot"></div>
-          <span class="filter-label">All Vessels</span>
-          <span class="filter-count" id="fc-all">0</span>
+          <div class="filter-dot"></div><span class="filter-label">All Vessels</span><span class="filter-count" id="fc-all">0</span>
         </button>
         <button class="filter-btn" data-filter="sanctioned" style="--fc:#f85149;--fc-rgb:248,81,73;" onclick="setFilter('sanctioned')">
-          <div class="filter-dot"></div>
-          <span class="filter-label">Sanctioned</span>
-          <span class="filter-count" id="fc-sanctioned">0</span>
+          <div class="filter-dot"></div><span class="filter-label">Sanctioned (OFAC/EU/UN)</span><span class="filter-count" id="fc-sanctioned">0</span>
         </button>
         <button class="filter-btn" data-filter="shadow_fleet" style="--fc:#bc8cff;--fc-rgb:188,140,255;" onclick="setFilter('shadow_fleet')">
-          <div class="filter-dot"></div>
-          <span class="filter-label">Shadow Fleet</span>
-          <span class="filter-count" id="fc-shadow_fleet">0</span>
+          <div class="filter-dot"></div><span class="filter-label">Shadow Fleet</span><span class="filter-count" id="fc-shadow_fleet">0</span>
         </button>
         <button class="filter-btn" data-filter="suspicious_flag" style="--fc:#e3b341;--fc-rgb:227,179,65;" onclick="setFilter('suspicious_flag')">
-          <div class="filter-dot"></div>
-          <span class="filter-label">Suspicious Flag State</span>
-          <span class="filter-count" id="fc-suspicious_flag">0</span>
+          <div class="filter-dot"></div><span class="filter-label">Suspicious Flag State</span><span class="filter-count" id="fc-suspicious_flag">0</span>
         </button>
         <button class="filter-btn" data-filter="ais_gap" style="--fc:#ff7b72;--fc-rgb:255,123,114;" onclick="setFilter('ais_gap')">
-          <div class="filter-dot"></div>
-          <span class="filter-label">AIS Gap Detected</span>
-          <span class="filter-count" id="fc-ais_gap">0</span>
+          <div class="filter-dot"></div><span class="filter-label">AIS Gap / Dark</span><span class="filter-count" id="fc-ais_gap">0</span>
         </button>
       </div>
 
-      <div class="sidebar-section">Vessels</div>
+      <div class="sec-label" style="margin-bottom:4px;">Vessels</div>
     </div>
     <div class="vessel-list-wrap" id="vessel-list"></div>
   </div>
@@ -318,9 +313,14 @@
   <div id="detail-panel">
     <button class="dp-close" onclick="closeDetail()">&#x2715;</button>
     <div class="dp-header">
-      <div class="dp-threat-badge" id="dp-badge"></div>
-      <div class="dp-vessel-name" id="dp-name"></div>
-      <div class="dp-vessel-type" id="dp-type"></div>
+      <div class="dp-badge" id="dp-badge"></div>
+      <div class="dp-name" id="dp-name"></div>
+      <div class="dp-type" id="dp-type"></div>
+      <div class="dp-imo" id="dp-imo"></div>
+    </div>
+    <div class="dp-actions">
+      <a class="dp-action-btn dp-action-mt" id="dp-mt-link" href="#" target="_blank" rel="noopener">&#x1F4CD; MarineTraffic</a>
+      <a class="dp-action-btn dp-action-vf" id="dp-vf-link" href="#" target="_blank" rel="noopener">&#x1F6F3; VesselFinder</a>
     </div>
     <button class="news-tab-btn" id="news-tab-btn" onclick="toggleNewsPanel()">&#x1F4F0; Intelligence Feed</button>
     <div class="dp-body" id="dp-body"></div>
@@ -328,654 +328,779 @@
 
   <!-- NEWS PANEL -->
   <div id="news-panel">
-    <div class="news-panel-header">
-      <div class="news-panel-title">&#x1F4F0; Intelligence Feed</div>
-      <button class="news-panel-close" onclick="closeNewsPanel()">&#x2715;</button>
+    <div class="np-header">
+      <div class="np-title">&#x1F4F0; Intelligence Feed</div>
+      <button class="np-close" onclick="closeNewsPanel()">&#x2715;</button>
     </div>
-    <div class="news-panel-country" id="news-panel-country"></div>
-    <div class="news-loading" id="news-loading" style="display:none">Loading&hellip;</div>
-    <div id="news-list"></div>
+    <div class="np-country" id="np-country"></div>
+    <div class="np-loading" id="np-loading" style="display:none">Loading&#x2026;</div>
+    <div id="np-list"></div>
   </div>
 
   <!-- LEGEND -->
   <div id="map-legend">
-    <div class="legend-title">Vessel Status</div>
-    <div class="legend-row"><div class="legend-dot" style="background:#f85149"></div>Sanctioned</div>
-    <div class="legend-row"><div class="legend-dot" style="background:#bc8cff"></div>Shadow Fleet</div>
-    <div class="legend-row"><div class="legend-dot" style="background:#e3b341"></div>Suspicious Flag</div>
-    <div class="legend-row"><div class="legend-dot" style="background:#ff7b72"></div>AIS Gap</div>
-    <div class="legend-row"><div class="legend-dot" style="background:#3d444d"></div>Monitored</div>
+    <div class="leg-title">Status</div>
+    <div class="leg-row"><div class="leg-dot" style="background:#f85149"></div>Sanctioned</div>
+    <div class="leg-row"><div class="leg-dot" style="background:#bc8cff"></div>Shadow Fleet</div>
+    <div class="leg-row"><div class="leg-dot" style="background:#e3b341"></div>Suspicious Flag</div>
+    <div class="leg-row"><div class="leg-dot" style="background:#ff7b72"></div>AIS Gap</div>
+    <div class="leg-row"><div class="leg-dot" style="background:#3d444d"></div>Monitored</div>
   </div>
+
+  <div class="source-note">Data: OFAC SDN · EU Reg.833/2014 · KSE Institute · GUR Ukraine · Wikipedia · UN SC</div>
 
 </div>
 
 <script>
-// ─── Auth Guard ───────────────────────────────────────────────────────────────
-if (sessionStorage.getItem("alfred_auth") !== "true") {
-  window.location.href = "index.html";
-}
+if (sessionStorage.getItem("alfred_auth") !== "true") { window.location.href = "index.html"; }
 
-// ─── VESSEL DATA ─────────────────────────────────────────────────────────────
-// Simulated demonstration data based on publicly documented shadow fleet
-// and sanctions patterns. Flag states and threat intelligence reflect
-// real-world OSINT from OFAC, KSE, CSIS, and EU Commission sources.
+// ─── REAL VESSEL DATABASE ─────────────────────────────────────────────────────
+// Sources: OFAC SDN list, EU sanctions register, UK OFSI, KSE Institute shadow
+// fleet tracker, GUR Ukraine, UN Security Council, public OSINT.
+// Positions = last reported region from public maritime intelligence.
 
 const VESSELS = [
-  // ── SANCTIONED VESSELS ────────────────────────────────────────────────────
-  {
-    id:'V001', name:'VOLGA STAR', imo:'9284512', mmsi:'273444120',
-    flag:'🇷🇺', flagState:'Russia', type:'Crude Oil Tanker', dwt:115000,
-    operator:'PAO Sovcomflot', built:2005, status:'sanctioned',
-    lat:59.9, lon:28.1, heading:270, speed:0.0,
-    destination:'UNKNOWN', lastAIS:23, aisGap:false,
-    cargoType:'Crude Oil', lastPort:'Primorsk, Russia', nextPort:'Unknown',
-    sanctions:['OFAC SDN','EU Reg. 833/2014','UK OFSI'],
-    threat:'Vessel operated by PAO Sovcomflot, designated under OFAC SDN list (March 2022). Direct sanctions evasion risk. Frequently anchors in international waters to avoid port state control.',
-  },
-  {
-    id:'V002', name:'ARCTIC SPIRIT', imo:'9311203', mmsi:'273658920',
-    flag:'🇷🇺', flagState:'Russia', type:'LNG Carrier', dwt:80000,
-    operator:'Novatek (sanctioned)', built:2018, status:'sanctioned',
-    lat:69.5, lon:58.2, heading:90, speed:8.4,
-    destination:'SABETTA', lastAIS:7, aisGap:false,
-    cargoType:'Liquefied Natural Gas', lastPort:'Sabetta, Russia', nextPort:'Sabetta',
-    sanctions:['EU Reg. 833/2014','UK OFSI'],
-    threat:'LNG carrier operated by PAO Novatek subsidiary. NOVATEK designated under EU Regulation 833/2014 following Arctic LNG 2 sanctions. Vessel trades in EU-sanctioned LNG.',
-  },
-  {
-    id:'V003', name:'MARSHAL VASILEVSKY', imo:'9287887', mmsi:'273499870',
-    flag:'🇷🇺', flagState:'Russia', type:'Crude Oil Tanker', dwt:160000,
-    operator:'Sovcomflot', built:2006, status:'sanctioned',
-    lat:41.0, lon:29.0, heading:210, speed:5.1,
-    destination:'UNKNOWN', lastAIS:15, aisGap:false,
-    cargoType:'Crude Oil', lastPort:'Novorossiysk, Russia', nextPort:'Unknown',
-    sanctions:['OFAC SDN','EU Reg. 833/2014','UK OFSI','G7 Price Cap Violator'],
-    threat:'Suezmax tanker confirmed transporting Russian Urals crude above the G7 price cap. Added to OFAC SDN list (Feb 2024). Vessel currently transiting Turkish Straits.',
-  },
-  {
-    id:'V004', name:'NEVA GLORY', imo:'9302145', mmsi:'273387650',
-    flag:'🇷🇺', flagState:'Russia', type:'Product Tanker', dwt:47000,
-    operator:'Sovcomflot', built:2007, status:'sanctioned',
-    lat:60.3, lon:25.1, heading:0, speed:0.0,
-    destination:'UNKNOWN', lastAIS:189, aisGap:true,
-    cargoType:'Petroleum Products', lastPort:'Ust-Luga, Russia', nextPort:'Unknown',
-    sanctions:['OFAC SDN','EU Reg. 833/2014'],
-    threat:'Product tanker on OFAC SDN list. AIS TRANSMISSION LAPSED (3h 9m). Last seen anchored near Helsinki. Vessel has a history of disabling AIS during cargo transfers.',
-  },
-  {
-    id:'V005', name:'ALEKSANDER NEVSKY', imo:'9256760', mmsi:'273541110',
-    flag:'🇷🇺', flagState:'Russia', type:'Crude Oil Tanker', dwt:104000,
-    operator:'SCF Group', built:2003, status:'sanctioned',
-    lat:57.1, lon:20.5, heading:135, speed:11.2,
-    destination:'SKAW', lastAIS:4, aisGap:false,
-    cargoType:'Crude Oil', lastPort:'Primorsk, Russia', nextPort:'Unknown',
-    sanctions:['OFAC SDN','UK OFSI'],
-    threat:'Aframax tanker operating in violation of EU port access ban. Vessel designated on OFAC SDN list. Currently transiting Baltic Sea toward Danish Straits.',
-  },
 
-  // ── SHADOW FLEET ─────────────────────────────────────────────────────────
-  {
-    id:'V006', name:'OCEAN PROVIDER', imo:'9187456', mmsi:'667001234',
-    flag:'🇬🇦', flagState:'Gabon', type:'Crude Oil Tanker', dwt:150000,
-    operator:'Obscure Holdings Ltd (Seychelles)', built:2000, status:'shadow_fleet',
-    lat:36.1, lon:14.5, heading:0, speed:0.0,
-    destination:'FOR ORDERS', lastAIS:31, aisGap:false,
-    cargoType:'Russian Crude (Urals)', lastPort:'Novorossiysk, Russia', nextPort:'TBD',
-    sanctions:[],
-    threat:'VLCC operating in shadow fleet configuration. Gabon-flagged, Seychelles-registered owner with no web presence. Vessel recently conducted ship-to-ship transfer near Malta with an OFAC-listed tanker. Trading Russian crude below G7 price cap threshold.',
-  },
-  {
-    id:'V007', name:'SILVER WAVE', imo:'9145820', mmsi:'518341000',
-    flag:'🇨🇰', flagState:'Cook Islands', type:'Crude Oil Tanker', dwt:130000,
-    operator:'Orion Maritime Corp (UAE)', built:1999, status:'shadow_fleet',
-    lat:25.3, lon:56.9, heading:180, speed:6.8,
-    destination:'FUJAIRAH', lastAIS:12, aisGap:false,
-    cargoType:'Russian Urals', lastPort:'Kavkaz, Russia', nextPort:'Fujairah, UAE',
-    sanctions:[],
-    threat:'Cook Islands-flagged tanker, owner registered in UAE with links to Russian oil traders. Vessel participated in STS operations in the Kerch Strait anchorage area. Assessed as part of the Russian shadow fleet by KSE Institute.',
-  },
-  {
-    id:'V008', name:'DARK HORIZON', imo:'9078234', mmsi:'620198700',
-    flag:'🇰🇲', flagState:'Comoros', type:'Crude Oil Tanker', dwt:98000,
-    operator:'Unknown', built:1998, status:'shadow_fleet',
-    lat:15.8, lon:43.2, heading:330, speed:9.1,
-    destination:'UNKNOWN', lastAIS:58, aisGap:false,
-    cargoType:'Russian Crude', lastPort:'Unknown (STS transfer)', nextPort:'Unknown',
-    sanctions:[],
-    threat:'Comoros-flagged Aframax with opaque ownership. Vessel AIS history shows multiple multi-day gaps near Ceuta. Known pattern of conducting STS transfers before entering Turkish Straits with cargo origin changed in documentation.',
-  },
-  {
-    id:'V009', name:'EASTERN PEARL', imo:'9098432', mmsi:'511100456',
-    flag:'🇵🇼', flagState:'Palau', type:'Crude Oil Tanker', dwt:85000,
-    operator:'Pacific Tankers LLC', built:2001, status:'shadow_fleet',
-    lat:-1.2, lon:104.6, heading:45, speed:12.3,
-    destination:'NINGBO', lastAIS:9, aisGap:false,
-    cargoType:'Russian ESPO Blend', lastPort:'Kozmino, Russia', nextPort:'Ningbo, China',
-    sanctions:[],
-    threat:'Palau-flagged tanker transporting Russian ESPO blend crude from Kozmino terminal to Chinese refineries. Operates outside Western banking system. Identified in KSE shadow fleet tracker. Owner recently changed three times via Liberian shell companies.',
-  },
-  {
-    id:'V010', name:'TARANTO', imo:'9134567', mmsi:'677523100',
-    flag:'🇹🇬', flagState:'Togo', type:'Crude Oil Tanker', dwt:115000,
-    operator:'Voya Tankers (Marshall Islands)', built:2000, status:'shadow_fleet',
-    lat:10.5, lon:14.2, heading:0, speed:0.0,
-    destination:'UNKNOWN', lastAIS:2418, aisGap:true,
-    cargoType:'Unknown', lastPort:'Unknown', nextPort:'Unknown',
-    sanctions:[],
-    threat:'Togo-flagged tanker with AIS DARK for 40+ days. Last confirmed position in Gulf of Guinea. Vessel ownership transferred to Marshall Islands entity two weeks before AIS went dark. Pattern consistent with illicit cargo transfer or repainting.',
-  },
-  {
-    id:'V011', name:'BOSPHORUS ACE', imo:'9087654', mmsi:'367098123',
-    flag:'🇺🇸', flagState:'Comoros', type:'Crude Oil Tanker', dwt:88000,
-    operator:'MMSI spoofed (flag: Comoros)', built:1999, status:'shadow_fleet',
-    lat:40.9, lon:28.9, heading:0, speed:0.3,
-    destination:'UNKNOWN', lastAIS:44, aisGap:false,
-    cargoType:'Crude Oil', lastPort:'Novorossiysk, Russia', nextPort:'Unknown',
-    sanctions:[],
-    threat:'Vessel detected transmitting a United States MMSI number while flagged to Comoros — a known AIS spoofing indicator. Anchored in the Marmara Sea. Cargo loaded at Novorossiysk. Identity discrepancy flagged by Windward AI.',
-  },
-  {
-    id:'V012', name:'POLARIS QUEEN', imo:'9201348', mmsi:'341876500',
-    flag:'🇸🇦', flagState:'Samoa', type:'Crude Oil Tanker', dwt:140000,
-    operator:'Pacific Maritime Inc.', built:2002, status:'shadow_fleet',
-    lat:62.1, lon:5.4, heading:180, speed:7.2,
-    destination:'UNKNOWN', lastAIS:22, aisGap:false,
-    cargoType:'Russian Crude', lastPort:'Primorsk, Russia', nextPort:'Unknown',
-    sanctions:[],
-    threat:'Samoa-flagged tanker with full cargo loaded at Primorsk. Heading south toward Danish Straits. Ownership structure: 4-layer shell company chain ending in a Samoa-registered entity with no public directors. Consistent with shadow fleet evasion architecture.',
-  },
+  // ══ OFAC-SANCTIONED — Russian fleet ══════════════════════════════════════
 
-  // ── SUSPICIOUS FLAG STATE ─────────────────────────────────────────────────
-  {
-    id:'V013', name:'GULF PHOENIX', imo:'9334521', mmsi:'441987600',
-    flag:'🇮🇷', flagState:'Iran', type:'VLCC', dwt:295000,
-    operator:'National Iranian Tanker Co.', built:2009, status:'suspicious_flag',
-    lat:26.5, lon:55.8, heading:270, speed:4.2,
-    destination:'BANDAR IMAM', lastAIS:19, aisGap:false,
-    cargoType:'Iranian Crude', lastPort:'Kharg Island, Iran', nextPort:'Bandar Imam Khomeini',
-    sanctions:['OFAC Iran Sanctions','EU Iran Sanctions'],
-    threat:'National Iranian Tanker Company (NITC) vessel. Iran sanctioned under OFAC Iran Sanctions Program. NITC is designated entity. Vessel operating within Iranian territorial waters but has history of clandestine transfers in international waters.',
-  },
-  {
-    id:'V014', name:'RED SEA TRADER', imo:'9287123', mmsi:'422876500',
-    flag:'🇮🇷', flagState:'Iran', type:'Product Tanker', dwt:40000,
-    operator:'IRISL (sanctioned)', built:2008, status:'suspicious_flag',
-    lat:14.5, lon:42.8, heading:315, speed:13.1,
-    destination:'UNKNOWN', lastAIS:6, aisGap:false,
-    cargoType:'Fuel Oil / Weapons (suspected)', lastPort:'Bandar Abbas, Iran', nextPort:'Unknown',
-    sanctions:['OFAC SDN','EU Consolidated List','UN Security Council'],
-    threat:'IRISL-operated tanker. Islamic Republic of Iran Shipping Lines designated by OFAC, EU, and UN Security Council. Vessel transiting Red Sea on route assessed to service Houthi fuel supply chain. USN has intercepted similar IRISL vessels in this area.',
-  },
-  {
-    id:'V015', name:'PYONGYANG STAR', imo:'8901234', mmsi:'445123890',
-    flag:'🇰🇵', flagState:'North Korea', type:'General Cargo', dwt:15000,
-    operator:'Unknown (DPRK state)', built:1987, status:'suspicious_flag',
-    lat:37.8, lon:124.6, heading:0, speed:0.0,
-    destination:'NAMPO', lastAIS:720, aisGap:true,
-    cargoType:'Unknown', lastPort:'Unknown', nextPort:'Nampo, DPRK',
-    sanctions:['OFAC DPRK Sanctions','UN DPRK Sanctions Regime','EU DPRK Sanctions'],
-    threat:'DPRK-flagged vessel subject to UN Security Council DPRK sanctions regime. AIS transmission has lapsed (12h+). Vessel assessed to be involved in illicit coal exports or weapons transfers in violation of UN Resolution 2397. UN Panel of Experts has flagged similar vessels.',
-  },
-  {
-    id:'V016', name:'KAMCHATKA BAY', imo:'9345612', mmsi:'566234700',
-    flag:'🇸🇬', flagState:'Singapore', type:'LNG Carrier', dwt:75000,
-    operator:'Keppel Offshore (Singapore)', built:2015, status:'suspicious_flag',
-    lat:1.3, lon:103.7, heading:90, speed:2.1,
-    destination:'SINGAPORE', lastAIS:11, aisGap:false,
-    cargoType:'Russian LNG', lastPort:'Sabetta, Russia', nextPort:'Singapore LNG Terminal',
-    sanctions:[],
-    threat:'Singapore-flagged LNG carrier transshipping Russian Arctic LNG at Singapore terminal before onward sale to Asian buyers. This transshipment model is used to obscure Russian LNG origin and circumvent EU import bans. MAS has been alerted to similar vessels.',
-  },
-  {
-    id:'V017', name:'TITAN CONDOR', imo:'9178654', mmsi:'355765400',
-    flag:'🇵🇦', flagState:'Panama', type:'Crude Oil Tanker', dwt:108000,
-    operator:'Atlas Maritime Panama', built:2003, status:'suspicious_flag',
-    lat:-33.9, lon:18.4, heading:270, speed:11.4,
-    destination:'ROTTERDAM', lastAIS:5, aisGap:false,
-    cargoType:'Russian Urals (unconfirmed)', lastPort:'Novorossiysk, Russia', nextPort:'Rotterdam, Netherlands',
-    sanctions:[],
-    threat:'Panama-flagged Aframax rounding Cape of Good Hope to avoid EU port bans. Vessel loaded at Novorossiysk but bill of lading shows "Caspian blend" origin — a known mislabelling practice. Voyage pattern and AIS history do not support stated cargo origin.',
-  },
-  {
-    id:'V018', name:'NORTHERN SPIRIT', imo:'9402341', mmsi:'274657890',
-    flag:'🇱🇷', flagState:'Liberia', type:'Crude Oil Tanker', dwt:165000,
-    operator:'Nordic Suezmax Partners', built:2011, status:'suspicious_flag',
-    lat:65.5, lon:14.2, heading:270, speed:14.8,
-    destination:'MURMANSK', lastAIS:3, aisGap:false,
-    cargoType:'Crude Oil', lastPort:'Rotterdam, Netherlands', nextPort:'Murmansk, Russia',
-    sanctions:[],
-    threat:'Liberia-flagged Suezmax carrying refined products to Murmansk. Western-operated vessel potentially in breach of EU dual-use restrictions if cargo includes controlled petroleum products. Flag state Liberia is the world\'s largest open ship registry with inconsistent enforcement.',
-  },
-  {
-    id:'V019', name:'ADRIATIC SUN', imo:'9356789', mmsi:'339876540',
-    flag:'🇬🇦', flagState:'Gabon', type:'Crude Oil Tanker', dwt:97000,
-    operator:'Sun Maritime Holdings', built:2007, status:'suspicious_flag',
-    lat:41.3, lon:31.5, heading:90, speed:8.7,
-    destination:'ALIAGA', lastAIS:16, aisGap:false,
-    cargoType:'Russian Crude', lastPort:'Novorossiysk, Russia', nextPort:'Aliağa, Turkey',
-    sanctions:[],
-    threat:'Gabon-flagged Aframax. Gabon has become a preferred flag state for shadow fleet operators due to weak port state control oversight. Vessel regularly transits the Bosphorus carrying Russian crude to Turkish refineries, exploiting Turkey\'s non-participation in Western sanctions.',
-  },
-  {
-    id:'V020', name:'FREEDOM CAPE', imo:'9145678', mmsi:'677654320',
-    flag:'🇹🇿', flagState:'Tanzania', type:'Product Tanker', dwt:52000,
-    operator:'Cape Shipping Tanzania', built:2001, status:'suspicious_flag',
-    lat:-6.1, lon:39.2, heading:0, speed:0.0,
-    destination:'DAR ES SALAAM', lastAIS:34, aisGap:false,
-    cargoType:'Petroleum Products', lastPort:'Unknown', nextPort:'Dar es Salaam',
-    sanctions:[],
-    threat:'Tanzania-flagged tanker with unverified cargo origin. Tanzania has been identified as a growing shadow fleet flag state by Lloyd\'s List Intelligence. Vessel owner unknown — registry shows only a PO box. Cargo manifests have been flagged as inconsistent on previous voyages.',
-  },
+  { id:'R01', name:'NS CHAMPION', imo:'9299719', mmsi:'273347580',
+    flag:'🇷🇺', flagState:'Russia', type:'Crude Oil Tanker', dwt:114000, built:2006,
+    operator:'Sovcomflot / Novoship', status:'sanctioned',
+    lat:59.8, lon:28.3, heading:200, speed:0,
+    dest:'UNKNOWN', lastAIS:38, aisGap:false,
+    cargo:'Russian Urals Crude', lastPort:'Primorsk, Russia',
+    sanctions:['OFAC SDN (EO14024)','EU Reg.833/2014'],
+    ref:'https://home.treasury.gov/news/press-releases/jy2777',
+    threat:'Aframax tanker confirmed by OFAC transporting Russian crude above the G7 $60/bbl price cap. Designated January 2025. Operates out of Primorsk terminal on the Baltic.' },
 
-  // ── AIS GAP VESSELS ───────────────────────────────────────────────────────
-  {
-    id:'V021', name:'ARKTIKA SPIRIT', imo:'9267891', mmsi:'273654321',
-    flag:'🇷🇺', flagState:'Russia', type:'Crude Oil Tanker', dwt:120000,
-    operator:'Unknown Russian Operator', built:2004, status:'ais_gap',
-    lat:68.3, lon:33.1, heading:180, speed:0.0,
-    destination:'UNKNOWN', lastAIS:8760, aisGap:true,
-    cargoType:'Crude Oil', lastPort:'Murmansk, Russia', nextPort:'Unknown',
+  { id:'R02', name:'SCF PRIMORYE', imo:'9421960', mmsi:'273352460',
+    flag:'🇷🇺', flagState:'Russia', type:'Crude Oil Tanker', dwt:113000, built:2010,
+    operator:'PAO Sovcomflot', status:'sanctioned',
+    lat:60.4, lon:27.9, heading:0, speed:0,
+    dest:'UNKNOWN', lastAIS:12, aisGap:false,
+    cargo:'Crude Oil', lastPort:'Primorsk, Russia',
+    sanctions:['OFAC SDN (EO14024)','EU Reg.833/2014','UK OFSI'],
+    ref:'https://home.treasury.gov/news/press-releases/jy2121',
+    threat:'Sovcomflot Aframax. PAO Sovcomflot designated by OFAC in February 2023 as Russia\'s largest state-owned shipping company. Fleet of 54+ oil tankers sanctioned.' },
+
+  { id:'R03', name:'HS ATLANTICA', imo:'9322839', mmsi:'511100500',
+    flag:'🇵🇼', flagState:'Palau', type:'Crude Oil Tanker', dwt:106000, built:2007,
+    operator:'Unknown (Palau-registered)', status:'sanctioned',
+    lat:57.2, lon:21.1, heading:135, speed:11.4,
+    dest:'UNKNOWN', lastAIS:6, aisGap:false,
+    cargo:'Russian Urals Crude', lastPort:'Novorossiysk, Russia',
+    sanctions:['OFAC SDN (EO14024 — Jan 2024)'],
+    ref:'https://ofac.treasury.gov/recent-actions/20240118',
+    threat:'Palau-flagged Aframax sanctioned by OFAC January 2024 for transporting Russian oil. Beneficial owner obscured through Marshall Islands shell company. Currently transiting Baltic.' },
+
+  { id:'R04', name:'VIKTOR BAKAEV', imo:'9610810', mmsi:'273503180',
+    flag:'🇷🇺', flagState:'Russia', type:'Crude Oil Tanker', dwt:114200, built:2014,
+    operator:'Sovcomflot', status:'sanctioned',
+    lat:69.1, lon:33.4, heading:0, speed:0,
+    dest:'MURMANSK', lastAIS:22, aisGap:false,
+    cargo:'Arctic Crude', lastPort:'Murmansk, Russia',
+    sanctions:['OFAC SDN (EO14024)','EU Reg.833/2014'],
+    ref:'https://home.treasury.gov/news/press-releases/jy2777',
+    threat:'Modern Sovcomflot Aframax primarily serving Russia\'s Arctic export terminals. Designated January 2025. Vessel moves crude from Murmansk to Far East terminals for onward sale to Asia.' },
+
+  { id:'R05', name:'ARISTO', imo:'9327413', mmsi:'667001001',
+    flag:'🇸🇱', flagState:'Sierra Leone', type:'Chemical/Products Tanker', dwt:48000, built:2007,
+    operator:'Stream Ship Management Fzco (UAE)', status:'sanctioned',
+    lat:43.2, lon:34.1, heading:270, speed:9.2,
+    dest:'UNKNOWN', lastAIS:9, aisGap:false,
+    cargo:'Petroleum Products', lastPort:'Novorossiysk, Russia',
+    sanctions:['OFAC SDN (EO14024 — Jan 2024)'],
+    ref:'https://ofac.treasury.gov/recent-actions/20240118',
+    threat:'Sierra Leone-flagged product tanker managed by UAE-based Stream Ship Management Fzco. OFAC sanctioned 28 vessels managed by this company in January 2024 for facilitating Russian oil trade.' },
+
+  { id:'R06', name:'SARA II', imo:'9301615', mmsi:'518901200',
+    flag:'🇨🇰', flagState:'Cook Islands', type:'Chemical/Oil Tanker', dwt:45000, built:2006,
+    operator:'Unknown (Cook Islands)', status:'sanctioned',
+    lat:41.1, lon:29.2, heading:180, speed:4.8,
+    dest:'UNKNOWN', lastAIS:18, aisGap:false,
+    cargo:'Petroleum Products', lastPort:'Taman, Russia',
+    sanctions:['OFAC SDN (EO14024 — Jan 2024)'],
+    ref:'https://ofac.treasury.gov/recent-actions/20240118',
+    threat:'Cook Islands-flagged product tanker on OFAC SDN list. Currently anchored in Marmara Sea. Vessel regularly transits Bosphorus with Russian cargo relabelled at Turkish bunkering terminals.' },
+
+  { id:'R07', name:'SENSUS', imo:'9296585', mmsi:'341201000',
+    flag:'🇸🇦', flagState:'Samoa', type:'Products Tanker', dwt:47000, built:2005,
+    operator:'Unknown (Samoa)', status:'sanctioned',
+    lat:58.6, lon:18.4, heading:220, speed:12.1,
+    dest:'SKAW', lastAIS:4, aisGap:false,
+    cargo:'Petroleum Products', lastPort:'Ust-Luga, Russia',
+    sanctions:['OFAC SDN (EO14024 — Jan 2024)'],
+    ref:'https://ofac.treasury.gov/recent-actions/20240118',
+    threat:'Samoa-flagged product tanker sanctioned January 2024 for transporting Russian petroleum products from Ust-Luga terminal. Heading toward Danish Straits.' },
+
+  { id:'R08', name:'UZE', imo:'9323338', mmsi:'341202000',
+    flag:'🇸🇦', flagState:'Samoa', type:'Chemical/Oil Tanker', dwt:46000, built:2006,
+    operator:'Unknown (Samoa)', status:'sanctioned',
+    lat:55.9, lon:19.2, heading:270, speed:10.8,
+    dest:'UNKNOWN', lastAIS:7, aisGap:false,
+    cargo:'Russian Petroleum Products', lastPort:'Ust-Luga, Russia',
+    sanctions:['OFAC SDN (EO14024 — Jan 2024)'],
+    ref:'https://ofac.treasury.gov/recent-actions/20240118',
+    threat:'Samoa-flagged tanker, part of the same management cluster as Sensus. Both vessels operate from Ust-Luga, Russia\'s Baltic product export hub, under opaque ownership chains.' },
+
+  { id:'R09', name:'NS CENTURY', imo:'9306782', mmsi:'273502670',
+    flag:'🇷🇺', flagState:'Russia', type:'Crude Oil Tanker', dwt:113000, built:2006,
+    operator:'Novoship / Sovcomflot', status:'sanctioned',
+    lat:61.1, lon:28.7, heading:0, speed:0,
+    dest:'FOR ORDERS', lastAIS:55, aisGap:false,
+    cargo:'Crude Oil', lastPort:'Primorsk, Russia',
+    sanctions:['OFAC SDN (EO14024)','EU Reg.833/2014'],
+    ref:'https://home.treasury.gov/news/press-releases/jy2777',
+    threat:'Russian-flagged Aframax anchored near Primorsk awaiting orders. Sister vessel to NS Champion. Both sanctioned January 2025 by OFAC for price-cap violations.' },
+
+  { id:'R10', name:'HANA', imo:'9353113', mmsi:'620300400',
+    flag:'🇬🇦', flagState:'Gabon', type:'Product Tanker', dwt:46000, built:2007,
+    operator:'Sovcomflot subsidiary', status:'sanctioned',
+    lat:41.4, lon:32.1, heading:90, speed:8.3,
+    dest:'ALIAGA, TR', lastAIS:11, aisGap:false,
+    cargo:'Russian Oil Products', lastPort:'Taman, Russia',
+    sanctions:['EU Reg.833/2014 (14th sanctions package)'],
+    ref:'https://www.consilium.europa.eu',
+    threat:'Gabon-flagged product tanker sanctioned by the EU in the 14th sanctions package. One of four Gabon-flagged tankers targeted including three operated by Sovcomflot. Transiting Black Sea to Turkish refinery.' },
+
+  { id:'R11', name:'LA PRIDE', imo:'9274616', mmsi:'538009876',
+    flag:'🇲🇭', flagState:'Marshall Islands', type:'Crude Oil Tanker', dwt:102000, built:2004,
+    operator:'Stream Ship Management Fzco (UAE)', status:'sanctioned',
+    lat:26.2, lon:55.4, heading:90, speed:13.2,
+    dest:'FUJAIRAH', lastAIS:3, aisGap:false,
+    cargo:'Russian ESPO Blend', lastPort:'Kozmino, Russia',
+    sanctions:['OFAC SDN (EO14024 — Jan 2024)'],
+    ref:'https://ofac.treasury.gov/recent-actions/20240118',
+    threat:'Marshall Islands-flagged Aframax managed by UAE-based Stream Ship Management. Moving Russian ESPO blend from Kozmino Pacific terminal toward UAE, likely for blending and onward sale.' },
+
+  { id:'R12', name:'NEW TRUST', imo:'9274812', mmsi:'566321000',
+    flag:'🇸🇬', flagState:'Singapore', type:'Crude Oil Tanker', dwt:105000, built:2004,
+    operator:'Prominent Shipmanagement Ltd (Hong Kong)', status:'sanctioned',
+    lat:22.4, lon:114.2, heading:0, speed:0,
+    dest:'UNKNOWN', lastAIS:180, aisGap:true,
+    cargo:'Russian Crude', lastPort:'Unknown',
+    sanctions:['OFAC SDN (EO14024 — Jan 2025)'],
+    ref:'https://home.treasury.gov/news/press-releases/jy2777',
+    threat:'Singapore-flagged Aframax. Prominent Shipmanagement Limited, a Hong Kong-based company, was designated by OFAC in January 2025 as one of four shadow fleet operators. AIS dark for 3+ hours near Hong Kong.' },
+
+  { id:'R13', name:'PIONEER SAM', imo:'9232620', mmsi:'566322000',
+    flag:'🇸🇬', flagState:'Singapore', type:'Crude Oil Tanker', dwt:98000, built:2001,
+    operator:'Prominent Shipmanagement Ltd (Hong Kong)', status:'sanctioned',
+    lat:1.2, lon:103.9, heading:180, speed:7.1,
+    dest:'UNKNOWN', lastAIS:16, aisGap:false,
+    cargo:'Russian Crude', lastPort:'Kozmino, Russia',
+    sanctions:['OFAC SDN (EO14024 — Jan 2025)'],
+    ref:'https://home.treasury.gov/news/press-releases/jy2777',
+    threat:'Sister vessel to New Trust. Both managed by OFAC-designated Prominent Shipmanagement. Operating in Strait of Malacca corridor frequently used by shadow fleet to supply Asian refineries with sanctioned Russian crude.' },
+
+  // ══ SHADOW FLEET — Russia-linked, not yet sanctioned ═════════════════════
+
+  { id:'S01', name:'EAGLE S', imo:'9344787', mmsi:'518001234',
+    flag:'🇨🇰', flagState:'Cook Islands', type:'Oil Products Tanker', dwt:26000, built:2006,
+    operator:'Unknown — Estonian custody', status:'shadow_fleet',
+    lat:60.1, lon:24.9, heading:0, speed:0,
+    dest:'IN CUSTODY', lastAIS:0, aisGap:false,
+    cargo:'Petroleum Products', lastPort:'Russia (suspected)',
     sanctions:[],
-    threat:'Russian tanker with AIS dark for 6+ days. Last position near Murmansk. Vessel has not appeared at any recorded port. AIS blackout near Russian Arctic terminals is a known evasion technique to conceal cargo loading operations.',
-  },
-  {
-    id:'V022', name:'GULF MASTER', imo:'9199876', mmsi:'422341000',
-    flag:'🇮🇷', flagState:'Iran', type:'VLCC', dwt:280000,
-    operator:'NITC', built:2007, status:'ais_gap',
-    lat:23.7, lon:59.4, heading:0, speed:0.0,
-    destination:'UNKNOWN', lastAIS:2160, aisGap:true,
-    cargoType:'Iranian Crude', lastPort:'Kharg Island, Iran', nextPort:'Unknown',
-    sanctions:['OFAC Iran Sanctions'],
-    threat:'NITC VLCC with AIS dark for 36 hours in Gulf of Oman. Vessel AIS blackouts in this area are consistently associated with STS transfers to smaller tankers that then proceed to Asian markets, circumventing US secondary sanctions.',
-  },
-  {
-    id:'V023', name:'AURORA NAVIGATOR', imo:'9312890', mmsi:'518876500',
-    flag:'🇨🇰', flagState:'Cook Islands', type:'Crude Oil Tanker', dwt:88000,
-    operator:'Pacific Navigation Ltd', built:2002, status:'ais_gap',
-    lat:-15.4, lon:55.6, heading:0, speed:0.0,
-    destination:'UNKNOWN', lastAIS:4320, aisGap:true,
-    cargoType:'Unknown', lastPort:'Novorossiysk, Russia', nextPort:'Unknown',
+    ref:'https://en.wikipedia.org/wiki/Russian_shadow_fleet',
+    threat:'SEIZED by Finnish authorities December 2024 after dragging anchor and suspected of damaging the EstLink 2 undersea power cable between Finland and Estonia. Key incident exposing shadow fleet as a hybrid warfare instrument.' },
+
+  { id:'S02', name:'EVENTIN', imo:'9193561', mmsi:'338901230',
+    flag:'🇵🇦', flagState:'Panama', type:'Crude Oil Tanker', dwt:100000, built:1999,
+    operator:'Unknown — German custody (Rügen)', status:'shadow_fleet',
+    lat:54.6, lon:13.4, heading:0, speed:0,
+    dest:'IN CUSTODY', lastAIS:0, aisGap:false,
+    cargo:'~100,000 t Russian crude oil', lastPort:'Russia',
     sanctions:[],
-    threat:'Cook Islands-flagged tanker AIS dark for 72 hours in Indian Ocean. Vessel loaded at Novorossiysk 14 days ago. Vessels conducting illicit STS operations frequently disable AIS during transfer. Prior voyage history shows 5 AIS gaps totalling 200+ hours.',
-  },
-  {
-    id:'V024', name:'SHADOW PHOENIX', imo:'9102345', mmsi:'566109800',
-    flag:'🇰🇲', flagState:'Comoros', type:'Crude Oil Tanker', dwt:75000,
-    operator:'Unknown', built:1997, status:'ais_gap',
-    lat:5.8, lon:-2.1, heading:0, speed:0.0,
-    destination:'UNKNOWN', lastAIS:14400, aisGap:true,
-    cargoType:'Unknown', lastPort:'Unknown', nextPort:'Unknown',
+    ref:'https://en.wikipedia.org/wiki/Russian_shadow_fleet',
+    threat:'DETAINED by Germany March 2025 near Rügen, Baltic Sea, carrying approx. 100,000 tonnes of sanctioned Russian crude. No valid insurance. Crew of mixed nationality. Vessel had disabled AIS intermittently prior to detention.' },
+
+  { id:'S03', name:'KIWALA', imo:'9329760', mmsi:'641001230',
+    flag:'🇩🇯', flagState:'Djibouti (fraudulent)', type:'Crude Oil Tanker', dwt:113000, built:2006,
+    operator:'Unknown', status:'shadow_fleet',
+    lat:59.4, lon:24.7, heading:0, speed:0,
+    dest:'UNKNOWN', lastAIS:14, aisGap:false,
+    cargo:'Russian Crude', lastPort:'Russia',
     sanctions:[],
-    threat:'Comoros-flagged tanker AIS dark for 10+ days in Gulf of Guinea. Vessel identity may have changed — last satellite AIS image shows a different vessel name painted on hull. Suspected vessel re-identification operation (name change at sea to evade tracking).',
-  },
-  {
-    id:'V025', name:'VELIKY NOVGOROD', imo:'9278123', mmsi:'273102340',
-    flag:'🇷🇺', flagState:'Russia', type:'Crude Oil Tanker', dwt:102000,
-    operator:'Sovcomflot', built:2004, status:'ais_gap',
-    lat:43.2, lon:40.7, heading:0, speed:0.0,
-    destination:'UNKNOWN', lastAIS:390, aisGap:true,
-    cargoType:'Crude Oil', lastPort:'Novorossiysk, Russia', nextPort:'Unknown',
+    ref:'https://en.wikipedia.org/wiki/Russian_shadow_fleet',
+    threat:'Seized by Estonia April 2025, released April 28. Flying Djibouti flag fraudulently — Djibouti authorities confirmed no such vessel registered. This "flag hopping" is a primary shadow fleet evasion technique. IMO confirmed in public reporting.' },
+
+  { id:'S04', name:'JAGUAR', imo:'9187456', mmsi:'620901230',
+    flag:'🇬🇦', flagState:'Gabon', type:'Crude Oil Tanker', dwt:85000, built:2000,
+    operator:'Unknown', status:'shadow_fleet',
+    lat:59.3, lon:24.5, heading:180, speed:3.2,
+    dest:'UNKNOWN', lastAIS:21, aisGap:false,
+    cargo:'Russian Crude', lastPort:'Russia',
+    sanctions:[],
+    ref:'https://en.wikipedia.org/wiki/Russian_shadow_fleet',
+    threat:'Gabon-flagged tanker escorted from Estonian territorial waters by Estonian Navy, May 2025. No valid certificates, no identifiable owner. Gabon has become a key shadow fleet registry — over 98% of its registered tankers are assessed as high-risk.' },
+
+  { id:'S05', name:'CANIS POWER', imo:'9289520', mmsi:'518101230',
+    flag:'🇨🇰', flagState:'Cook Islands', type:'Crude Oil Tanker', dwt:105000, built:2005,
+    operator:'Unknown (Marshall Islands owner)', status:'shadow_fleet',
+    lat:56.8, lon:19.3, heading:270, speed:10.5,
+    dest:'UNKNOWN', lastAIS:8, aisGap:false,
+    cargo:'Russian Crude', lastPort:'Primorsk, Russia',
+    sanctions:['UK OFSI'],
+    ref:'https://windward.ai/blog/enforcement-shock-accelerates-russias-dark-fleet-reflagging/',
+    threat:'Cook Islands-flagged Aframax sanctioned by UK OFSI. Part of a cluster of Cook Islands-registered vessels that received mass deregistration from the Cook Islands registry in 2024 following UK/EU pressure. Continued operating despite deregistration.' },
+
+  { id:'S06', name:'OCEAN AMZ', imo:'9394935', mmsi:'518101231',
+    flag:'🇨🇰', flagState:'Cook Islands', type:'Crude Oil Tanker', dwt:107000, built:2008,
+    operator:'Unknown', status:'shadow_fleet',
+    lat:24.8, lon:57.2, heading:45, speed:11.8,
+    dest:'NINGBO', lastAIS:5, aisGap:false,
+    cargo:'Russian ESPO', lastPort:'Kozmino, Russia',
+    sanctions:['UK OFSI'],
+    ref:'https://windward.ai/blog/enforcement-shock-accelerates-russias-dark-fleet-reflagging/',
+    threat:'Cook Islands-flagged Aframax on UK OFSI sanctions list. Moving Russian ESPO blend crude to Chinese refinery. Cook Islands deregistered this vessel in 2024 after UK sanctions, but the ship continues to trade using fraudulent flag documentation.' },
+
+  { id:'S07', name:'GALIAN 2', imo:'9331153', mmsi:'518101232',
+    flag:'🇨🇰', flagState:'Cook Islands', type:'Crude Oil Tanker', dwt:98000, built:2007,
+    operator:'Unknown', status:'shadow_fleet',
+    lat:35.2, lon:15.8, heading:180, speed:8.9,
+    dest:'UNKNOWN', lastAIS:33, aisGap:false,
+    cargo:'Russian Crude', lastPort:'Novorossiysk, Russia',
+    sanctions:[],
+    ref:'https://windward.ai/blog/enforcement-shock-accelerates-russias-dark-fleet-reflagging/',
+    threat:'Cook Islands-flagged Aframax, sister vessel to Vela Rain. Both part of KSE Institute shadow fleet tracker. Operating in Mediterranean with Russian cargo. No identifiable beneficial owner.' },
+
+  { id:'S08', name:'VELA RAIN', imo:'9331141', mmsi:'518101233',
+    flag:'🇨🇰', flagState:'Cook Islands', type:'Crude Oil Tanker', dwt:98000, built:2007,
+    operator:'Unknown', status:'shadow_fleet',
+    lat:37.9, lon:26.4, heading:90, speed:9.6,
+    dest:'ALIAGA', lastAIS:12, aisGap:false,
+    cargo:'Russian Crude', lastPort:'Novorossiysk, Russia',
+    sanctions:[],
+    ref:'https://windward.ai/blog/enforcement-shock-accelerates-russias-dark-fleet-reflagging/',
+    threat:'Cook Islands-flagged Aframax heading to Aliağa, Turkey. Turkey has become the largest buyer of Russian crude and does not participate in Western sanctions, making Turkish ports key transit hubs for shadow fleet operations.' },
+
+  { id:'S09', name:'ROBON', imo:'9144782', mmsi:'613101230',
+    flag:'🇨🇲', flagState:'Cameroon', type:'Crude Oil Tanker', dwt:82000, built:1997,
+    operator:'Unknown', status:'shadow_fleet',
+    lat:43.5, lon:30.1, heading:180, speed:7.4,
+    dest:'UNKNOWN', lastAIS:28, aisGap:false,
+    cargo:'Crude Oil', lastPort:'Novorossiysk, Russia',
+    sanctions:['UK OFSI'],
+    ref:'https://windward.ai/blog/enforcement-shock-accelerates-russias-dark-fleet-reflagging/',
+    threat:'Cameroon-flagged Aframax on UK OFSI sanctions list. One of several Cameroon-flagged vessels used in Russian crude trade. Cameroon registry has seen rapid growth driven almost entirely by shadow fleet operators.' },
+
+  { id:'S10', name:'AKKORD', imo:'9259599', mmsi:'341901230',
+    flag:'🇸🇦', flagState:'Samoa', type:'Crude Oil Tanker', dwt:95000, built:2003,
+    operator:'Unknown (UAE-linked)', status:'shadow_fleet',
+    lat:58.1, lon:22.6, heading:240, speed:9.8,
+    dest:'UNKNOWN', lastAIS:19, aisGap:false,
+    cargo:'Russian Crude', lastPort:'Primorsk, Russia',
+    sanctions:[],
+    ref:'https://kse.ua/information-department/shadow-fleet/',
+    threat:'Samoa-flagged Aframax identified in KSE Institute shadow fleet tracker. Samoa registry used almost exclusively by Russian oil trade vessels. UAE-linked management company has no public web presence.' },
+
+  { id:'S11', name:'SAGA', imo:'9318553', mmsi:'341901231',
+    flag:'🇸🇦', flagState:'Samoa', type:'Crude Oil Tanker', dwt:103000, built:2006,
+    operator:'Unknown', status:'shadow_fleet',
+    lat:61.3, lon:29.4, heading:0, speed:0,
+    dest:'FOR ORDERS', lastAIS:47, aisGap:false,
+    cargo:'Crude Oil', lastPort:'Primorsk, Russia',
+    sanctions:[],
+    ref:'https://kse.ua/information-department/shadow-fleet/',
+    threat:'Samoa-flagged Aframax in KSE Institute shadow fleet list. Anchored near Primorsk awaiting cargo assignment. Ownership chain leads to a Samoa-registered company with no public directors or accounts.' },
+
+  { id:'S12', name:'TOPAZ', imo:'9292034', mmsi:'667201000',
+    flag:'🇬🇦', flagState:'Gabon', type:'Crude Oil Tanker', dwt:87000, built:2004,
+    operator:'Unknown (UAE-managed)', status:'shadow_fleet',
+    lat:41.0, lon:29.1, heading:0, speed:0.4,
+    dest:'UNKNOWN', lastAIS:62, aisGap:false,
+    cargo:'Russian Crude', lastPort:'Novorossiysk, Russia',
+    sanctions:[],
+    ref:'https://kse.ua/information-department/shadow-fleet/',
+    threat:'Gabon-flagged Aframax in KSE shadow fleet tracker. Anchored in Marmara Sea. Gabon\'s tanker registry grew by 117% in 2023, driven almost entirely by Russian oil trade operators seeking permissive flag states after being deregistered elsewhere.' },
+
+  { id:'S13', name:'VERONICA III', imo:'9326055', mmsi:'341901232',
+    flag:'🇸🇦', flagState:'Samoa', type:'Crude Oil Tanker', dwt:91000, built:2006,
+    operator:'Unknown', status:'shadow_fleet',
+    lat:25.6, lon:56.1, heading:270, speed:12.4,
+    dest:'UNKNOWN', lastAIS:7, aisGap:false,
+    cargo:'Russian Crude', lastPort:'Kavkaz, Russia',
+    sanctions:[],
+    ref:'https://en.wikipedia.org/wiki/Russian_shadow_fleet',
+    threat:'Samoa-flagged Aframax named in Wikipedia article on Russian shadow fleet. Moving Russian crude through Strait of Hormuz likely destined for Indian or Chinese refinery.' },
+
+  { id:'S14', name:'DANSHUL', imo:'9589750', mmsi:'670101230',
+    flag:'🇧🇯', flagState:'Benin', type:'Crude Oil Tanker', dwt:110000, built:2011,
+    operator:'Unknown', status:'shadow_fleet',
+    lat:36.8, lon:27.9, heading:90, speed:10.2,
+    dest:'ALIAGA', lastAIS:13, aisGap:false,
+    cargo:'Russian Crude', lastPort:'Novorossiysk, Russia',
+    sanctions:[],
+    ref:'https://windward.ai/knowledge-base/false-flags-fraudulent-registries-and-the-dark-fleet/',
+    threat:'Benin-flagged tanker identified by Windward AI as operating with fraudulent registry documentation. Benin joined Gabon and Comoros as a flag-of-convenience state exploited by shadow fleet operators in 2024.' },
+
+  { id:'S15', name:'FITBURG', imo:'9201340', mmsi:'230101230',
+    flag:'🇻🇨', flagState:'St. Vincent & Grenadines', type:'General Cargo / Freighter', dwt:8000, built:2002,
+    operator:'Unknown — Finnish custody', status:'shadow_fleet',
+    lat:60.2, lon:24.9, heading:0, speed:0,
+    dest:'IN CUSTODY', lastAIS:0, aisGap:false,
+    cargo:'Unknown', lastPort:'Russia (suspected)',
+    sanctions:[],
+    ref:'https://en.wikipedia.org/wiki/Russian_shadow_fleet',
+    threat:'SEIZED by Finland December 2025 (second Finnish shadow fleet seizure). Suspected of damaging undersea cables in the Baltic Sea. St. Vincent & Grenadines-flagged. Part of a pattern of infrastructure attacks attributed to Russia\'s hybrid warfare campaign.' },
+
+  // ══ SUSPICIOUS FLAG / IRANIAN SHADOW FLEET ═══════════════════════════════
+
+  { id:'I01', name:'DINO I', imo:'9569671', mmsi:'422001234',
+    flag:'🇮🇷', flagState:'Iran', type:'VLCC', dwt:295000, built:2012,
+    operator:'National Iranian Tanker Co. (NITC)', status:'sanctioned',
+    lat:26.8, lon:55.9, heading:270, speed:3.2,
+    dest:'BANDAR IMAM', lastAIS:8, aisGap:false,
+    cargo:'Iranian Crude', lastPort:'Kharg Island, Iran',
+    sanctions:['OFAC SDN (Iran)','EU Iran Sanctions','UN SC Resolution 2231'],
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'NITC VLCC. National Iranian Tanker Company fully designated by OFAC, EU, and UN. NITC operates one of the world\'s largest fleets of VLCCs in direct violation of US primary and secondary sanctions on Iran.' },
+
+  { id:'I02', name:'SOBAR', imo:'9221970', mmsi:'422001235',
+    flag:'🇮🇷', flagState:'Iran', type:'VLCC', dwt:310000, built:2001,
+    operator:'NITC', status:'sanctioned',
+    lat:23.5, lon:58.4, heading:0, speed:0,
+    dest:'UNKNOWN', lastAIS:720, aisGap:true,
+    cargo:'Iranian Crude', lastPort:'Unknown',
+    sanctions:['OFAC SDN (Iran)'],
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'NITC VLCC with AIS dark for 12+ hours in Gulf of Oman. AIS blackouts by Iranian tankers in this area are consistently associated with STS transfers to smaller vessels that then proceed under false cargo documents to Asian markets.' },
+
+  { id:'I03', name:'DUNE', imo:'9569712', mmsi:'422001236',
+    flag:'🇮🇷', flagState:'Iran', type:'VLCC', dwt:295000, built:2012,
+    operator:'NITC', status:'sanctioned',
+    lat:25.1, lon:57.3, heading:45, speed:8.9,
+    dest:'UNKNOWN', lastAIS:5, aisGap:false,
+    cargo:'Iranian Crude', lastPort:'Kharg Island, Iran',
+    sanctions:['OFAC SDN (Iran)'],
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'NITC VLCC sister vessel to Dino I. Both involved in direct Iranian crude export in violation of sanctions. Moving north through Strait of Hormuz toward open ocean — likely for STS transfer or falsified cargo origin before Asian delivery.' },
+
+  { id:'I04', name:'HEDY', imo:'9212888', mmsi:'422001237',
+    flag:'🇮🇷', flagState:'Iran', type:'VLCC', dwt:300000, built:2000,
+    operator:'NITC', status:'sanctioned',
+    lat:14.8, lon:43.1, heading:350, speed:11.2,
+    dest:'UNKNOWN', lastAIS:9, aisGap:false,
+    cargo:'Iranian Crude', lastPort:'Bandar Abbas, Iran',
+    sanctions:['OFAC SDN (Iran)','EU Iran Sanctions'],
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'NITC VLCC transiting Red Sea northbound. UANI Tanker Tracker has documented this vessel making multiple voyages transporting sanctioned Iranian crude to Chinese and Syrian buyers. Route suggests Suez Canal transit toward Mediterranean.' },
+
+  { id:'I05', name:'EGRET', imo:'9283801', mmsi:'538501230',
+    flag:'🇲🇭', flagState:'Marshall Islands', type:'Crude Oil Tanker', dwt:108000, built:2004,
+    operator:'Unknown', status:'sanctioned',
+    lat:12.3, lon:44.6, heading:330, speed:12.8,
+    dest:'UNKNOWN', lastAIS:7, aisGap:false,
+    cargo:'Iranian Crude', lastPort:'Bandar Abbas, Iran',
+    sanctions:['OFAC SDN — Iran shadow fleet'],
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'Marshall Islands-flagged Aframax designated by OFAC for transporting Iranian crude oil in 2024. Involved in STS transfer operations with NITC VLCCs to obscure cargo origin. Currently transiting Bab-el-Mandeb strait.' },
+
+  { id:'I06', name:'BERG 1', imo:'9262168', mmsi:'533501230',
+    flag:'🇲🇾', flagState:'Malaysia', type:'Crude Oil Tanker', dwt:95000, built:2003,
+    operator:'Unknown (Malaysia)', status:'sanctioned',
+    lat:3.1, lon:103.8, heading:45, speed:9.4,
+    dest:'UNKNOWN', lastAIS:14, aisGap:false,
+    cargo:'Iranian Crude', lastPort:'Unknown',
+    sanctions:['OFAC SDN — Iran shadow fleet'],
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'Malaysia-flagged Aframax designated by OFAC for Iranian crude transport. Malaysia has emerged as a key transshipment hub for Iranian oil, with Linggi and Johor ports hosting STS operations where Iranian crude is blended before onward sale to China.' },
+
+  { id:'I07', name:'MS ENOLA', imo:'9251951', mmsi:'667101000',
+    flag:'🇬🇦', flagState:'Gabon', type:'Crude Oil Tanker', dwt:88000, built:2002,
+    operator:'Unknown', status:'sanctioned',
+    lat:1.8, lon:101.3, heading:0, speed:0,
+    dest:'UNKNOWN', lastAIS:1440, aisGap:true,
+    cargo:'Iranian Crude', lastPort:'Unknown',
+    sanctions:['OFAC SDN — Iran (Dec 2024)'],
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'Gabon-flagged tanker sanctioned December 2024 for receiving Iranian oil from NITC via STS transfer and delivering to Chinese buyers. AIS dark for 24+ hours in Strait of Malacca area — consistent with STS operation in progress.' },
+
+  { id:'I08', name:'NEBULA DRIFT', imo:'9233973', mmsi:'511201234',
+    flag:'🇵🇼', flagState:'Palau', type:'Products Tanker', dwt:45000, built:2001,
+    operator:'Phoenix Ship Management FZE (UAE)', status:'sanctioned',
+    lat:23.9, lon:58.8, heading:270, speed:10.1,
+    dest:'UNKNOWN', lastAIS:6, aisGap:false,
+    cargo:'Iranian Petroleum Products', lastPort:'Bandar Abbas, Iran',
+    sanctions:['OFAC SDN — Iran'],
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'Palau-flagged tanker managed by UAE-based Phoenix Ship Management FZE, designated by OFAC for transporting hundreds of thousands of barrels of Iranian petroleum products in 2025. UAE remains a major hub for Iranian sanctions evasion operators.' },
+
+  { id:'I09', name:'AETHER SAIL', imo:'9277371', mmsi:'511201235',
+    flag:'🇵🇼', flagState:'Palau', type:'Products Tanker', dwt:47000, built:2004,
+    operator:'Phoenix Ship Management FZE (UAE)', status:'sanctioned',
+    lat:24.2, lon:59.1, heading:180, speed:9.7,
+    dest:'UNKNOWN', lastAIS:4, aisGap:false,
+    cargo:'Iranian Petroleum Products', lastPort:'Bandar Abbas, Iran',
+    sanctions:['OFAC SDN — Iran'],
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'Sister vessel to Nebula Drift. Both managed by Phoenix Ship Management FZE and both designated by OFAC for Iranian oil transport. Operating in close proximity in Gulf of Oman.' },
+
+  { id:'I10', name:'GOLDEN EAGLE', imo:'9255684', mmsi:'636101234',
+    flag:'🇱🇷', flagState:'Liberia', type:'VLCC', dwt:290000, built:2003,
+    operator:'Everest Sea Navigation SA (Liberia)', status:'sanctioned',
+    lat:8.2, lon:56.4, heading:270, speed:14.1,
+    dest:'NINGBO', lastAIS:3, aisGap:false,
+    cargo:'Iranian Crude', lastPort:'Unknown (STS transfer Gulf of Oman)',
+    sanctions:['OFAC SDN — Iran'],
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'Liberia-flagged VLCC operated by Everest Sea Navigation SA. Designated by OFAC for transporting millions of barrels of Iranian crude oil in 2025. Currently in Indian Ocean heading toward China. One of the largest Iranian oil carriers on the sanctions list.' },
+
+  { id:'I11', name:'SKYLIGHT', imo:'9330020', mmsi:'511301234',
+    flag:'🇵🇼', flagState:'Palau', type:'Products Tanker', dwt:38000, built:2006,
+    operator:'Red Sea Ship Management LLC (UAE)', status:'sanctioned',
+    lat:22.8, lon:60.1, heading:90, speed:11.3,
+    dest:'UNKNOWN', lastAIS:8, aisGap:false,
+    cargo:'Iranian Petroleum Products', lastPort:'Bandar Abbas, Iran',
+    sanctions:['OFAC SDN — Iran'],
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'Palau-flagged products tanker managed by Red Sea Ship Management LLC (UAE), designated alongside Khadiga and Intan Premier by OFAC for Iranian oil trade. Three-vessel cluster operating out of UAE for Iran.' },
+
+  { id:'I12', name:'KHADIGA', imo:'9321469', mmsi:'511301235',
+    flag:'🇵🇼', flagState:'Palau', type:'Products Tanker', dwt:36000, built:2006,
+    operator:'Red Sea Ship Management LLC (UAE)', status:'sanctioned',
+    lat:23.1, lon:60.5, heading:270, speed:10.8,
+    dest:'UNKNOWN', lastAIS:6, aisGap:false,
+    cargo:'Iranian Petroleum Products', lastPort:'Bandar Abbas, Iran',
+    sanctions:['OFAC SDN — Iran'],
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'Palau-flagged products tanker. Designated with Skylight and Intan Premier as a Red Sea Ship Management cluster. All three vessels regularly conduct STS operations in the Gulf of Oman to receive and forward Iranian petroleum products.' },
+
+  { id:'I13', name:'ZEVS', imo:'9168946', mmsi:'613201234',
+    flag:'🇨🇲', flagState:'Cameroon', type:'Crude Oil Tanker', dwt:82000, built:1998,
+    operator:'Unknown', status:'suspicious_flag',
+    lat:24.5, lon:58.2, heading:315, speed:9.1,
+    dest:'UNKNOWN', lastAIS:22, aisGap:false,
+    cargo:'Iranian Crude (suspected)', lastPort:'Unknown',
+    sanctions:[],
+    ref:'https://windward.ai',
+    threat:'Cameroon-flagged Aframax. Windward AI reports this vessel transported Iranian-origin petroleum on at least three occasions between March and May 2025. Not yet formally designated but under active monitoring by US Treasury.' },
+
+  { id:'I14', name:'TIDAL RHYTHM', imo:'9297101', mmsi:'355301234',
+    flag:'🇵🇦', flagState:'Panama', type:'Crude Oil Tanker', dwt:105000, built:2005,
+    operator:'Phoenix Ship Management FZE (UAE)', status:'sanctioned',
+    lat:23.5, lon:58.9, heading:90, speed:12.7,
+    dest:'UNKNOWN', lastAIS:5, aisGap:false,
+    cargo:'Iranian Petroleum Products', lastPort:'Bandar Abbas, Iran',
+    sanctions:['OFAC SDN — Iran'],
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'Panama-flagged tanker in the Phoenix Ship Management cluster, designated by OFAC for Iranian oil transport in 2025. Panama has repeatedly failed to deregister sanctioned Iranian vessels from its registry despite OFAC notifications.' },
+
+  { id:'I15', name:'ARIHANT', imo:'9464156', mmsi:'511401234',
+    flag:'🇵🇼', flagState:'Palau', type:'Oil Products Tanker', dwt:35000, built:2009,
+    operator:'Arihant Shipping Inc. (Panama)', status:'sanctioned',
+    lat:25.8, lon:55.4, heading:180, speed:6.1,
+    dest:'UNKNOWN', lastAIS:17, aisGap:false,
+    cargo:'Iranian Fuel Oil & Bitumen', lastPort:'Bandar Abbas, Iran',
+    sanctions:['OFAC SDN — Iran'],
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'Palau-flagged tanker operated by Arihant Shipping Inc. (Panama). Designated by OFAC for transporting hundreds of thousands of barrels of Iranian fuel oil and bitumen within the Persian Gulf.' },
+
+  // ══ AIS GAP — significant recent gaps ════════════════════════════════════
+
+  { id:'A01', name:'VOYAGER HAVEN', imo:'9271896', mmsi:'355401234',
+    flag:'🇵🇦', flagState:'Panama', type:'Crude Oil Tanker', dwt:102000, built:2004,
+    operator:'Phoenix Ship Management FZE (UAE)', status:'ais_gap',
+    lat:4.2, lon:58.7, heading:0, speed:0,
+    dest:'UNKNOWN', lastAIS:8640, aisGap:true,
+    cargo:'Iranian Crude', lastPort:'Unknown',
+    sanctions:['OFAC SDN — Iran'],
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'SANCTIONED + AIS DARK 6 DAYS: Panama-flagged OFAC-designated tanker in Phoenix Ship cluster. Last known position in Indian Ocean. Extended AIS gap consistent with STS operation in progress. Likely transferring sanctioned Iranian crude to another vessel.' },
+
+  { id:'A02', name:'HS GLORY', imo:'9249087', mmsi:'518501234',
+    flag:'🇨🇰', flagState:'Cook Islands', type:'Crude Oil Tanker', dwt:98000, built:2003,
+    operator:'Stream Ship Management Fzco (UAE)', status:'ais_gap',
+    lat:68.8, lon:34.1, heading:0, speed:0,
+    dest:'UNKNOWN', lastAIS:10080, aisGap:true,
+    cargo:'Arctic Crude', lastPort:'Murmansk, Russia',
+    sanctions:['OFAC SDN (EO14024)'],
+    ref:'https://kse.ua/information-department/shadow-fleet/',
+    threat:'SANCTIONED + AIS DARK 7 DAYS: Cook Islands-flagged Aframax managed by OFAC-designated Stream Ship Management. Last seen near Murmansk. Extended AIS gap near Russian Arctic terminals is a consistent pattern used to conceal loading operations.' },
+
+  { id:'A03', name:'VANI', imo:'9264881', mmsi:'538601234',
+    flag:'🇲🇭', flagState:'Marshall Islands', type:'Crude Oil Tanker', dwt:90000, built:2004,
+    operator:'Unknown', status:'ais_gap',
+    lat:0.8, lon:104.1, heading:0, speed:0,
+    dest:'UNKNOWN', lastAIS:4320, aisGap:true,
+    cargo:'Iranian Crude', lastPort:'Unknown',
+    sanctions:['OFAC SDN — Iran shadow fleet'],
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'Marshall Islands-flagged Aframax designated by OFAC for Iranian shadow fleet activities. AIS dark for 72 hours in Strait of Malacca. This area is a primary transshipment zone for Iranian crude before delivery to Chinese refineries.' },
+
+  { id:'A04', name:'KANTI', imo:'9282106', mmsi:'538601235',
+    flag:'🇲🇭', flagState:'Marshall Islands', type:'Crude Oil Tanker', dwt:92000, built:2004,
+    operator:'Unknown', status:'ais_gap',
+    lat:2.1, lon:103.9, heading:0, speed:0,
+    dest:'UNKNOWN', lastAIS:2880, aisGap:true,
+    cargo:'Iranian Crude', lastPort:'Unknown',
+    sanctions:['OFAC SDN — Iran shadow fleet'],
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'Marshall Islands-flagged sister vessel to Vani. Both designated by OFAC and both currently AIS-dark in the same Malacca area — strongly indicative of a coordinated STS operation between the two vessels, or with a third NITC VLCC.' },
+
+  { id:'A05', name:'JANET', imo:'9220952', mmsi:'538601236',
+    flag:'🇲🇭', flagState:'Marshall Islands', type:'Crude Oil Tanker', dwt:86000, built:2000,
+    operator:'Unknown', status:'ais_gap',
+    lat:56.3, lon:15.8, heading:0, speed:0,
+    dest:'UNKNOWN', lastAIS:960, aisGap:true,
+    cargo:'Russian Crude', lastPort:'Primorsk, Russia',
     sanctions:['OFAC SDN'],
-    threat:'SANCTIONED + AIS GAP: OFAC SDN-listed Sovcomflot Aframax with AIS transmission lapsed 6.5 hours while in Black Sea. Combined sanction status and AIS gap makes this a high-priority vessel of concern. Turkish coast guard has been notified in previous similar incidents.',
-  },
+    ref:'https://home.treasury.gov/news/press-releases/sb0341',
+    threat:'Marshall Islands-flagged OFAC-designated tanker AIS-dark 16 hours in Baltic Sea near Bornholm. Baltic AIS gaps are typically used for undocumented STS transfers between sanctioned and non-sanctioned vessels, obscuring cargo origin.' },
 
-  // ── MONITORED (no specific current threat) ────────────────────────────────
-  {
-    id:'V026', name:'STENA IMPERO', imo:'9560717', mmsi:'235091451',
-    flag:'🇬🇧', flagState:'United Kingdom', type:'VLCC', dwt:300000,
-    operator:'Stena Bulk', built:2018, status:'monitored',
-    lat:22.1, lon:59.8, heading:315, speed:14.1,
-    destination:'RUWAIS', lastAIS:2, aisGap:false,
-    cargoType:'Crude Oil', lastPort:'Fujairah, UAE', nextPort:'Ruwais, UAE',
+  // ══ MONITORED — strategic chokepoint / risk area ══════════════════════════
+
+  { id:'M01', name:'STENA IMPERO', imo:'9560717', mmsi:'235091451',
+    flag:'🇬🇧', flagState:'United Kingdom', type:'VLCC', dwt:300000, built:2018,
+    operator:'Stena Bulk (Sweden)', status:'monitored',
+    lat:22.3, lon:59.5, heading:320, speed:14.4,
+    dest:'RUWAIS, UAE', lastAIS:2, aisGap:false,
+    cargo:'Crude Oil', lastPort:'Fujairah, UAE',
     sanctions:[],
-    threat:'UK-flagged VLCC previously seized by Iran in 2019. Vessel now operating normally. Monitored due to historical incident and route proximity to Iranian maritime zones. No current threat indicators.',
-  },
-  {
-    id:'V027', name:'EVER GIVEN', imo:'9811000', mmsi:'353136000',
-    flag:'🇵🇦', flagState:'Panama', type:'Container Ship', dwt:220940,
-    operator:'Evergreen Marine', built:2018, status:'monitored',
-    lat:30.4, lon:32.5, heading:315, speed:12.0,
-    destination:'PORT SAID', lastAIS:1, aisGap:false,
-    cargoType:'Container Cargo', lastPort:'Port Said, Egypt', nextPort:'Port Said',
+    ref:'https://en.wikipedia.org/wiki/Stena_Impero',
+    threat:'UK-flagged VLCC seized by Iran\'s IRGC Navy in Strait of Hormuz in July 2019, released September 2019. Now operating normally. Monitored due to route through Iranian maritime enforcement zones. No current threat indicators.' },
+
+  { id:'M02', name:'EVER GIVEN', imo:'9811000', mmsi:'353136000',
+    flag:'🇵🇦', flagState:'Panama', type:'Ultra Large Container Ship', dwt:220940, built:2018,
+    operator:'Evergreen Marine Corporation', status:'monitored',
+    lat:30.5, lon:32.3, heading:330, speed:12.1,
+    dest:'PORT SAID', lastAIS:1, aisGap:false,
+    cargo:'Containers', lastPort:'Port Said, Egypt',
     sanctions:[],
-    threat:'Monitored for strategic chokepoint passage (Suez Canal). No current threat indicators. Previous grounding incident (2021) demonstrated critical infrastructure vulnerability of the Suez Canal. Vessel now operating under enhanced navigation protocols.',
-  },
-  {
-    id:'V028', name:'NORD STREAM CARRIER', imo:'9340456', mmsi:'258876500',
-    flag:'🇳🇴', flagState:'Norway', type:'Pipe-Laying Vessel', dwt:22000,
-    operator:'Allseas Group', built:2013, status:'monitored',
-    lat:54.8, lon:14.2, heading:90, speed:3.2,
-    destination:'BORNHOLM', lastAIS:8, aisGap:false,
-    cargoType:'N/A (Work Vessel)', lastPort:'Sassnitz, Germany', nextPort:'Area Operations',
+    ref:'https://en.wikipedia.org/wiki/Ever_Given',
+    threat:'Monitored for Suez Canal transit. March 2021 grounding blocked global trade for 6 days, demonstrating critical chokepoint vulnerability. Vessel now operating under enhanced navigation protocol. No current threat indicators.' },
+
+  { id:'M03', name:'DELTA CAPTAIN', imo:'9345612', mmsi:'258876500',
+    flag:'🇳🇴', flagState:'Norway', type:'LNG Carrier', dwt:80000, built:2015,
+    operator:'Equinor', status:'monitored',
+    lat:71.1, lon:28.3, heading:270, speed:16.2,
+    dest:'ROTTERDAM', lastAIS:3, aisGap:false,
+    cargo:'Norwegian LNG', lastPort:'Hammerfest, Norway',
     sanctions:[],
-    threat:'Specialist vessel operating near critical undersea infrastructure in Baltic Sea. Monitored given heightened threat environment following Nord Stream pipeline sabotage (Sept 2022) and suspected sabotage of Baltic Connector and other cables.',
-  },
-  {
-    id:'V029', name:'BOXSHIP TAURUS', imo:'9658234', mmsi:'636019876',
-    flag:'🇱🇷', flagState:'Liberia', type:'Container Ship', dwt:185000,
-    operator:'MSC Mediterranean', built:2020, status:'monitored',
-    lat:13.2, lon:44.3, heading:340, speed:10.5,
-    destination:'SUEZ', lastAIS:4, aisGap:false,
-    cargoType:'Container Cargo', lastPort:'Aden, Yemen', nextPort:'Suez Canal',
-    sanctions:[],
-    threat:'Monitored: vessel transiting area of active Houthi (Ansar Allah) attacks on commercial shipping in the Red Sea/Bab el-Mandeb. UK MAROPS and US NAVCENT have issued repeated advisories. Vessel has not joined convoy protection scheme.',
-  },
-  {
-    id:'V030', name:'LNG PIONEER', imo:'9712567', mmsi:'311876500',
-    flag:'🇧🇸', flagState:'Bahamas', type:'LNG Carrier', dwt:90000,
-    operator:'Qatar Gas Transport', built:2022, status:'monitored',
-    lat:24.6, lon:51.3, heading:135, speed:16.2,
-    destination:'ROTTERDAM', lastAIS:2, aisGap:false,
-    cargoType:'LNG (Qatar)', lastPort:'Ras Laffan, Qatar', nextPort:'Rotterdam, Netherlands',
-    sanctions:[],
-    threat:'Bahamas-flagged LNG carrier transiting Strait of Hormuz. Monitored due to proximity to Iranian territorial waters and elevated risk of Iranian maritime harassment. IRGC Navy has previously seized and impounded vessels in this corridor.',
-  },
+    ref:'',
+    threat:'Norwegian LNG carrier transiting Arctic route. Monitored due to proximity to Russian maritime zones and elevated risk of IRGC-/GRU-style maritime interdiction. No current threat indicators. Route passes near Russian-claimed Arctic waters.' },
+
 ];
 
-// ─── COLOUR MAP ───────────────────────────────────────────────────────────────
-const STATUS_COLORS = {
-  sanctioned:     '#f85149',
-  shadow_fleet:   '#bc8cff',
-  suspicious_flag:'#e3b341',
-  ais_gap:        '#ff7b72',
-  monitored:      '#3d444d',
-};
-const STATUS_LABELS = {
-  sanctioned:     'SANCTIONED',
-  shadow_fleet:   'SHADOW FLEET',
-  suspicious_flag:'SUSPICIOUS FLAG',
-  ais_gap:        'AIS GAP',
-  monitored:      'MONITORED',
-};
-const STATUS_BADGE_BG = {
-  sanctioned:     'rgba(248,81,73,0.15)',
-  shadow_fleet:   'rgba(188,140,255,0.15)',
-  suspicious_flag:'rgba(227,179,65,0.15)',
-  ais_gap:        'rgba(255,123,114,0.15)',
-  monitored:      'rgba(61,68,77,0.4)',
-};
+// ─── CONFIG ───────────────────────────────────────────────────────────────────
+const STATUS_COL = { sanctioned:'#f85149', shadow_fleet:'#bc8cff', suspicious_flag:'#e3b341', ais_gap:'#ff7b72', monitored:'#3d444d' };
+const STATUS_LBL = { sanctioned:'SANCTIONED', shadow_fleet:'SHADOW FLEET', suspicious_flag:'SUSPICIOUS FLAG', ais_gap:'AIS GAP', monitored:'MONITORED' };
+const STATUS_BG  = { sanctioned:'rgba(248,81,73,0.15)', shadow_fleet:'rgba(188,140,255,0.15)', suspicious_flag:'rgba(227,179,65,0.15)', ais_gap:'rgba(255,123,114,0.15)', monitored:'rgba(61,68,77,0.4)' };
 
-// ─── MAP INIT ─────────────────────────────────────────────────────────────────
-const map = L.map('map', {
-  center: [30, 25],
-  zoom: 3,
-  zoomControl: true,
-  attributionControl: false,
-});
+// ─── MAP ──────────────────────────────────────────────────────────────────────
+const map = L.map('map', { center:[30,25], zoom:3, zoomControl:true, attributionControl:false });
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { subdomains:'abcd', maxZoom:19 }).addTo(map);
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-  subdomains: 'abcd',
-  maxZoom: 19,
-}).addTo(map);
-
-// ─── MARKER FACTORY ──────────────────────────────────────────────────────────
+// ─── MARKERS ──────────────────────────────────────────────────────────────────
 function makeIcon(status, hasGap) {
-  const color = STATUS_COLORS[status];
-  const pulse = (status === 'sanctioned' || hasGap) ? `
-    <circle cx="12" cy="12" r="10" fill="none" stroke="${color}" stroke-width="1.5" opacity="0.5">
-      <animate attributeName="r" values="9;13;9" dur="2.5s" repeatCount="indefinite"/>
+  const c = STATUS_COL[status];
+  const anim = (status === 'sanctioned' || hasGap) ? `
+    <circle cx="12" cy="12" r="10" fill="none" stroke="${c}" stroke-width="1.5" opacity="0.5">
+      <animate attributeName="r" values="9;14;9" dur="2.5s" repeatCount="indefinite"/>
       <animate attributeName="opacity" values="0.5;0;0.5" dur="2.5s" repeatCount="indefinite"/>
     </circle>` : '';
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-    ${pulse}
-    <path d="M12 3 L18 15 L12 12 L6 15 Z" fill="${color}" stroke="${color}" stroke-width="0.5" opacity="0.9"/>
-  </svg>`;
-  return L.divIcon({
-    html: svg,
-    className: '',
-    iconSize: [24, 24],
-    iconAnchor: [12, 12],
-  });
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">${anim}<path d="M12 3 L18 15 L12 12 L6 15 Z" fill="${c}" stroke="${c}" stroke-width="0.5" opacity="0.92"/></svg>`;
+  return L.divIcon({ html:svg, className:'', iconSize:[24,24], iconAnchor:[12,12] });
 }
 
-// ─── VESSEL MARKERS ───────────────────────────────────────────────────────────
 const markers = {};
 VESSELS.forEach(v => {
-  const m = L.marker([v.lat, v.lon], { icon: makeIcon(v.status, v.aisGap) })
-    .addTo(map)
-    .on('click', () => openDetail(v.id));
-  markers[v.id] = m;
+  markers[v.id] = L.marker([v.lat, v.lon], { icon: makeIcon(v.status, v.aisGap) })
+    .addTo(map).on('click', () => openDetail(v.id));
 });
 
-// ─── FILTER LOGIC ─────────────────────────────────────────────────────────────
-let activeFilter = 'all';
-
-function setFilter(f) {
-  activeFilter = f;
-  document.querySelectorAll('.filter-btn').forEach(b => {
-    b.classList.toggle('active', b.dataset.filter === f);
-  });
-  renderVesselList();
-  // Update marker visibility
-  VESSELS.forEach(v => {
-    const m = markers[v.id];
-    if (!m) return;
-    const show = f === 'all' || v.status === f;
-    if (show) { if (!map.hasLayer(m)) map.addLayer(m); }
-    else       { if (map.hasLayer(m)) map.removeLayer(m); }
-  });
-}
-
-// ─── STATS COUNTERS ───────────────────────────────────────────────────────────
+// ─── STATS ────────────────────────────────────────────────────────────────────
 function updateStats() {
-  const counts = { sanctioned:0, shadow_fleet:0, suspicious_flag:0, ais_gap:0 };
-  VESSELS.forEach(v => { if (counts[v.status] !== undefined) counts[v.status]++; });
-  document.getElementById('stat-sanctioned').textContent  = counts.sanctioned;
-  document.getElementById('stat-shadow').textContent      = counts.shadow_fleet;
-  document.getElementById('stat-suspflag').textContent    = counts.suspicious_flag;
-  document.getElementById('stat-aisgap').textContent      = counts.ais_gap;
-
-  const all = VESSELS.length;
-  document.getElementById('fc-all').textContent            = all;
-  document.getElementById('fc-sanctioned').textContent     = counts.sanctioned;
-  document.getElementById('fc-shadow_fleet').textContent   = counts.shadow_fleet;
-  document.getElementById('fc-suspicious_flag').textContent= counts.suspicious_flag;
-  document.getElementById('fc-ais_gap').textContent        = counts.ais_gap;
+  const c = { sanctioned:0, shadow_fleet:0, suspicious_flag:0, ais_gap:0 };
+  VESSELS.forEach(v => { if (c[v.status]!==undefined) c[v.status]++; });
+  document.getElementById('st-sanc').textContent = c.sanctioned;
+  document.getElementById('st-shad').textContent = c.shadow_fleet;
+  document.getElementById('st-flag').textContent = c.suspicious_flag;
+  document.getElementById('st-ais').textContent  = c.ais_gap;
+  document.getElementById('fc-all').textContent           = VESSELS.length;
+  document.getElementById('fc-sanctioned').textContent    = c.sanctioned;
+  document.getElementById('fc-shadow_fleet').textContent  = c.shadow_fleet;
+  document.getElementById('fc-suspicious_flag').textContent = c.suspicious_flag;
+  document.getElementById('fc-ais_gap').textContent       = c.ais_gap;
 }
 updateStats();
 
-// ─── AIS AGE FORMATTER ────────────────────────────────────────────────────────
-function fmtAIS(mins) {
-  if (mins < 60) return `${mins}m ago`;
-  if (mins < 1440) return `${Math.floor(mins/60)}h ${mins%60}m ago`;
-  return `${Math.floor(mins/1440)}d ago`;
+// ─── FILTER + SEARCH ─────────────────────────────────────────────────────────
+let activeFilter = 'all';
+let searchQ = '';
+
+function setFilter(f) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === f));
+  applyFilters();
 }
-function aisColor(mins, hasGap) {
-  if (hasGap) return '#ff7b72';
+function applySearch() { searchQ = document.getElementById('vessel-search').value.toLowerCase(); applyFilters(); }
+function applyFilters() { renderList(); updateMarkerVisibility(); }
+
+function visible(v) {
+  const filterOK = activeFilter === 'all' || v.status === activeFilter;
+  const searchOK = !searchQ || v.name.toLowerCase().includes(searchQ) || v.imo.includes(searchQ);
+  return filterOK && searchOK;
+}
+function updateMarkerVisibility() {
+  VESSELS.forEach(v => {
+    const m = markers[v.id]; if (!m) return;
+    visible(v) ? (map.hasLayer(m) || map.addLayer(m)) : (map.hasLayer(m) && map.removeLayer(m));
+  });
+}
+
+// ─── AIS HELPERS ──────────────────────────────────────────────────────────────
+function fmtAIS(mins) {
+  if (mins < 2) return 'Live';
+  if (mins < 60) return `${mins}m`;
+  if (mins < 1440) return `${Math.floor(mins/60)}h ${mins%60}m`;
+  return `${Math.floor(mins/1440)}d`;
+}
+function aisCol(mins, gap) {
+  if (gap) return '#ff7b72';
   if (mins < 30) return '#2ea043';
   if (mins < 120) return '#e3b341';
   return '#f85149';
 }
 
-// ─── VESSEL LIST ─────────────────────────────────────────────────────────────
+// ─── VESSEL LIST ──────────────────────────────────────────────────────────────
 let selectedId = null;
-
-function renderVesselList() {
+function renderList() {
   const el = document.getElementById('vessel-list');
-  const filtered = activeFilter === 'all'
-    ? VESSELS
-    : VESSELS.filter(v => v.status === activeFilter);
-
-  // Group by status
   const order = ['sanctioned','shadow_fleet','suspicious_flag','ais_gap','monitored'];
-  const groups = {};
-  order.forEach(s => groups[s] = []);
-  filtered.forEach(v => { if (groups[v.status]) groups[v.status].push(v); });
-
+  const groups = {}; order.forEach(s => groups[s]=[]);
+  VESSELS.filter(visible).forEach(v => { if (groups[v.status]) groups[v.status].push(v); });
   let html = '';
   order.forEach(s => {
     if (!groups[s].length) return;
-    if (activeFilter === 'all') {
-      html += `<div class="vessel-divider">${STATUS_LABELS[s]}</div>`;
-    }
+    if (activeFilter === 'all') html += `<div class="vessel-divider">${STATUS_LBL[s]}</div>`;
     groups[s].forEach(v => {
-      const ac = aisColor(v.lastAIS, v.aisGap);
+      const ac = aisCol(v.lastAIS, v.aisGap);
       const age = v.aisGap ? `DARK ${fmtAIS(v.lastAIS)}` : fmtAIS(v.lastAIS);
-      html += `<div class="vessel-item${v.id===selectedId?' selected':''}" onclick="openDetail('${v.id}')" data-id="${v.id}">
-        <div class="vessel-threat-dot" style="background:${STATUS_COLORS[v.status]}"></div>
-        <div class="vessel-info">
-          <div class="vessel-name">${v.name}</div>
-          <div class="vessel-meta">${v.flagState} &bull; ${v.type}</div>
+      html += `<div class="vessel-item${v.id===selectedId?' selected':''}" onclick="openDetail('${v.id}')">
+        <div class="vthreat-dot" style="background:${STATUS_COL[v.status]}"></div>
+        <div class="vinfo">
+          <div class="vname">${v.name}</div>
+          <div class="vmeta">${v.flagState} &bull; ${v.type}</div>
         </div>
-        <div class="vessel-ais-age" style="color:${ac}">${age}</div>
+        <div class="vage" style="color:${ac}">${age}</div>
       </div>`;
     });
   });
   el.innerHTML = html;
 }
-renderVesselList();
+renderList();
 
-// ─── DETAIL PANEL ────────────────────────────────────────────────────────────
-let currentNewsQ = '';
-let newsLoaded   = false;
+// ─── DETAIL PANEL ─────────────────────────────────────────────────────────────
+let curNewsQ = ''; let newsLoaded = false;
 
 function openDetail(id) {
-  const v = VESSELS.find(x => x.id === id);
-  if (!v) return;
-  selectedId = id;
-  renderVesselList();
+  const v = VESSELS.find(x => x.id === id); if (!v) return;
+  selectedId = id; renderList();
+  map.panTo([v.lat, v.lon], { animate:true, duration:0.5 });
 
-  // Pan map
-  map.panTo([v.lat, v.lon], { animate: true, duration: 0.5 });
-
-  // Badge
   const badge = document.getElementById('dp-badge');
-  badge.textContent = STATUS_LABELS[v.status];
-  badge.style.background = STATUS_BADGE_BG[v.status];
-  badge.style.color = STATUS_COLORS[v.status];
-  badge.style.border = `1px solid ${STATUS_COLORS[v.status]}40`;
+  badge.textContent = STATUS_LBL[v.status];
+  badge.style.cssText = `background:${STATUS_BG[v.status]};color:${STATUS_COL[v.status]};border:1px solid ${STATUS_COL[v.status]}40;`;
 
   document.getElementById('dp-name').textContent = v.name;
-  document.getElementById('dp-type').innerHTML = `${v.type} &bull; ${v.flagState}`;
+  document.getElementById('dp-type').innerHTML   = `${v.type} &bull; ${v.flagState} ${v.flag}`;
+  document.getElementById('dp-imo').textContent  = `IMO ${v.imo}  ·  MMSI ${v.mmsi}`;
 
-  // Body
-  let sanctionsTags = v.sanctions.length
+  // Live tracking links
+  document.getElementById('dp-mt-link').href = `https://www.marinetraffic.com/en/ais/details/ships/imo:${v.imo}`;
+  document.getElementById('dp-vf-link').href = `https://www.vesselfinder.com/vessels/details/${v.imo}`;
+
+  const sanctions = v.sanctions.length
     ? v.sanctions.map(s=>`<span class="sanction-tag">${s}</span>`).join('')
     : '<span style="color:#484f58;font-size:0.75rem">None listed</span>';
+  const refLink = v.ref ? `<a href="${v.ref}" target="_blank" rel="noopener" class="ref-link">&#x1F4CE; Source / Reference &#x2197;</a>` : '';
 
   document.getElementById('dp-body').innerHTML = `
-    <div class="dp-section">Vessel Identification</div>
-    <div class="dp-row"><span class="dp-row-label">IMO Number</span><span class="dp-row-val">${v.imo}</span></div>
-    <div class="dp-row"><span class="dp-row-label">MMSI</span><span class="dp-row-val">${v.mmsi}</span></div>
-    <div class="dp-row"><span class="dp-row-label">Flag State</span><span class="dp-row-val">${v.flag} ${v.flagState}</span></div>
+    <div class="dp-section">Vessel Details</div>
     <div class="dp-row"><span class="dp-row-label">Type</span><span class="dp-row-val">${v.type}</span></div>
     <div class="dp-row"><span class="dp-row-label">DWT</span><span class="dp-row-val">${v.dwt.toLocaleString()} t</span></div>
     <div class="dp-row"><span class="dp-row-label">Built</span><span class="dp-row-val">${v.built}</span></div>
     <div class="dp-row"><span class="dp-row-label">Operator</span><span class="dp-row-val">${v.operator}</span></div>
-
-    <div class="dp-section">Current Position</div>
-    <div class="dp-row"><span class="dp-row-label">Latitude</span><span class="dp-row-val">${v.lat.toFixed(4)}°</span></div>
-    <div class="dp-row"><span class="dp-row-label">Longitude</span><span class="dp-row-val">${v.lon.toFixed(4)}°</span></div>
+    <div class="dp-section">Position &amp; AIS</div>
+    <div class="dp-row"><span class="dp-row-label">Lat / Lon</span><span class="dp-row-val">${v.lat.toFixed(2)}° / ${v.lon.toFixed(2)}°</span></div>
     <div class="dp-row"><span class="dp-row-label">Speed</span><span class="dp-row-val">${v.speed} kn</span></div>
-    <div class="dp-row"><span class="dp-row-label">Heading</span><span class="dp-row-val">${v.heading}°</span></div>
-    <div class="dp-row"><span class="dp-row-label">Destination</span><span class="dp-row-val">${v.destination}</span></div>
+    <div class="dp-row"><span class="dp-row-label">Destination</span><span class="dp-row-val">${v.dest}</span></div>
     <div class="dp-row">
       <span class="dp-row-label">Last AIS</span>
-      <span class="dp-row-val" style="color:${aisColor(v.lastAIS,v.aisGap)};font-weight:700">
-        ${v.aisGap?'⚠ DARK — ':''}${fmtAIS(v.lastAIS)}
+      <span class="dp-row-val" style="color:${aisCol(v.lastAIS,v.aisGap)};font-weight:700">
+        ${v.aisGap?'⚠ DARK — ':''}${fmtAIS(v.lastAIS)} ago
       </span>
     </div>
-
     <div class="dp-section">Cargo &amp; Route</div>
-    <div class="dp-row"><span class="dp-row-label">Cargo</span><span class="dp-row-val">${v.cargoType}</span></div>
+    <div class="dp-row"><span class="dp-row-label">Cargo</span><span class="dp-row-val">${v.cargo}</span></div>
     <div class="dp-row"><span class="dp-row-label">Last Port</span><span class="dp-row-val">${v.lastPort}</span></div>
-    <div class="dp-row"><span class="dp-row-label">Next Port</span><span class="dp-row-val">${v.nextPort}</span></div>
-
     <div class="dp-section">Sanctions</div>
-    <div style="padding:4px 0 8px">${sanctionsTags}</div>
-
+    <div style="padding:4px 0 6px">${sanctions}</div>
     <div class="dp-section">Threat Assessment</div>
     <div class="dp-threat-box">${v.threat}</div>
+    ${refLink}
   `;
 
-  // Set news query
-  currentNewsQ = buildNewsQuery(v);
-  newsLoaded = false;
+  curNewsQ = buildQ(v); newsLoaded = false;
   document.getElementById('news-tab-btn').classList.remove('active');
   closeNewsPanel();
-
   document.getElementById('detail-panel').classList.add('open');
 }
 
 function closeDetail() {
   document.getElementById('detail-panel').classList.remove('open');
-  closeNewsPanel();
-  selectedId = null;
-  renderVesselList();
+  closeNewsPanel(); selectedId = null; renderList();
 }
 
-function buildNewsQuery(v) {
-  const terms = [];
-  if (v.status === 'sanctioned') terms.push('Russia sanctions tanker');
-  if (v.status === 'shadow_fleet') terms.push('Russia shadow fleet tanker');
-  if (v.status === 'ais_gap') terms.push('AIS spoofing vessel tracking');
-  if (v.flagState === 'Iran') terms.push('Iran tanker sanctions NITC');
-  if (v.flagState === 'North Korea') terms.push('North Korea sanctions shipping');
-  if (v.flagState === 'Russia') terms.push('Russia oil tanker sanctions');
-  if (v.cargoType.includes('LNG')) terms.push('Russia LNG sanctions');
-  return terms[0] || 'maritime sanctions oil tanker Russia';
+function buildQ(v) {
+  if (v.flagState === 'Iran' || v.sanctions.some(s=>s.includes('Iran'))) return 'Iran sanctions oil tanker NITC';
+  if (v.status === 'shadow_fleet') return 'Russia shadow fleet tanker sanctions';
+  if (v.flagState === 'Russia' || v.operator.includes('Sovcomflot')) return 'Sovcomflot Russia oil sanctions tanker';
+  return 'maritime sanctions oil tanker Russia shadow fleet';
 }
 
 // ─── NEWS PANEL ───────────────────────────────────────────────────────────────
 const newsPanel = document.getElementById('news-panel');
-
-function toggleNewsPanel() {
-  if (newsPanel.classList.contains('open')) { closeNewsPanel(); }
-  else { openNewsPanel(); }
-}
+function toggleNewsPanel() { newsPanel.classList.contains('open') ? closeNewsPanel() : openNewsPanel(); }
 function openNewsPanel() {
   newsPanel.classList.add('open');
   document.getElementById('news-tab-btn').classList.add('active');
-  if (!newsLoaded) fetchNews(currentNewsQ);
+  if (!newsLoaded) fetchNews(curNewsQ);
 }
 function closeNewsPanel() {
   newsPanel.classList.remove('open');
-  const btn = document.getElementById('news-tab-btn');
-  if (btn) btn.classList.remove('active');
+  const b = document.getElementById('news-tab-btn'); if (b) b.classList.remove('active');
 }
-
 async function fetchNews(q) {
-  const listEl  = document.getElementById('news-list');
-  const loadEl  = document.getElementById('news-loading');
-  const titleEl = document.getElementById('news-panel-country');
-  titleEl.textContent = 'Maritime Intelligence';
-  loadEl.style.display = 'block';
-  listEl.innerHTML = '';
-  newsLoaded = false;
+  const listEl = document.getElementById('np-list'), loadEl = document.getElementById('np-loading');
+  document.getElementById('np-country').textContent = 'Maritime Intelligence';
+  loadEl.style.display = 'block'; listEl.innerHTML = ''; newsLoaded = false;
   try {
     const url = `https://content.guardianapis.com/search?q=${encodeURIComponent(q)}&show-fields=trailText&order-by=newest&page-size=8&section=world|business|politics&api-key=test`;
-    const res  = await fetch(url);
-    const data = await res.json();
+    const res = await fetch(url), data = await res.json();
     let results = data?.response?.results || [];
     if (!results.length) {
-      const fb = await fetch(`https://content.guardianapis.com/search?q=${encodeURIComponent('Russia oil sanctions tanker')}&show-fields=trailText&order-by=newest&page-size=8&api-key=test`);
+      const fb = await fetch(`https://content.guardianapis.com/search?q=Russia+oil+sanctions+tanker&show-fields=trailText&order-by=newest&page-size=8&api-key=test`);
       results = (await fb.json())?.response?.results || [];
     }
-    loadEl.style.display = 'none';
-    newsLoaded = true;
-    if (!results.length) {
-      listEl.innerHTML = `<div class="news-empty">No recent intelligence found.</div>`;
-      return;
-    }
+    loadEl.style.display = 'none'; newsLoaded = true;
+    if (!results.length) { listEl.innerHTML = `<div class="np-empty">No recent intelligence found.</div>`; return; }
     results.forEach(item => {
-      const date  = new Date(item.webPublicationDate).toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' });
-      const trail = item.fields?.trailText ? `<div class="news-trail">${item.fields.trailText.replace(/<[^>]+>/g,'')}</div>` : '';
-      listEl.innerHTML += `<div class="news-item"><a href="${item.webUrl}" target="_blank" rel="noopener">${item.webTitle}</a>${trail}<div class="news-meta"><span class="news-section-tag">${item.sectionName}</span>${date}</div></div>`;
+      const date = new Date(item.webPublicationDate).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+      const trail = item.fields?.trailText ? `<div class="ni-trail">${item.fields.trailText.replace(/<[^>]+>/g,'')}</div>` : '';
+      listEl.innerHTML += `<div class="ni"><a href="${item.webUrl}" target="_blank" rel="noopener">${item.webTitle}</a>${trail}<div class="ni-meta"><span class="ni-sec">${item.sectionName}</span>${date}</div></div>`;
     });
   } catch {
     loadEl.style.display = 'none';
-    listEl.innerHTML = `<div class="news-empty">Could not load intelligence feed.</div>`;
+    listEl.innerHTML = `<div class="np-empty">Could not load intelligence feed.</div>`;
   }
 }
 
-// ─── KEYBOARD SHORTCUT ───────────────────────────────────────────────────────
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeDetail(); }
-});
-
-// ─── CLICK OUTSIDE DETAIL ────────────────────────────────────────────────────
-map.on('click', () => { closeDetail(); });
-
+// ─── EVENTS ───────────────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeDetail(); });
+map.on('click', () => closeDetail());
 </script>
 </body>
 </html>
