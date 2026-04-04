@@ -498,7 +498,8 @@
     <div id="ais-debug-log"><span class="dbg-info">— waiting for events —</span></div>
     <div class="ais-debug-foot">
       <button class="ais-debug-clear" onclick="document.getElementById('ais-debug-log').innerHTML=''">Clear</button>
-      <span style="font-size:0.65rem;color:#484f58;align-self:center">All raw WebSocket events shown here</span>
+      <button class="ais-debug-clear" onclick="runNetworkTest()" style="margin-left:6px;color:#58a6ff;border-color:#58a6ff33">&#x1F9EA; Network Test</button>
+      <span style="font-size:0.65rem;color:#484f58;align-self:center;margin-left:auto">All raw WebSocket events shown here</span>
     </div>
   </div>
 </div>
@@ -1371,6 +1372,8 @@ function _doConnect(key) {
 
   let hadAuthError = false;  // true only if server sent an explicit error message
   let waitingTimer  = null;  // "waiting for vessels" fallback timer
+  let openFired     = false; // track whether onopen ever fired
+  const connectTime = Date.now();
 
   setBtn('connecting', 'Connecting…');
   setStatusBar(true, 'Connecting to AISStream.io…', '#e3b341');
@@ -1379,6 +1382,7 @@ function _doConnect(key) {
   ws = new WebSocket('wss://stream.aisstream.io/v0/stream');
 
   ws.onopen = () => {
+    openFired = true;
     // Minimal subscription — only required fields, single correct variant
     const sub = {
       APIKey: key,
@@ -1448,13 +1452,35 @@ function _doConnect(key) {
   ws.onclose = (evt) => {
     clearTimeout(waitingTimer);
     wsConnected = false;
-    dbgLog('CLOSE', `code=${evt.code} reason="${evt.reason}" clean=${evt.wasClean}`);
-    console.log('[ALFRED AIS] Closed — code:', evt.code, 'reason:', evt.reason, 'hadAuthError:', hadAuthError);
+    const elapsed = Date.now() - connectTime;
+    dbgLog('CLOSE', `code=${evt.code} reason="${evt.reason}" clean=${evt.wasClean} elapsed=${elapsed}ms`);
+    console.log('[ALFRED AIS] Closed — code:', evt.code, 'reason:', evt.reason, 'hadAuthError:', hadAuthError, 'openFired:', openFired, 'elapsed:', elapsed + 'ms');
 
     if (evt.code === 1000) {
       // Clean close (user-initiated)
       setBtn('', 'Connect Live AIS');
       setStatusBar(false);
+      return;
+    }
+
+    // Detect immediate local block: close fires < 600ms and onopen never fired
+    // This is NOT an auth failure — the TCP/WebSocket handshake never completed
+    if (!openFired && elapsed < 600) {
+      setBtn('error', 'Blocked — click to retry');
+      setStatusBar(true, 'Connection blocked locally — see Debug Console for fix', '#f85149');
+      dbgLog('ERROR', `━━ CONNECTION BLOCKED (${elapsed}ms, onopen never fired) ━━`);
+      dbgLog('ERROR', 'The WebSocket was blocked BEFORE reaching the network.');
+      dbgLog('ERROR', 'This is NOT an API key problem. Causes & fixes:');
+      dbgLog('INFO',  '1. Browser extension blocking WebSocket — open an INCOGNITO window and retry');
+      dbgLog('INFO',  '2. uBlock Origin / AdGuard — add exception for: stream.aisstream.io');
+      dbgLog('INFO',  '3. VPN or proxy extension — try disabling it');
+      dbgLog('INFO',  '4. Windows Firewall / Antivirus — check if wss:// port 443 is blocked');
+      dbgLog('INFO',  '5. Click "Network Test" below to check if general WebSockets work');
+      // Still reconnect — user may fix the block while page is open
+      wsReconnectTimer = setTimeout(() => {
+        const k = localStorage.getItem('alfred_ais_key');
+        if (k) _doConnect(k);
+      }, 15000);
       return;
     }
 
@@ -1465,7 +1491,7 @@ function _doConnect(key) {
       return; // Don't auto-reconnect on real auth failure
     }
 
-    // Everything else (1006 abnormal, network drop, server restart) → reconnect
+    // Everything else (1006 abnormal after open, network drop, server restart) → reconnect
     console.warn('[ALFRED AIS] Reconnecting in 8s (code', evt.code, ')');
     setBtn('error', 'Reconnecting…');
     setStatusBar(true, `Disconnected (code ${evt.code}) — reconnecting in 8s…`, '#e3b341');
@@ -1482,6 +1508,84 @@ function disconnectAIS() {
   wsConnected = false;
   setBtn('', 'Connect Live AIS');
   setStatusBar(false);
+}
+
+// ── Network Diagnostics ───────────────────────────────────────────────────────
+// Tests whether WebSockets work at all in this browser, and whether
+// aisstream.io is specifically reachable. Helps pinpoint local blocks.
+function runNetworkTest() {
+  // Open debug console if hidden
+  document.getElementById('ais-debug-overlay').classList.remove('hidden');
+  dbgLog('INFO', '━━ NETWORK DIAGNOSTIC TEST STARTING ━━');
+
+  // Test 1: Can we reach aisstream.io over HTTPS (basic connectivity)?
+  dbgLog('INFO', 'Test 1: HTTP fetch → aisstream.io ...');
+  fetch('https://aisstream.io/', { method: 'HEAD', mode: 'no-cors', cache: 'no-store', signal: AbortSignal.timeout(5000) })
+    .then(() => {
+      dbgLog('RECV', 'Test 1 PASS — aisstream.io is reachable over HTTPS');
+    })
+    .catch(err => {
+      dbgLog('ERROR', `Test 1 FAIL — HTTPS fetch blocked: ${err.message}`);
+      dbgLog('INFO', '  → Domain may be blocked by DNS filter or extension');
+    });
+
+  // Test 2: Generic WebSocket echo test (port 443, unrelated server)
+  dbgLog('INFO', 'Test 2: WebSocket → wss://echo.websocket.org ...');
+  let echoT = Date.now();
+  try {
+    const echoWs = new WebSocket('wss://echo.websocket.org');
+    const echoTimer = setTimeout(() => {
+      dbgLog('ERROR', 'Test 2 TIMEOUT — echo server did not respond in 8s');
+      try { echoWs.close(); } catch(e){}
+    }, 8000);
+    echoWs.onopen = () => {
+      clearTimeout(echoTimer);
+      dbgLog('RECV', `Test 2 PASS — generic WebSocket works (${Date.now()-echoT}ms). Browser allows WSS.`);
+      echoWs.close(1000);
+      // Now test aisstream specifically
+      dbgLog('INFO', 'Test 3: WebSocket → wss://stream.aisstream.io/v0/stream ...');
+      let aisT = Date.now();
+      try {
+        const aisTestWs = new WebSocket('wss://stream.aisstream.io/v0/stream');
+        const aisTimer = setTimeout(() => {
+          dbgLog('ERROR', 'Test 3 TIMEOUT — aisstream.io did not respond in 8s');
+          try { aisTestWs.close(); } catch(e){}
+        }, 8000);
+        aisTestWs.onopen = () => {
+          clearTimeout(aisTimer);
+          dbgLog('RECV', `Test 3 PASS — aisstream.io WebSocket opens (${Date.now()-aisT}ms). Connection OK!`);
+          dbgLog('INFO', '  → If live stream still fails, verify your API key is correct.');
+          aisTestWs.close(1000);
+        };
+        aisTestWs.onerror = () => { clearTimeout(aisTimer); };
+        aisTestWs.onclose = (e) => {
+          clearTimeout(aisTimer);
+          if (!aisTestWs._opened) {
+            dbgLog('ERROR', `Test 3 FAIL — aisstream.io WebSocket blocked (code=${e.code}, ${Date.now()-aisT}ms)`);
+            dbgLog('INFO',  '  → aisstream.io specifically is blocked. Likely causes:');
+            dbgLog('INFO',  '    • Browser extension blocking this domain (uBlock, firewall ext)');
+            dbgLog('INFO',  '    • Add aisstream.io to your extension allowlist, OR');
+            dbgLog('INFO',  '    • Try incognito mode (disables extensions)');
+          }
+        };
+        Object.defineProperty(aisTestWs, '_opened', { get: function(){ return aisTestWs.readyState >= 2; } });
+      } catch(e2) {
+        dbgLog('ERROR', `Test 3 EXCEPTION — ${e2.message}`);
+      }
+    };
+    echoWs.onerror = () => {};
+    echoWs.onclose = (e) => {
+      clearTimeout(echoTimer);
+      if (Date.now() - echoT < 600 && echoWs.readyState !== 1) {
+        dbgLog('ERROR', `Test 2 FAIL — generic WebSocket immediately blocked (${Date.now()-echoT}ms)`);
+        dbgLog('ERROR', '  → Your browser is blocking ALL WebSocket connections.');
+        dbgLog('INFO',  '  → Fix: Open this page in incognito mode (Ctrl+Shift+N).');
+        dbgLog('INFO',  '  → OR: Disable browser extensions one by one to find the culprit.');
+      }
+    };
+  } catch(e) {
+    dbgLog('ERROR', `Test 2 EXCEPTION — ${e.message}`);
+  }
 }
 
 // ── Incoming AIS message handler ─────────────────────────────────────────────
