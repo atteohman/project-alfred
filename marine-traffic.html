@@ -1295,32 +1295,49 @@ function _doConnect(key) {
   if (ws) { try { ws.close(); } catch(e){} ws = null; }
   clearTimeout(wsReconnectTimer);
 
+  let hadAuthError = false;  // true only if server sent an explicit error message
+  let waitingTimer  = null;  // "waiting for vessels" fallback timer
+
   setBtn('connecting', 'Connecting…');
   setStatusBar(true, 'Connecting to AISStream.io…', '#e3b341');
 
   ws = new WebSocket('wss://stream.aisstream.io/v0/stream');
 
   ws.onopen = () => {
-    // Field name is "Apikey" (lowercase k) per AISStream.io JS docs
+    // Include both capitalisation variants — docs are inconsistent
     const sub = {
+      APIKey: key,
       Apikey: key,
       BoundingBoxes: AIS_BOXES,
       FilterMessageTypes: ['PositionReport', 'ShipStaticData'],
     };
     ws.send(JSON.stringify(sub));
-    // Don't set connected=true yet — wait for first data or error from server
-    setStatusBar(true, 'Authenticating with AISStream.io…', '#e3b341');
-    console.log('[ALFRED AIS] Socket open, subscription sent');
+
+    // Mark connected immediately — socket IS open, subscription sent.
+    // Real auth failure will arrive as a JSON error message from the server.
+    wsConnected = true;
+    setBtn('connected', 'AIS Live ✓');
+    setStatusBar(true, 'Connected — waiting for vessels in region…', '#2ea043');
+    console.log('[ALFRED AIS] Socket open, subscription sent with both APIKey/Apikey variants');
+
+    // After 20 s with no data, reassure the user it's still alive
+    waitingTimer = setTimeout(() => {
+      if (wsConnected && wsMsgCount === 0) {
+        setStatusBar(true, 'Connected — no vessels in range yet (stream is live)', '#2ea043');
+      }
+    }, 20000);
   };
 
   ws.onmessage = (event) => {
+    clearTimeout(waitingTimer);
     try {
       const msg = JSON.parse(event.data);
 
-      // AISStream sends plain error strings or {error:...} objects on bad auth
-      if (typeof msg === 'string' || msg.error || msg.Error || msg.message?.toLowerCase().includes('error')) {
-        const errText = msg.error || msg.Error || msg.message || msg;
-        console.error('[ALFRED AIS] Server error:', errText);
+      // Server sends {"error":"..."} on bad auth — this is the ONLY reliable signal
+      const errText = msg.error || msg.Error;
+      if (errText) {
+        hadAuthError = true;
+        console.error('[ALFRED AIS] Server auth error:', errText);
         setBtn('error', 'AIS Auth Failed — click to retry');
         setStatusBar(true, `Auth error: ${errText}`, '#f85149');
         wsConnected = false;
@@ -1328,57 +1345,58 @@ function _doConnect(key) {
         return;
       }
 
-      // First valid data packet — mark as connected
-      if (!wsConnected) {
-        wsConnected = true;
-        setBtn('connected', 'AIS Live ✓');
+      // Valid AIS data — update status to show live feed is active
+      if (wsMsgCount === 0) {
         setStatusBar(true, 'Connected — streaming live AIS data', '#2ea043');
-        console.log('[ALFRED AIS] Authenticated — receiving data');
       }
 
       handleAISMessage(msg);
     } catch(e) {
-      // Non-JSON message — likely plain-text error from server
-      console.warn('[ALFRED AIS] Non-JSON message:', event.data);
-      if (!wsConnected) {
-        setBtn('error', 'AIS Error — click to retry');
-        setStatusBar(true, `Server: ${String(event.data).slice(0,80)}`, '#f85149');
+      // Non-JSON (plain text) — log it but don't treat as error unless it looks like one
+      const raw = String(event.data);
+      console.warn('[ALFRED AIS] Non-JSON:', raw);
+      if (/error|invalid|unauthorized|forbidden/i.test(raw)) {
+        hadAuthError = true;
+        setBtn('error', 'AIS Auth Failed — click to retry');
+        setStatusBar(true, `Server: ${raw.slice(0, 120)}`, '#f85149');
+        wsConnected = false;
+        ws.close(1000);
       }
     }
   };
 
   ws.onerror = (err) => {
     console.error('[ALFRED AIS] WebSocket error', err);
-    setBtn('error', 'AIS Error — click to retry');
-    setStatusBar(true, 'WebSocket connection error — check console', '#f85149');
+    // onerror is always followed by onclose — let onclose handle the UI
   };
 
   ws.onclose = (evt) => {
+    clearTimeout(waitingTimer);
     wsConnected = false;
-    console.log('[ALFRED AIS] Closed — code:', evt.code, 'reason:', evt.reason);
+    console.log('[ALFRED AIS] Closed — code:', evt.code, 'reason:', evt.reason, 'hadAuthError:', hadAuthError);
 
     if (evt.code === 1000) {
-      // Clean close (user-initiated disconnect)
+      // Clean close (user-initiated)
       setBtn('', 'Connect Live AIS');
       setStatusBar(false);
       return;
     }
-    // Code 1006 = abnormal / auth rejected; 1008 = policy violation
-    if (evt.code === 1006 || evt.code === 1008) {
+
+    // Only flag as auth failure if server actually sent an error message
+    if (hadAuthError) {
       setBtn('error', 'AIS Auth Failed — click to retry');
-      setStatusBar(true,
-        'Authentication failed — check your API key at aisstream.io/profile',
-        '#f85149');
-      return; // Don't auto-reconnect on auth failure
+      setStatusBar(true, 'Authentication failed — verify key at aisstream.io → API Keys', '#f85149');
+      return; // Don't auto-reconnect on real auth failure
     }
-    // Any other code = network drop — reconnect
-    console.warn('[ALFRED AIS] Reconnecting in 10s (code', evt.code, ')');
+
+    // Everything else (1006 abnormal, network drop, server restart) → reconnect
+    console.warn('[ALFRED AIS] Reconnecting in 8s (code', evt.code, ')');
     setBtn('error', 'Reconnecting…');
-    setStatusBar(true, `Disconnected (${evt.code}) — reconnecting in 10s…`, '#e3b341');
+    setStatusBar(true, `Disconnected (code ${evt.code}) — reconnecting in 8s…`, '#e3b341');
     wsReconnectTimer = setTimeout(() => {
       const k = localStorage.getItem('alfred_ais_key');
       if (k) _doConnect(k);
-    }, 10000);
+    }, 8000);
   };
 }
 
