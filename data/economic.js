@@ -18,19 +18,19 @@ const ECON_DATA = {
     sanctions:false,
     summary:"World's second-largest economy facing a prolonged property sector correction and US tariff escalation. Growth has stabilised around 4.5%, supported by manufacturing exports — particularly EVs and clean energy equipment — and government stimulus. De-risking by Western multinationals continues to redirect some supply chains." },
 
-  392: { name:"Japan", gdp:4460, gdpPerCap:36000, growth:0.7, debt:257.0, tradeBalance:-42,
+  392: { name:"Japan", gdp:4460, gdpPerCap:36000, growth:0.6, debt:257.0, tradeBalance:-42,
     exports:["Vehicles","Machinery","Electronics","Precision Instruments","Chemicals"],
     partners:["United States","China","South Korea","Australia","EU"],
     sanctions:false,
     summary:"Highly developed economy under PM Sanae Takaichi (Japan's first female PM, since October 2025), who launched a ¥13.9 trillion stimulus package. The Bank of Japan has gradually raised rates from negative territory; yen weakness has boosted export earnings. Demographic contraction and record public debt remain long-term structural challenges." },
 
-  276: { name:"Germany", gdp:4450, gdpPerCap:53200, growth:0.7, debt:65.0, tradeBalance:268,
+  276: { name:"Germany", gdp:4450, gdpPerCap:53200, growth:0.9, debt:65.0, tradeBalance:268,
     exports:["Vehicles","Machinery","Chemicals","Pharmaceuticals","Electronics"],
     partners:["United States","France","Netherlands","China","Italy"],
     sanctions:false,
     summary:"Europe's largest economy is recovering from a two-year contraction. The new CDU-led government that won the February 2025 election reformed the constitutional debt brake to unlock a €500B defence and infrastructure fund. Automotive sector restructuring continues as EV adoption accelerates; export competitiveness is gradually improving." },
 
-  356: { name:"India", gdp:4500, gdpPerCap:3130, growth:6.5, debt:82.5, tradeBalance:-250,
+  356: { name:"India", gdp:4500, gdpPerCap:3130, growth:6.3, debt:82.5, tradeBalance:-250,
     exports:["Petroleum Products","Pharmaceuticals","IT Services","Textiles","Machinery"],
     partners:["United States","UAE","China","Saudi Arabia","EU"],
     sanctions:false,
@@ -42,7 +42,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Highly service-driven economy anchored by London's global financial centre. The Labour government that took office in 2024 has focused on fiscal consolidation and public investment. A partial trade reset with the EU has reduced some post-Brexit friction, supporting modest growth recovery." },
 
-  250: { name:"France", gdp:3150, gdpPerCap:47800, growth:0.8, debt:113.2, tradeBalance:-105,
+  250: { name:"France", gdp:3150, gdpPerCap:47800, growth:0.9, debt:113.2, tradeBalance:-105,
     exports:["Aerospace","Pharmaceuticals","Luxury Goods","Vehicles","Agriculture"],
     partners:["Germany","United States","Italy","Belgium","Spain"],
     sanctions:false,
@@ -126,7 +126,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"One of the world's wealthiest countries per capita and a global hub for private banking, pharmaceuticals, and precision manufacturing. The UBS-Credit Suisse merger, completed in 2023, created an even larger systemically important institution. Switzerland aligned with EU Russia sanctions but maintains its traditional neutrality." },
 
-  616: { name:"Poland", gdp:920, gdpPerCap:24300, growth:3.6, debt:48.0, tradeBalance:10,
+  616: { name:"Poland", gdp:920, gdpPerCap:24300, growth:3.1, debt:48.0, tradeBalance:10,
     exports:["Machinery","Vehicles","Electronics","Food","Furniture"],
     partners:["Germany","Czech Republic","France","UK","Netherlands"],
     sanctions:false,
