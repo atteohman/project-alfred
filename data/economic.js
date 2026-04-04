@@ -348,11 +348,11 @@ const ECON_DATA = {
     sanctions:true,
     summary:"In January 2026, the US captured Nicolás Maduro; Acting President Delcy Rodríguez has assumed power under contested legitimacy. Trump has declared intent to open Venezuela's oil sector to US companies, which could structurally reshape the economy if political stability is established. Partial dollarisation continues; hyperinflation has moderated but underlying economic dysfunction persists." },
 
-  364: { name:"Iran", gdp:720, gdpPerCap:8000, growth:3.5, debt:31.0, tradeBalance:26,
+  364: { name:"Iran", gdp:720, gdpPerCap:8000, growth:1.1, debt:31.0, tradeBalance:26,
     exports:["Crude Oil","Petroleum Products","Petrochemicals","Pistachios","Carpets"],
     partners:["China","Iraq","Turkey","UAE","Russia"],
     sanctions:true,
-    summary:"Economy operating under extensive Western sanctions, with oil exports redirected almost entirely to China. The assassination of Supreme Leader Ali Khamenei in February 2026 and the subsequent IRGC-backed accession of Mojtaba Khamenei has thrown Iran into a political crisis. Any diplomatic opening pursued by reform president Pezeshkian is now indefinitely suspended. Economic outlook extremely uncertain." },
+    summary:"Economy operating under extensive Western sanctions, with oil exports redirected almost entirely to China. The IMF's January 2026 forecast of 1.1% growth (already down from prior estimates due to stricter US sanctions) has been severely undermined by the US-Israeli war that began February 28, 2026. Strait of Hormuz closure has disrupted oil exports. The assassination of Supreme Leader Khamenei and IRGC consolidation of power has suspended any diplomatic reform. Actual 2026 growth is likely sharply negative; the IMF has warned the war poses a global economic shock." },
 
   408: { name:"North Korea", gdp:18, gdpPerCap:665, growth:0.8, debt:0, tradeBalance:0,
     exports:["Coal","Iron","Textiles","Armaments","Cyber Services"],
