@@ -133,7 +133,8 @@ const ALLIANCES = {
       { y: 2022, e: "Russia's Ukraine invasion strains group cohesion; India and China refuse to condemn Moscow." },
       { y: 2023, e: "Johannesburg Summit invites UAE, Egypt, Ethiopia, Iran, Saudi Arabia, Argentina to join." },
       { y: 2024, e: "UAE, Iran, Egypt, Ethiopia join as full members. Argentina declines under new president Milei." },
-      { y: 2025, e: "Indonesia joins in January as the 10th member. Saudi Arabia formally joins in July at the Rio Summit, bringing BRICS to 11 full members." }
+      { y: 2025, e: "Indonesia joins in January as the 10th member. Saudi Arabia formally joins in July at the Rio Summit, bringing BRICS to 11 full members." },
+      { y: 2025, e: "10 Partner Countries admitted: Belarus, Bolivia, Cuba, Kazakhstan, Malaysia, Nigeria, Thailand, Uganda, Uzbekistan, Vietnam — expanding BRICS's associate orbit to 21 states." }
     ]
   },
   quad: {
