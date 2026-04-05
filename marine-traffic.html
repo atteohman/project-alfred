@@ -62,6 +62,10 @@
     .ais-connect-btn.connected { color: #2ea043; border-color: #2ea043; background: rgba(46,160,67,0.14); }
     .ais-connect-btn.error { color: #f85149; border-color: rgba(248,81,73,0.4); background: rgba(248,81,73,0.08); }
     .ais-connect-btn.connecting { color: #e3b341; border-color: rgba(227,179,65,0.4); background: rgba(227,179,65,0.08); }
+    .pos-connect-btn { color:#79c0ff; border-color:rgba(121,192,255,0.3); background:rgba(121,192,255,0.06); }
+    .pos-connect-btn:hover { background:rgba(121,192,255,0.14); border-color:rgba(121,192,255,0.6); }
+    .pos-connect-btn.active { color:#58a6ff; border-color:#58a6ff; background:rgba(88,166,255,0.14); }
+    .pos-connect-btn.error { color:#f85149; border-color:rgba(248,81,73,0.4); background:rgba(248,81,73,0.08); }
     @keyframes spin { to { transform: rotate(360deg); } }
     .ais-spinner { display: inline-block; animation: spin 1s linear infinite; }
 
@@ -414,6 +418,10 @@
   </div>
   <div class="header-right">
     <span class="src-badge">OFAC · EU · KSE · UN · GUR</span>
+    <button class="ais-connect-btn pos-connect-btn" id="pos-connect-btn" onclick="openPosModal()">
+      <span id="pos-btn-dot" class="live-dot" style="background:#484f58;animation:none"></span>
+      <span id="pos-btn-label">&#x1F4CD; Live Positions</span>
+    </button>
     <button class="ais-connect-btn" id="ais-connect-btn" onclick="openAISModal()">
       <span id="ais-btn-dot" class="live-dot" style="background:#484f58;animation:none"></span>
       <span id="ais-btn-label">Connect Live AIS</span>
@@ -550,6 +558,35 @@
       <button class="ais-debug-clear" onclick="document.getElementById('ais-debug-log').innerHTML=''">Clear</button>
       <button class="ais-debug-clear" onclick="runNetworkTest()" style="margin-left:6px;color:#58a6ff;border-color:#58a6ff33">&#x1F9EA; Network Test</button>
       <span style="font-size:0.65rem;color:#484f58;align-self:center;margin-left:auto">All raw WebSocket events shown here</span>
+    </div>
+  </div>
+</div>
+
+<!-- LIVE POSITIONS MODAL -->
+<div id="pos-modal-overlay" class="hidden">
+  <div class="ais-modal">
+    <div class="ais-modal-title">&#x1F4CD; Live Vessel Positions</div>
+    <div class="ais-modal-sub">
+      Fetches real GPS positions for all tracked vessels from
+      <a href="https://vesselapi.com" target="_blank" rel="noopener">VesselAPI.com</a>
+      and moves map markers to their true current locations. Refreshes every 5 minutes.
+    </div>
+    <label class="ais-modal-label">VesselAPI Key</label>
+    <input class="ais-modal-input" id="pos-key-input" type="password"
+      placeholder="Paste your VesselAPI key here…" autocomplete="off" spellcheck="false"
+      onkeydown="if(event.key==='Enter') connectLivePos()">
+    <div class="ais-modal-actions">
+      <button class="ais-modal-connect" onclick="connectLivePos()">&#x1F4CD; Fetch Live Positions</button>
+      <button class="ais-modal-cancel" onclick="closePosModal()">Cancel</button>
+    </div>
+    <div class="ais-modal-note">
+      &#x1F512; Key stored in browser only — used exclusively to query VesselAPI.com.<br><br>
+      &#x26A0;&#xFE0F; <strong style="color:#e6edf3">Free account:</strong> Register at
+      <a href="https://vesselapi.com" target="_blank" rel="noopener" style="color:#58a6ff">vesselapi.com</a>
+      — no credit card required. Copy your API key from the dashboard and paste above.<br><br>
+      &#x1F30D; Queries real-time AIS positions for all 40+ tracked vessels by MMSI.
+      Map markers move to true GPS coordinates. Vessels without recent AIS coverage
+      remain at their estimated region. Refreshes automatically every 5 minutes.
     </div>
   </div>
 </div>
@@ -1265,7 +1302,10 @@ function openDetail(id) {
     <div class="dp-row"><span class="dp-row-label">Built</span><span class="dp-row-val">${v.built}</span></div>
     <div class="dp-row"><span class="dp-row-label">Operator</span><span class="dp-row-val">${v.operator}</span></div>
     <div class="dp-section">Position &amp; AIS</div>
-    <div class="dp-row"><span class="dp-row-label">Map Position</span><span class="dp-row-val" style="color:#e3b341;font-size:0.7rem">Estimated region ↑ live map above</span></div>
+    <div class="dp-row"><span class="dp-row-label">Map Position</span><span class="dp-row-val">${v._posLive
+      ? `${v.lat.toFixed(4)}°, ${v.lon.toFixed(4)}° <span style="color:#2ea043;font-size:0.68rem;font-weight:700">● LIVE</span>`
+      : `<span style="color:#e3b341;font-size:0.7rem">Estimated region ↑ live map above</span>`
+    }</span></div>
     <div class="dp-row"><span class="dp-row-label">Speed</span><span class="dp-row-val">${v.speed} kn</span></div>
     <div class="dp-row"><span class="dp-row-label">Destination</span><span class="dp-row-val">${v.dest}</span></div>
     <div class="dp-row">
@@ -1385,6 +1425,150 @@ const AIS_BOXES = [
   [[58.0, 14.0], [72.0, 58.0]],   // Norwegian Sea / Barents / Murmansk
   [[-5.0, 94.0], [25.0,125.0]],   // Indian Ocean / South China Sea approaches
 ];
+
+// ═══════════════════════════════════════════════════════════════════════════
+// ── LIVE POSITION ENGINE — VesselAPI.com REST ────────────────────────────
+// ═══════════════════════════════════════════════════════════════════════════
+let posRefreshTimer = null;
+let posLastFetch    = null;
+let posConnected    = false;
+
+function openPosModal() {
+  if (posConnected) { stopLivePos(); return; }
+  const saved = localStorage.getItem('alfred_pos_key');
+  if (saved) document.getElementById('pos-key-input').value = saved;
+  document.getElementById('pos-modal-overlay').classList.remove('hidden');
+  setTimeout(() => document.getElementById('pos-key-input').focus(), 80);
+}
+function closePosModal() {
+  document.getElementById('pos-modal-overlay').classList.add('hidden');
+}
+
+function setPosBtn(state, label) {
+  const btn = document.getElementById('pos-connect-btn');
+  const dot = document.getElementById('pos-btn-dot');
+  btn.className = 'ais-connect-btn pos-connect-btn ' + state;
+  document.getElementById('pos-btn-label').textContent = label;
+  const dotColors = { active:'#58a6ff', error:'#f85149', '':'#484f58' };
+  dot.style.background  = dotColors[state] || '#484f58';
+  dot.style.animation   = state === 'active' ? '' : 'none';
+}
+
+async function connectLivePos() {
+  const key = document.getElementById('pos-key-input').value.trim();
+  if (!key) { alert('Please enter your VesselAPI key.'); return; }
+  localStorage.setItem('alfred_pos_key', key);
+  closePosModal();
+  posConnected = true;
+  setPosBtn('active', '📍 Fetching…');
+  await fetchLivePositions(key);
+  // Schedule refresh every 5 minutes
+  posRefreshTimer = setInterval(async () => {
+    const k = localStorage.getItem('alfred_pos_key');
+    if (k) await fetchLivePositions(k);
+  }, 5 * 60 * 1000);
+}
+
+function stopLivePos() {
+  clearInterval(posRefreshTimer);
+  posConnected = false;
+  setPosBtn('', '📍 Live Positions');
+  localStorage.removeItem('alfred_pos_key');
+}
+
+async function fetchLivePositions(apiKey) {
+  const vessels = VESSELS.filter(v => v.mmsi);
+  setPosBtn('active', '📍 Updating…');
+
+  // Fetch all vessels in parallel — VesselAPI handles concurrent requests fine
+  const results = await Promise.allSettled(
+    vessels.map(v =>
+      fetch(`https://api.vesselapi.com/v1/vessel/${v.mmsi}/position?filter.idType=mmsi`, {
+        headers: { 'Authorization': `Bearer ${apiKey}` }
+      })
+      .then(r => {
+        if (r.status === 401) throw new Error('AUTH_FAIL');
+        if (!r.ok) throw new Error(`HTTP_${r.status}`);
+        return r.json();
+      })
+      .then(data => ({ v, pos: data.vesselPosition }))
+    )
+  );
+
+  let updated = 0;
+  let authFail = false;
+
+  results.forEach(result => {
+    if (result.status === 'rejected') {
+      if (String(result.reason).includes('AUTH_FAIL')) authFail = true;
+      return;
+    }
+    const { v, pos } = result.value;
+    if (!pos || pos.latitude == null) return;
+
+    // Update vessel object
+    v.lat     = pos.latitude;
+    v.lon     = pos.longitude;
+    v.speed   = pos.sog  ?? v.speed;
+    v.heading = pos.cog  ?? v.heading;
+    if (pos.timestamp) {
+      v.lastAIS = Math.max(0, Math.round(
+        (Date.now() - new Date(pos.timestamp).getTime()) / 60000
+      ));
+      v.aisGap = v.lastAIS > 120; // mark as AIS gap if >2h old
+    }
+    v._posLive = true; // flag: position confirmed live
+
+    // Move Leaflet marker to true position
+    if (markers[v.id]) {
+      markers[v.id].setLatLng([v.lat, v.lon]);
+      // Rebuild icon in case aisGap state changed
+      markers[v.id].setIcon(makeIcon(v.status, v.aisGap));
+      // Update tooltip
+      markers[v.id].setTooltipContent(
+        `<b>${v.name}</b><br><span style="color:#2ea043;font-size:0.75em">✓ Live AIS position</span>`
+      );
+    }
+    updated++;
+  });
+
+  if (authFail) {
+    setPosBtn('error', '📍 Auth Failed — click to reset');
+    setStatusBar(true, 'VesselAPI key rejected — check your key at vesselapi.com', '#f85149');
+    clearInterval(posRefreshTimer);
+    posConnected = false;
+    return;
+  }
+
+  posLastFetch = new Date();
+  const ts = posLastFetch.toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' });
+  setPosBtn('active', `📍 ${updated}/${vessels.length} live · ${ts}`);
+  setStatusBar(true, `Live positions: ${updated}/${vessels.length} vessels updated at ${ts}`, '#58a6ff');
+
+  // If detail panel is open, refresh lat/lon display
+  if (selectedId) {
+    const v = VESSELS.find(x => x.id === selectedId);
+    if (v && v._posLive) refreshDetailPosition(v);
+  }
+  // Re-render list to update AIS timestamps
+  renderList();
+  updateStats();
+}
+
+// ── Auto-start if key was saved from previous session ─────────────────────
+(function initPosEngine() {
+  const saved = localStorage.getItem('alfred_pos_key');
+  if (saved) {
+    posConnected = true;
+    setPosBtn('active', '📍 Connecting…');
+    fetchLivePositions(saved).then(() => {
+      posRefreshTimer = setInterval(async () => {
+        const k = localStorage.getItem('alfred_pos_key');
+        if (k) await fetchLivePositions(k);
+      }, 5 * 60 * 1000);
+    });
+  }
+})();
 
 // ── Modal helpers ────────────────────────────────────────────────────────────
 function openAISModal() {
@@ -1739,22 +1923,28 @@ function handleAISMessage(msg) {
 function refreshDetailPosition(v) {
   const body = document.getElementById('dp-body');
   if (!body) return;
-  // Update lat/lon row
   body.querySelectorAll('.dp-row').forEach(row => {
     const lbl = row.querySelector('.dp-row-label');
     if (!lbl) return;
-    if (lbl.textContent === 'Lat / Lon') {
-      row.querySelector('.dp-row-val').innerHTML =
-        `${v.lat.toFixed(4)}° / ${v.lon.toFixed(4)}° <span class="live-pos-badge live">LIVE</span>`;
+    if (lbl.textContent === 'Map Position') {
+      row.querySelector('.dp-row-val').innerHTML = v._posLive
+        ? `${v.lat.toFixed(4)}°, ${v.lon.toFixed(4)}° <span style="color:#2ea043;font-size:0.68rem;font-weight:700">● LIVE</span>`
+        : `<span style="color:#e3b341;font-size:0.7rem">Estimated region ↑ live map above</span>`;
     }
     if (lbl.textContent === 'Speed') {
       row.querySelector('.dp-row-val').textContent = v.speed + ' kn';
     }
     if (lbl.textContent === 'Last AIS') {
-      row.querySelector('.dp-row-val').innerHTML =
-        `<span style="color:#2ea043;font-weight:700">Live — just now</span>`;
+      row.querySelector('.dp-row-val').innerHTML = v._posLive
+        ? `<span style="color:#2ea043;font-weight:700">${fmtAIS(v.lastAIS)} ago</span>`
+        : `${v.aisGap ? '⚠ DARK — ' : ''}${fmtAIS(v.lastAIS)} ago`;
     }
   });
+  // Also update the VesselFinder iframe to re-centre on new position
+  const iframe = document.getElementById('dp-live-iframe');
+  if (iframe && iframe.src !== 'about:blank') {
+    iframe.src = `https://www.vesselfinder.com/aismap?zoom=5&lat=${v.lat}&lon=${v.lon}&mmsi=${v.mmsi}&names=true&clicktoact=false&bgc=1A1F27`;
+  }
 }
 
 // ── Real-time AIS age ticker (updates every 60s) ──────────────────────────────
