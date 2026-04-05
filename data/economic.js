@@ -1,5 +1,5 @@
 // Economic data — edit this file to update figures
-// Last updated: 2026-Q1
+// Last updated: 2026-Q2
 
 // ── Economic Data ─────────────────────────────────────────────────────────────
 // Key: ISO 3166-1 numeric code (as used by topojson world-atlas)
@@ -18,13 +18,13 @@ const ECON_DATA = {
     sanctions:false,
     summary:"World's second-largest economy facing a prolonged property sector correction and US tariff escalation. Growth has stabilised around 4.5%, supported by manufacturing exports — particularly EVs and clean energy equipment — and government stimulus. De-risking by Western multinationals continues to redirect some supply chains." },
 
-  392: { name:"Japan", gdp:4460, gdpPerCap:36000, growth:0.6, debt:257.0, tradeBalance:-42,
+  392: { name:"Japan", gdp:4460, gdpPerCap:36000, growth:0.7, debt:257.0, tradeBalance:-42,
     exports:["Vehicles","Machinery","Electronics","Precision Instruments","Chemicals"],
     partners:["United States","China","South Korea","Australia","EU"],
     sanctions:false,
     summary:"Highly developed economy under PM Sanae Takaichi (Japan's first female PM, since October 2025), who launched a ¥13.9 trillion stimulus package. The Bank of Japan has gradually raised rates from negative territory; yen weakness has boosted export earnings. Demographic contraction and record public debt remain long-term structural challenges." },
 
-  276: { name:"Germany", gdp:4450, gdpPerCap:53200, growth:0.9, debt:65.0, tradeBalance:268,
+  276: { name:"Germany", gdp:4450, gdpPerCap:53200, growth:1.1, debt:65.0, tradeBalance:268,
     exports:["Vehicles","Machinery","Chemicals","Pharmaceuticals","Electronics"],
     partners:["United States","France","Netherlands","China","Italy"],
     sanctions:false,
@@ -42,7 +42,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Highly service-driven economy anchored by London's global financial centre. The Labour government that took office in 2024 has focused on fiscal consolidation and public investment. A partial trade reset with the EU has reduced some post-Brexit friction, supporting modest growth recovery." },
 
-  250: { name:"France", gdp:3150, gdpPerCap:47800, growth:0.9, debt:113.2, tradeBalance:-105,
+  250: { name:"France", gdp:3150, gdpPerCap:47800, growth:1.0, debt:113.2, tradeBalance:-105,
     exports:["Aerospace","Pharmaceuticals","Luxury Goods","Vehicles","Agriculture"],
     partners:["Germany","United States","Italy","Belgium","Spain"],
     sanctions:false,
@@ -66,7 +66,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Resource-rich economy facing pressure from US tariffs on steel, aluminium, and autos under the Trump trade policy. Canada has responded with retaliatory measures while seeking USMCA renegotiation. Energy exports to Asia are growing as pipelines to the Pacific come online." },
 
-  643: { name:"Russia", gdp:2250, gdpPerCap:15500, growth:1.0, debt:18.0, tradeBalance:180,
+  643: { name:"Russia", gdp:2250, gdpPerCap:15500, growth:0.8, debt:18.0, tradeBalance:180,
     exports:["Petroleum","Natural Gas","Metals","Wheat","Chemicals","Arms"],
     partners:["China","India","Turkey","Iran","Kazakhstan"],
     sanctions:true,
