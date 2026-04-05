@@ -1,5 +1,5 @@
 // Alliance network data
-// Last updated: 2026-Q1
+// Last updated: 2026-Q2
 
 // ─── Alliance Definitions ─────────────────────────────────────────────────────
 const ALLIANCES = {
@@ -89,7 +89,7 @@ const ALLIANCES = {
   csto: {
     id: "csto", label: "CSTO", fullName: "Collective Security Treaty Organization",
     color: "#e05c5c", xf: 0.63, yf: 0.20,
-    founded: "May 14, 1992 (Treaty) / October 7, 2002 (Organization)", hq: "Moscow, Russia", memberCount: 6,
+    founded: "May 14, 1992 (Treaty) / October 7, 2002 (Organization)", hq: "Moscow, Russia", memberCount: 5,
     summary: "The CSTO is Russia's primary multilateral military alliance, binding Moscow with five former Soviet republics in a collective defense pact. Often described as a Russian-dominated counterpart to NATO, in practice it has served primarily as a tool for Russia to maintain sphere-of-influence over the post-Soviet space. Its most dramatic deployment came in January 2022, when CSTO forces intervened in Kazakhstan to suppress protests against President Tokayev — a use of force against civilian unrest that alarmed many observers.",
     events: [
       { y: 1992, e: "Collective Security Treaty signed in Tashkent by 6 post-Soviet republics amid Soviet dissolution." },
@@ -99,7 +99,8 @@ const ALLIANCES = {
       { y: 2020, e: "CSTO refuses to invoke mutual defense during Armenia-Azerbaijan Nagorno-Karabakh war, embarrassing alliance." },
       { y: 2022, e: "CSTO deploys to Kazakhstan to support President Tokayev against mass anti-government protests." },
       { y: 2022, e: "Armenia withdraws from CSTO exercises following Russian inaction over Azerbaijani attacks on Armenian territory." },
-      { y: 2024, e: "Armenia suspends CSTO membership, citing Russia's failure to defend it from Azerbaijan." }
+      { y: 2024, e: "Armenia suspends CSTO membership, citing Russia's failure to defend it from Azerbaijan." },
+      { y: 2025, e: "Armenia completes de facto withdrawal — ceases all participation and dues payments; PM Pashinyan declares Armenia considers itself outside the CSTO. Effective membership reduced to 5." }
     ]
   },
   sco: {
@@ -248,7 +249,7 @@ const COUNTRIES = {
   KAZ: { name: "Kazakhstan",        a: ["csto","sco"] },
   KGZ: { name: "Kyrgyzstan",        a: ["csto","sco"] },
   TJK: { name: "Tajikistan",        a: ["csto","sco"] },
-  ARM: { name: "Armenia",           a: ["csto"] },
+  ARM: { name: "Armenia",           a: [] },
   UZB: { name: "Uzbekistan",        a: ["sco"] },
   CHN: { name: "China",             a: ["sco","brics"] },
   IND: { name: "India",             a: ["sco","brics","quad"] },
