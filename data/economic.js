@@ -12,7 +12,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"World's largest nominal economy. Growth is projected at 2.4% for 2026 (IMF, January 2026), supported by the One Big Beautiful Bill Act tax incentives, AI-driven investment, and a partial trade truce with China agreed in November 2025. Tariff pass-through to consumer prices is gradually materialising but has been slower than feared. Core inflation is expected to return to 2% in 2027." },
 
-  156: { name:"China", gdp:20700, gdpPerCap:14700, growth:4.5, debt:86.8, tradeBalance:920,
+  156: { name:"China", gdp:20700, gdpPerCap:14700, growth:4.5, debt:86.8, tradeBalance:1190,
     exports:["Electronics","Machinery","EVs","Steel","Chemicals","Solar Equipment"],
     partners:["ASEAN","EU","United States","Japan","South Korea"],
     sanctions:false,
@@ -24,7 +24,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Highly developed economy under PM Sanae Takaichi (Japan's first female PM, since October 2025), who launched a ¥13.9 trillion stimulus package. The Bank of Japan has gradually raised rates from negative territory; yen weakness has boosted export earnings. Demographic contraction and record public debt remain long-term structural challenges." },
 
-  276: { name:"Germany", gdp:4450, gdpPerCap:53200, growth:1.1, debt:65.0, tradeBalance:268,
+  276: { name:"Germany", gdp:4450, gdpPerCap:53200, growth:0.9, debt:63.5, tradeBalance:268,
     exports:["Vehicles","Machinery","Chemicals","Pharmaceuticals","Electronics"],
     partners:["United States","France","Netherlands","China","Italy"],
     sanctions:false,
@@ -42,7 +42,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Highly service-driven economy anchored by London's global financial centre. The Labour government that took office in 2024 has focused on fiscal consolidation and public investment. A partial trade reset with the EU has reduced some post-Brexit friction, supporting modest growth recovery." },
 
-  250: { name:"France", gdp:3150, gdpPerCap:47800, growth:1.0, debt:113.2, tradeBalance:-105,
+  250: { name:"France", gdp:3150, gdpPerCap:47800, growth:1.0, debt:115.8, tradeBalance:-105,
     exports:["Aerospace","Pharmaceuticals","Luxury Goods","Vehicles","Agriculture"],
     partners:["Germany","United States","Italy","Belgium","Spain"],
     sanctions:false,
