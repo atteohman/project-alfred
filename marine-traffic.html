@@ -115,6 +115,16 @@
     .live-pos-badge.live { background: rgba(46,160,67,0.15); color: #2ea043; border: 1px solid rgba(46,160,67,0.3); }
     .live-pos-badge.est  { background: rgba(72,79,88,0.3); color: #6e7681; border: 1px solid #21262d; }
 
+    /* ── VESSEL TOOLTIP ── */
+    .vessel-tooltip {
+      background:#161b22 !important; border:1px solid #30363d !important;
+      border-radius:6px !important; color:#e6edf3 !important;
+      font-family:'Segoe UI',system-ui,sans-serif !important;
+      font-size:0.78rem !important; padding:6px 10px !important;
+      box-shadow:0 4px 16px rgba(0,0,0,0.6) !important;
+    }
+    .vessel-tooltip::before { display:none !important; }
+
     /* ── DEBUG CONSOLE ── */
     #ais-debug-overlay {
       position: fixed; inset: 0; background: rgba(0,0,0,0.75);
@@ -282,6 +292,32 @@
       background:rgba(46,160,67,0.06);border-color:rgba(46,160,67,0.25);color:#2ea043;
     }
     .dp-action-vf:hover { background:rgba(46,160,67,0.14);border-color:#2ea043; }
+
+    /* ── LIVE MAP EMBED ── */
+    .dp-live-map-wrap {
+      margin:10px 18px 0; flex-shrink:0;
+      border:1px solid #21262d; border-radius:8px; overflow:hidden;
+      position:relative; background:#0d1117;
+    }
+    .dp-live-map-header {
+      display:flex;align-items:center;justify-content:space-between;
+      padding:6px 10px; background:#0d1117; cursor:pointer;
+      font-size:0.65rem; font-weight:700; letter-spacing:0.1em;
+      text-transform:uppercase; color:#2ea043; user-select:none;
+    }
+    .dp-live-map-header:hover { background:#161b22; }
+    .dp-live-map-toggle { font-size:0.6rem; color:#484f58; }
+    .dp-live-iframe-wrap { height:190px; display:block; }
+    .dp-live-iframe-wrap.collapsed { display:none; }
+    .dp-live-iframe {
+      width:100%;height:100%;border:none;display:block;
+      filter:hue-rotate(185deg) brightness(0.85);
+    }
+    .dp-live-note {
+      padding:3px 10px 5px; font-size:0.58rem; color:#484f58;
+      background:#0d1117; text-align:center;
+    }
+
     .news-tab-btn {
       margin:10px 18px 0;
       background:rgba(88,166,255,0.06);border:1px solid rgba(88,166,255,0.25);
@@ -445,6 +481,20 @@
       <a class="dp-action-btn dp-action-mt" id="dp-mt-link" href="#" target="_blank" rel="noopener">&#x1F4CD; MarineTraffic</a>
       <a class="dp-action-btn dp-action-vf" id="dp-vf-link" href="#" target="_blank" rel="noopener">&#x1F6F3; VesselFinder</a>
     </div>
+
+    <!-- LIVE POSITION MAP -->
+    <div class="dp-live-map-wrap">
+      <div class="dp-live-map-header" onclick="toggleLiveMap()">
+        <span>&#x1F7E2; Live Position — VesselFinder AIS</span>
+        <span class="dp-live-map-toggle" id="dp-livemap-toggle">&#x25BC;</span>
+      </div>
+      <div class="dp-live-iframe-wrap" id="dp-livemap-wrap">
+        <iframe id="dp-live-iframe" class="dp-live-iframe" src="about:blank" loading="lazy"
+          allow="fullscreen" referrerpolicy="no-referrer"></iframe>
+      </div>
+      <div class="dp-live-note">Live AIS data via VesselFinder &bull; positions update every ~2 min</div>
+    </div>
+
     <button class="news-tab-btn" id="news-tab-btn" onclick="toggleNewsPanel()">&#x1F4F0; Intelligence Feed</button>
     <div class="dp-body" id="dp-body"></div>
   </div>
@@ -1085,7 +1135,12 @@ function makeIcon(status, hasGap) {
 const markers = {};
 VESSELS.forEach(v => {
   markers[v.id] = L.marker([v.lat, v.lon], { icon: makeIcon(v.status, v.aisGap) })
-    .addTo(map).on('click', () => openDetail(v.id));
+    .addTo(map)
+    .bindTooltip(`<b>${v.name}</b><br><span style="color:#e3b341;font-size:0.75em">⚠ Estimated region — click for live position</span>`, {
+      direction:'top', offset:[0,-8], opacity:0.95,
+      className:'vessel-tooltip'
+    })
+    .on('click', () => openDetail(v.id));
 });
 
 // ─── STATS ────────────────────────────────────────────────────────────────────
@@ -1190,6 +1245,14 @@ function openDetail(id) {
   document.getElementById('dp-mt-link').href = `https://www.marinetraffic.com/en/ais/details/ships/imo:${v.imo}`;
   document.getElementById('dp-vf-link').href = `https://www.vesselfinder.com/vessels/details/${v.imo}`;
 
+  // Live position iframe — VesselFinder AIS embed centred on approximate region
+  // zoom:5 = ~2000km view, so vessel will be visible even if far from hardcoded centre
+  const iframe = document.getElementById('dp-live-iframe');
+  iframe.src = `https://www.vesselfinder.com/aismap?zoom=5&lat=${v.lat}&lon=${v.lon}&mmsi=${v.mmsi}&names=true&clicktoact=false&bgc=1A1F27`;
+  // Make sure the map section is expanded
+  document.getElementById('dp-livemap-wrap').classList.remove('collapsed');
+  document.getElementById('dp-livemap-toggle').textContent = '▼';
+
   const sanctions = v.sanctions.length
     ? v.sanctions.map(s=>`<span class="sanction-tag">${s}</span>`).join('')
     : '<span style="color:#484f58;font-size:0.75rem">None listed</span>';
@@ -1202,7 +1265,7 @@ function openDetail(id) {
     <div class="dp-row"><span class="dp-row-label">Built</span><span class="dp-row-val">${v.built}</span></div>
     <div class="dp-row"><span class="dp-row-label">Operator</span><span class="dp-row-val">${v.operator}</span></div>
     <div class="dp-section">Position &amp; AIS</div>
-    <div class="dp-row"><span class="dp-row-label">Lat / Lon</span><span class="dp-row-val">${v.lat.toFixed(2)}° / ${v.lon.toFixed(2)}°</span></div>
+    <div class="dp-row"><span class="dp-row-label">Map Position</span><span class="dp-row-val" style="color:#e3b341;font-size:0.7rem">Estimated region ↑ live map above</span></div>
     <div class="dp-row"><span class="dp-row-label">Speed</span><span class="dp-row-val">${v.speed} kn</span></div>
     <div class="dp-row"><span class="dp-row-label">Destination</span><span class="dp-row-val">${v.dest}</span></div>
     <div class="dp-row">
@@ -1229,7 +1292,16 @@ function openDetail(id) {
 
 function closeDetail() {
   document.getElementById('detail-panel').classList.remove('open');
+  // Clear iframe to stop loading when panel closes
+  document.getElementById('dp-live-iframe').src = 'about:blank';
   closeNewsPanel(); selectedId = null; renderList();
+}
+
+function toggleLiveMap() {
+  const wrap   = document.getElementById('dp-livemap-wrap');
+  const toggle = document.getElementById('dp-livemap-toggle');
+  const collapsed = wrap.classList.toggle('collapsed');
+  toggle.textContent = collapsed ? '▶' : '▼';
 }
 
 function buildQ(v) {
