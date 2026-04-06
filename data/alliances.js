@@ -18,7 +18,8 @@ const ALLIANCES = {
       { y: 2004, e: "Largest single expansion: 7 Eastern European states join, including the Baltic republics." },
       { y: 2022, e: "Russia's invasion of Ukraine triggers NATO's largest military buildup since the Cold War." },
       { y: 2023, e: "Finland becomes the 31st member, doubling NATO's direct land border with Russia." },
-      { y: 2024, e: "Sweden becomes the 32nd member, completing full Nordic integration into NATO." }
+      { y: 2024, e: "Sweden becomes the 32nd member, completing full Nordic integration into NATO." },
+      { y: 2026, e: "Seven allies (Belgium, Denmark, France, Netherlands, Norway, Turkey, UK) agree to jointly develop ballistic missile defense capabilities — sensors, interceptors, and tactical control systems." }
     ]
   },
   eu: {
