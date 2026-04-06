@@ -30,7 +30,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Europe's largest economy is recovering from a two-year contraction. The new CDU-led government that won the February 2025 election reformed the constitutional debt brake to unlock a €500B defence and infrastructure fund. Automotive sector restructuring continues as EV adoption accelerates; export competitiveness is gradually improving." },
 
-  356: { name:"India", gdp:4500, gdpPerCap:3130, growth:6.3, debt:82.5, tradeBalance:-250,
+  356: { name:"India", gdp:4500, gdpPerCap:3130, growth:6.4, debt:82.5, tradeBalance:-250,
     exports:["Petroleum Products","Pharmaceuticals","IT Services","Textiles","Machinery"],
     partners:["United States","UAE","China","Saudi Arabia","EU"],
     sanctions:false,
@@ -60,7 +60,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"South America's largest economy benefiting from strong commodity exports. The Lula government's fiscal framework has faced credibility challenges; the central bank raised rates significantly to anchor inflation expectations. Brazil's commodity wealth and BRICS role give it strategic leverage." },
 
-  124: { name:"Canada", gdp:2290, gdpPerCap:57500, growth:1.7, debt:107.5, tradeBalance:22,
+  124: { name:"Canada", gdp:2290, gdpPerCap:57500, growth:1.5, debt:107.5, tradeBalance:22,
     exports:["Petroleum","Vehicles","Gold","Wheat","Machinery","Lumber"],
     partners:["United States","China","Mexico","Japan","UK"],
     sanctions:false,
@@ -84,7 +84,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Manufacturing hub facing significant headwinds from US tariff policy. The Sheinbaum government has pushed judicial reforms while managing nearshoring investment momentum. US tariffs on Mexican goods under the USMCA renegotiation have added uncertainty, though Mexico's integrated supply chains with the US create mutual dependency." },
 
-  36:  { name:"Australia", gdp:1900, gdpPerCap:69000, growth:2.3, debt:48.0, tradeBalance:125,
+  36:  { name:"Australia", gdp:1900, gdpPerCap:69000, growth:2.1, debt:48.0, tradeBalance:125,
     exports:["Iron Ore","Coal","Gold","Natural Gas","Agriculture","Education"],
     partners:["China","Japan","South Korea","United States","UK"],
     sanctions:false,
@@ -126,7 +126,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"One of the world's wealthiest countries per capita and a global hub for private banking, pharmaceuticals, and precision manufacturing. The UBS-Credit Suisse merger, completed in 2023, created an even larger systemically important institution. Switzerland aligned with EU Russia sanctions but maintains its traditional neutrality." },
 
-  616: { name:"Poland", gdp:920, gdpPerCap:24300, growth:3.1, debt:48.0, tradeBalance:10,
+  616: { name:"Poland", gdp:920, gdpPerCap:24300, growth:3.5, debt:48.0, tradeBalance:10,
     exports:["Machinery","Vehicles","Electronics","Food","Furniture"],
     partners:["Germany","Czech Republic","France","UK","Netherlands"],
     sanctions:false,

@@ -37,7 +37,8 @@ const ALLIANCES = {
       { y: 2009, e: "Lisbon Treaty reforms EU institutions and creates the European External Action Service (de facto foreign ministry)." },
       { y: 2016, e: "UK votes 52-48% to leave the EU — first ever departure of a member state." },
       { y: 2020, e: "Brexit completed. UK formally leaves the single market and customs union." },
-      { y: 2022, e: "Ukraine and Moldova granted EU candidate status following Russian invasion." }
+      { y: 2022, e: "Ukraine and Moldova granted EU candidate status following Russian invasion." },
+      { y: 2025, e: "Armenia's parliament votes to begin EU membership application process (March 2025), marking a historic westward pivot after withdrawal from the CSTO." }
     ]
   },
   five_eyes: {
