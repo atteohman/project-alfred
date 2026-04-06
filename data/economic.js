@@ -24,7 +24,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Highly developed economy under PM Sanae Takaichi (Japan's first female PM, since October 2025), who launched a ¥13.9 trillion stimulus package. The Bank of Japan has gradually raised rates from negative territory; yen weakness has boosted export earnings. Demographic contraction and record public debt remain long-term structural challenges." },
 
-  276: { name:"Germany", gdp:4450, gdpPerCap:53200, growth:0.9, debt:63.5, tradeBalance:268,
+  276: { name:"Germany", gdp:5050, gdpPerCap:60200, growth:1.0, debt:63.5, tradeBalance:268,
     exports:["Vehicles","Machinery","Chemicals","Pharmaceuticals","Electronics"],
     partners:["United States","France","Netherlands","China","Italy"],
     sanctions:false,
@@ -72,7 +72,7 @@ const ECON_DATA = {
     sanctions:true,
     summary:"War-economy operating under extensive Western sanctions. Inflation has been persistent and the central bank holds rates above 20%. Trade has been fully reoriented toward China, India, and the Global South. Any ceasefire or peace process in Ukraine would reshape the economic outlook significantly. Long-term capital and talent flight is eroding productive capacity." },
 
-  410: { name:"South Korea", gdp:1870, gdpPerCap:36400, growth:2.3, debt:55.8, tradeBalance:45,
+  410: { name:"South Korea", gdp:1870, gdpPerCap:36400, growth:1.9, debt:55.8, tradeBalance:45,
     exports:["Semiconductors","Vehicles","Ships","Petrochemicals","Electronics"],
     partners:["China","United States","Vietnam","Japan","Australia"],
     sanctions:false,
@@ -108,13 +108,13 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Gateway economy to Europe and home to ASML, the world's sole manufacturer of extreme ultraviolet (EUV) chip lithography machines. Dutch export controls on ASML equipment to China have become a flashpoint in US-China tech competition. Rotterdam handles over a third of all EU maritime trade." },
 
-  792: { name:"Turkey", gdp:1380, gdpPerCap:16100, growth:3.5, debt:30.5, tradeBalance:-78,
+  792: { name:"Turkey", gdp:1380, gdpPerCap:16100, growth:4.2, debt:30.5, tradeBalance:-78,
     exports:["Vehicles","Machinery","Textiles","Steel","Electronics","Food"],
     partners:["Germany","Russia","China","United States","Iraq"],
     sanctions:false,
     summary:"Emerging market that has pivoted back to orthodox monetary policy after 2023–24 rate hikes tamed inflation from its 85% peak. Growth is recovering. Turkey continues to leverage its NATO membership and Black Sea gateway position as a geopolitical mediator between Russia and Ukraine." },
 
-  682: { name:"Saudi Arabia", gdp:1220, gdpPerCap:33000, growth:2.8, debt:26.5, tradeBalance:185,
+  682: { name:"Saudi Arabia", gdp:1220, gdpPerCap:33000, growth:4.5, debt:26.5, tradeBalance:185,
     exports:["Crude Oil","Refined Products","Petrochemicals","Plastics","Dates"],
     partners:["China","India","Japan","South Korea","United States"],
     sanctions:false,
