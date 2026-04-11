@@ -18,7 +18,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"World's second-largest economy facing a prolonged property sector correction and US tariff escalation. Growth has stabilised around 4.5%, supported by manufacturing exports — particularly EVs and clean energy equipment — and government stimulus. De-risking by Western multinationals continues to redirect some supply chains." },
 
-  392: { name:"Japan", gdp:4460, gdpPerCap:36000, growth:0.7, debt:257.0, tradeBalance:-42,
+  392: { name:"Japan", gdp:4460, gdpPerCap:36000, growth:0.6, debt:257.0, tradeBalance:-42,
     exports:["Vehicles","Machinery","Electronics","Precision Instruments","Chemicals"],
     partners:["United States","China","South Korea","Australia","EU"],
     sanctions:false,
@@ -30,7 +30,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Europe's largest economy is recovering from a two-year contraction. The new CDU-led government that won the February 2025 election reformed the constitutional debt brake to unlock a €500B defence and infrastructure fund. Automotive sector restructuring continues as EV adoption accelerates; export competitiveness is gradually improving." },
 
-  356: { name:"India", gdp:4500, gdpPerCap:3130, growth:6.2, debt:82.5, tradeBalance:-250,
+  356: { name:"India", gdp:4500, gdpPerCap:3130, growth:6.3, debt:82.5, tradeBalance:-250,
     exports:["Petroleum Products","Pharmaceuticals","IT Services","Textiles","Machinery"],
     partners:["United States","UAE","China","Saudi Arabia","EU"],
     sanctions:false,
@@ -42,7 +42,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Highly service-driven economy anchored by London's global financial centre. The Labour government that took office in 2024 has focused on fiscal consolidation and public investment. A partial trade reset with the EU has reduced some post-Brexit friction, supporting modest growth recovery." },
 
-  250: { name:"France", gdp:3150, gdpPerCap:47800, growth:1.0, debt:115.8, tradeBalance:-105,
+  250: { name:"France", gdp:3150, gdpPerCap:47800, growth:0.9, debt:115.8, tradeBalance:-105,
     exports:["Aerospace","Pharmaceuticals","Luxury Goods","Vehicles","Agriculture"],
     partners:["Germany","United States","Italy","Belgium","Spain"],
     sanctions:false,
