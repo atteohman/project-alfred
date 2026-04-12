@@ -30,7 +30,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Europe's largest economy is recovering from a two-year contraction. The new CDU-led government that won the February 2025 election reformed the constitutional debt brake to unlock a €500B defence and infrastructure fund. Automotive sector restructuring continues as EV adoption accelerates; export competitiveness is gradually improving." },
 
-  356: { name:"India", gdp:4500, gdpPerCap:3130, growth:6.4, debt:82.5, tradeBalance:-250,
+  356: { name:"India", gdp:4500, gdpPerCap:3130, growth:6.2, debt:82.5, tradeBalance:-250,
     exports:["Petroleum Products","Pharmaceuticals","IT Services","Textiles","Machinery"],
     partners:["United States","UAE","China","Saudi Arabia","EU"],
     sanctions:false,
@@ -346,13 +346,13 @@ const ECON_DATA = {
     exports:["Petroleum","Gold","Bauxite","Agricultural Products"],
     partners:["China","Cuba","Russia","Turkey","Colombia"],
     sanctions:true,
-    summary:"In January 2026, the US captured Nicolás Maduro; Acting President Delcy Rodríguez has assumed power under contested legitimacy. Trump has declared intent to open Venezuela's oil sector to US companies, which could structurally reshape the economy if political stability is established. Partial dollarisation continues; hyperinflation has moderated but underlying economic dysfunction persists." },
+    summary:"In January 2026, the US captured Nicolás Maduro; Acting President Delcy Rodríguez assumed power. The US lifted sanctions on Rodríguez on April 2, 2026 and authorised PDVSA to sell Venezuelan oil directly to US companies — the first significant US sanctions relief in years and a potential structural shift for the oil sector. Partial dollarisation continues; hyperinflation has moderated but underlying economic dysfunction persists." },
 
   364: { name:"Iran", gdp:720, gdpPerCap:8000, growth:1.1, debt:31.0, tradeBalance:26,
     exports:["Crude Oil","Petroleum Products","Petrochemicals","Pistachios","Carpets"],
     partners:["China","Iraq","Turkey","UAE","Russia"],
     sanctions:true,
-    summary:"Economy operating under extensive Western sanctions, with oil exports redirected almost entirely to China. The IMF's January 2026 forecast of 1.1% growth (already down from prior estimates due to stricter US sanctions) has been severely undermined by the US-Israeli war that began February 28, 2026. Strait of Hormuz closure has disrupted oil exports. The assassination of Supreme Leader Khamenei and IRGC consolidation of power has suspended any diplomatic reform. Actual 2026 growth is likely sharply negative; the IMF has warned the war poses a global economic shock." },
+    summary:"Economy operating under extensive Western sanctions, with oil exports redirected almost entirely to China. The IMF's January 2026 forecast of 1.1% growth has been severely undermined by the US-Israeli war (Operation Epic Fury) that began February 28, 2026. The IRGC closed the Strait of Hormuz, sending oil to $126/barrel — the worst global shipping disruption since the 1970s. A Pakistan-brokered 2-week ceasefire was agreed April 8, 2026; Iran had not fulfilled the Strait reopening condition as of April 12, 2026. Actual 2026 growth is sharply negative; the IMF has warned the war poses a global economic shock." },
 
   408: { name:"North Korea", gdp:18, gdpPerCap:665, growth:0.8, debt:0, tradeBalance:0,
     exports:["Coal","Iron","Textiles","Armaments","Cyber Services"],
@@ -400,7 +400,7 @@ const ECON_DATA = {
     exports:["Jewellery","Base Metals","Chemical Products","Vegetables","Electrical Equipment"],
     partners:["Switzerland","Saudi Arabia","UAE","United States","Syria"],
     sanctions:false,
-    summary:"After years of paralysis, the election of a new president in January 2025 ended a two-year vacuum and has re-opened the path to IMF negotiations and banking sector reform. The Gaza war's spillover and Hezbollah's 2024 conflict with Israel caused significant economic damage; some Gulf investment is tentatively returning." },
+    summary:"After years of paralysis, the election of a new president in January 2025 re-opened the path to IMF negotiations and banking sector reform. A 2026 Lebanon war erupted as Hezbollah re-escalated alongside Iran's retaliation campaign against Israel (Operation Epic Fury, beginning March 2026), halting nascent reconstruction and reversing early economic stabilisation. Gulf investment has again paused; IMF negotiations are suspended. GDP contraction in 2026 is virtually certain." },
 
   116: { name:"Cambodia", gdp:34, gdpPerCap:1960, growth:6.5, debt:32.0, tradeBalance:-5,
     exports:["Garments","Footwear","Tourism","Rice","Rubber"],
