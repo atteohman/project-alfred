@@ -244,7 +244,7 @@ const ECON_DATA = {
     exports:["Machinery","Vehicles","Electronics","Chemicals","Agricultural Products"],
     partners:["Germany","Austria","Slovakia","Romania","Italy"],
     sanctions:false,
-    summary:"Export-oriented economy that has attracted the largest per-capita Chinese EV and battery investment in the EU (CATL, BYD, Huawei). The Orbán government's close ties with Russia and China continue to create friction with EU partners over sanctions and rule-of-law, delaying cohesion fund access." },
+    summary:"Export-oriented economy that has attracted the largest per-capita Chinese EV and battery investment in the EU (CATL, BYD, Huawei). Tisza Party's landslide April 12, 2026 election victory (138/199 seats) ends Orbán's 16-year rule; incoming PM Péter Magyar's pro-EU stance is expected to unblock EU cohesion funds withheld over rule-of-law disputes, improving the medium-term fiscal and investment outlook." },
 
   642: { name:"Romania", gdp:395, gdpPerCap:20800, growth:3.0, debt:51.5, tradeBalance:-22,
     exports:["Vehicles","Machinery","Electronics","Agriculture","Software"],
