@@ -10,7 +10,7 @@ const ECON_DATA = {
     exports:["Technology","Aerospace","Pharmaceuticals","Financial Services","Agriculture","Petroleum"],
     partners:["Canada","Mexico","EU","Japan","UK"],
     sanctions:false,
-    summary:"World's largest nominal economy. Growth is projected at 2.4% for 2026 (IMF, January 2026), supported by the One Big Beautiful Bill Act tax incentives, AI-driven investment, and a partial trade truce with China agreed in November 2025. Tariff pass-through to consumer prices is gradually materialising but has been slower than feared. Core inflation is expected to return to 2% in 2027." },
+    summary:"World's largest nominal economy. Growth was projected at 2.4% for 2026 (IMF, January 2026), supported by the One Big Beautiful Bill Act tax incentives, AI-driven investment, and a partial trade truce with China agreed in November 2025. However, the US-Israel-Iran war (Operation Epic Fury, from February 28, 2026) has materially altered the outlook: the IRGC's Strait of Hormuz closure sent oil to $126/barrel; Islamabad ceasefire talks collapsed April 12; the US declared a naval blockade of Iranian ports from April 13. The Iran shock — compounding 145%+ tariffs on China — has elevated recession risk; actual 2026 growth is expected to fall below the January IMF projection." },
 
   156: { name:"China", gdp:20700, gdpPerCap:14700, growth:4.5, debt:86.8, tradeBalance:1190,
     exports:["Electronics","Machinery","EVs","Steel","Chemicals","Solar Equipment"],
@@ -352,7 +352,7 @@ const ECON_DATA = {
     exports:["Crude Oil","Petroleum Products","Petrochemicals","Pistachios","Carpets"],
     partners:["China","Iraq","Turkey","UAE","Russia"],
     sanctions:true,
-    summary:"Economy operating under extensive Western sanctions, with oil exports redirected almost entirely to China. The IMF's January 2026 forecast of 1.1% growth has been severely undermined by the US-Israeli war (Operation Epic Fury) that began February 28, 2026. The IRGC closed the Strait of Hormuz, sending oil to $126/barrel — the worst global shipping disruption since the 1970s. A Pakistan-brokered 2-week ceasefire was agreed April 8, 2026; Iran had not fulfilled the Strait reopening condition as of April 12, 2026. Actual 2026 growth is sharply negative; the IMF has warned the war poses a global economic shock." },
+    summary:"Economy operating under extensive Western sanctions, with oil exports redirected almost entirely to China. The IMF's January 2026 forecast of 1.1% growth has been severely undermined by the US-Israeli war (Operation Epic Fury) that began February 28, 2026. The IRGC closed the Strait of Hormuz, sending oil to $126/barrel — the worst global shipping disruption since the 1970s. Pakistan-mediated ceasefire talks in Islamabad collapsed April 12, 2026 (JD Vance departed with no deal); Trump declared a US Navy blockade of Iranian ports in the Strait of Hormuz effective April 13, 2026. Iran's oil exports are now effectively zero; 2026 growth is deeply negative." },
 
   408: { name:"North Korea", gdp:18, gdpPerCap:665, growth:0.8, debt:0, tradeBalance:0,
     exports:["Coal","Iron","Textiles","Armaments","Cyber Services"],
