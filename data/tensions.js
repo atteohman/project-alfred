@@ -95,7 +95,7 @@ const LEADER_DATA = {
   "724": { name: "Pedro Sánchez",         title: "Prime Minister",  wiki: "Pedro Sánchez" },
   "728": { name: "Salva Kiir Mayardit",   title: "President",       wiki: "Salva Kiir Mayardit" },
   "729": { name: "Abdel Fattah al-Burhan",title: "Head of Sovereignty Council", wiki: "Abdel Fattah al-Burhan" },
-  "740": { name: "Chan Santokhi",         title: "President",       wiki: "Chan Santokhi" },
+  "740": { name: "Jennifer Geerlings-Simons", title: "President",   wiki: "Jennifer Geerlings-Simons" },
   "756": { name: "Guy Parmelin",           title: "Federal President (2026)", wiki: "Guy Parmelin" },
   "760": { name: "Ahmad al-Sharaa",       title: "Transitional President", wiki: "Ahmad al-Sharaa" },
   "762": { name: "Emomali Rahmon",        title: "President",       wiki: "Emomali Rahmon" },

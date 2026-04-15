@@ -114,11 +114,11 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Emerging market that has pivoted back to orthodox monetary policy after 2023–24 rate hikes tamed inflation from its 85% peak. Growth is recovering. Turkey continues to leverage its NATO membership and Black Sea gateway position as a geopolitical mediator between Russia and Ukraine." },
 
-  682: { name:"Saudi Arabia", gdp:1220, gdpPerCap:33000, growth:4.5, debt:26.5, tradeBalance:185,
+  682: { name:"Saudi Arabia", gdp:1220, gdpPerCap:33000, growth:3.1, debt:26.5, tradeBalance:185,
     exports:["Crude Oil","Refined Products","Petrochemicals","Plastics","Dates"],
     partners:["China","India","Japan","South Korea","United States"],
     sanctions:false,
-    summary:"Economy diversifying under Vision 2030, though non-oil revenue targets remain challenging. ARAMCO dividends fund a massive sovereign investment programme. OPEC+ production management has sustained oil prices. Giga-projects like NEOM continue despite scaling adjustments; tourism and entertainment sectors are growing rapidly." },
+    summary:"Economy diversifying under Vision 2030, though non-oil revenue targets remain challenging. ARAMCO dividends fund a massive sovereign investment programme. IMF April 2026 WEO cut Saudi growth to 3.1% (from 4.5%), citing the Strait of Hormuz disruption and regional conflict as key downside risks; Saudi Arabia's Red Sea export terminals (Yanbu) provide partial insulation from Hormuz closure. Giga-projects like NEOM continue; elevated oil prices at $126/barrel support revenues despite supply chain uncertainty." },
 
   756: { name:"Switzerland", gdp:985, gdpPerCap:109000, growth:1.6, debt:37.5, tradeBalance:91,
     exports:["Pharmaceuticals","Chemicals","Watches","Financial Services","Machinery"],
