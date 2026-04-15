@@ -12,11 +12,11 @@ const ECON_DATA = {
     sanctions:false,
     summary:"World's largest nominal economy. The IMF April 2026 WEO (released April 14) revised US growth down to 2.3% for 2026 (from 2.4% in the January update), driven by the Iran war shock: the IRGC's Strait of Hormuz closure sent oil to $126/barrel; the US-Israel-Iran war (Operation Epic Fury, from February 28, 2026) compounds uncertainty. Islamabad ceasefire talks collapsed April 12; Trump ordered a US Navy blockade of Iranian ports on April 13. The Iran shock — on top of 145%+ tariffs on China — has elevated recession risk. Growth had been supported by the One Big Beautiful Bill Act tax incentives, AI-driven investment, and a partial trade truce with China agreed in November 2025." },
 
-  156: { name:"China", gdp:20700, gdpPerCap:14700, growth:4.5, debt:86.8, tradeBalance:1190,
+  156: { name:"China", gdp:20700, gdpPerCap:14700, growth:4.4, debt:86.8, tradeBalance:1190,
     exports:["Electronics","Machinery","EVs","Steel","Chemicals","Solar Equipment"],
     partners:["ASEAN","EU","United States","Japan","South Korea"],
     sanctions:false,
-    summary:"World's second-largest economy facing a prolonged property sector correction and US tariff escalation. Growth has stabilised around 4.5%, supported by manufacturing exports — particularly EVs and clean energy equipment — and government stimulus. De-risking by Western multinationals continues to redirect some supply chains." },
+    summary:"World's second-largest economy facing a prolonged property sector correction and US tariff escalation. Growth is forecast at 4.4% for 2026 (IMF April WEO), revised slightly down from the January forecast, supported by manufacturing exports — particularly EVs and clean energy equipment — and government stimulus. De-risking by Western multinationals continues to redirect some supply chains." },
 
   392: { name:"Japan", gdp:4460, gdpPerCap:36000, growth:0.6, debt:257.0, tradeBalance:-42,
     exports:["Vehicles","Machinery","Electronics","Precision Instruments","Chemicals"],
