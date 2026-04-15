@@ -6,17 +6,17 @@
 // gdp: billions USD | gdpPerCap: USD | growth: % | debt: % of GDP
 // tradeBalance: billions USD (positive = surplus, negative = deficit)
 const ECON_DATA = {
-  840: { name:"United States", gdp:31800, gdpPerCap:94400, growth:2.4, debt:124.5, tradeBalance:-1050,
+  840: { name:"United States", gdp:31800, gdpPerCap:94400, growth:2.3, debt:124.5, tradeBalance:-1050,
     exports:["Technology","Aerospace","Pharmaceuticals","Financial Services","Agriculture","Petroleum"],
     partners:["Canada","Mexico","EU","Japan","UK"],
     sanctions:false,
-    summary:"World's largest nominal economy. Growth is projected at 2.4% for 2026 (IMF, January 2026), supported by the One Big Beautiful Bill Act tax incentives, AI-driven investment, and a partial trade truce with China agreed in November 2025. Tariff pass-through to consumer prices is gradually materialising but has been slower than feared. Core inflation is expected to return to 2% in 2027." },
+    summary:"World's largest nominal economy. Growth is projected at 2.3% for 2026 (IMF, April 2026 WEO), a modest downward revision from 2.4% in January, reflecting the impact of the Strait of Hormuz crisis on energy prices and broader geopolitical uncertainty. AI-driven investment and fiscal stimulus continue to support the expansion. Core inflation is expected to return to 2% in 2027." },
 
-  156: { name:"China", gdp:20700, gdpPerCap:14700, growth:4.5, debt:86.8, tradeBalance:1190,
+  156: { name:"China", gdp:20700, gdpPerCap:14700, growth:4.4, debt:86.8, tradeBalance:1190,
     exports:["Electronics","Machinery","EVs","Steel","Chemicals","Solar Equipment"],
     partners:["ASEAN","EU","United States","Japan","South Korea"],
     sanctions:false,
-    summary:"World's second-largest economy facing a prolonged property sector correction and US tariff escalation. Growth has stabilised around 4.5%, supported by manufacturing exports — particularly EVs and clean energy equipment — and government stimulus. De-risking by Western multinationals continues to redirect some supply chains." },
+    summary:"World's second-largest economy facing a prolonged property sector correction and US tariff escalation. Growth forecast revised up to 4.4% by the IMF (April 2026 WEO) on lower effective US tariff rates and domestic stimulus. Manufacturing exports — particularly EVs and clean energy equipment — remain strong. De-risking by Western multinationals continues to redirect some supply chains." },
 
   392: { name:"Japan", gdp:4460, gdpPerCap:36000, growth:0.7, debt:257.0, tradeBalance:-42,
     exports:["Vehicles","Machinery","Electronics","Precision Instruments","Chemicals"],
@@ -348,11 +348,11 @@ const ECON_DATA = {
     sanctions:true,
     summary:"In January 2026, the US captured Nicolás Maduro; Acting President Delcy Rodríguez has assumed power under contested legitimacy. Trump has declared intent to open Venezuela's oil sector to US companies, which could structurally reshape the economy if political stability is established. Partial dollarisation continues; hyperinflation has moderated but underlying economic dysfunction persists." },
 
-  364: { name:"Iran", gdp:720, gdpPerCap:8000, growth:1.1, debt:31.0, tradeBalance:26,
+  364: { name:"Iran", gdp:720, gdpPerCap:8000, growth:-6.1, debt:31.0, tradeBalance:26,
     exports:["Crude Oil","Petroleum Products","Petrochemicals","Pistachios","Carpets"],
     partners:["China","Iraq","Turkey","UAE","Russia"],
     sanctions:true,
-    summary:"Economy operating under extensive Western sanctions, with oil exports redirected almost entirely to China. The IMF's January 2026 forecast of 1.1% growth (already down from prior estimates due to stricter US sanctions) has been severely undermined by the US-Israeli war that began February 28, 2026. Strait of Hormuz closure has disrupted oil exports. The assassination of Supreme Leader Khamenei and IRGC consolidation of power has suspended any diplomatic reform. Actual 2026 growth is likely sharply negative; the IMF has warned the war poses a global economic shock." },
+    summary:"Economy under dual shock: comprehensive Western sanctions and an active war with the US and Israel (since Feb 28, 2026). IMF April 2026 WEO revised Iran's 2026 growth to -6.1% (a -7.2pp cut from January). The Strait of Hormuz closure has collapsed oil export revenues; commercial shipping dropped 90%+. Iran selectively allows China, Russia, India, Iraq, and Pakistan-flagged ships. A US naval blockade of Iran began April 13, 2026. Mojtaba Khamenei (elected Supreme Leader March 8) is an IRGC-aligned hardliner; any diplomatic reform is suspended." },
 
   408: { name:"North Korea", gdp:18, gdpPerCap:665, growth:0.8, debt:0, tradeBalance:0,
     exports:["Coal","Iron","Textiles","Armaments","Cyber Services"],
