@@ -588,7 +588,7 @@ const ECON_DATA = {
     exports:["Coffee","Bananas","Textiles","Palm Oil","Shrimp"],
     partners:["United States","Germany","Belgium","El Salvador","Guatemala"],
     sanctions:false,
-    summary:"Central American economy where security improvements following regional anti-gang crackdowns have reduced emigration pressure. Maquila (export-processing) sector and coffee exports remain pillars. The Castro government has pursued closer ties with China, switching diplomatic recognition from Taiwan." },
+    summary:"Central American economy where security improvements following regional anti-gang crackdowns have reduced emigration pressure. Maquila (export-processing) sector and coffee exports remain pillars. Conservative President Nasry Asfura (inaugurated January 27, 2026, after winning the November 2025 election) replaced the Castro government; Honduras-China diplomatic relations established in 2023 remain in place. Closer US ties are anticipated under the Trump-backed president." },
 
   // Taiwan
   158: { name:"Taiwan", gdp:780, gdpPerCap:32500, growth:3.2, debt:27.5, tradeBalance:88,
