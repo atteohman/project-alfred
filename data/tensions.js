@@ -121,7 +121,7 @@ const LEADER_DATA = {
   "148": { name: "Mahamat Idriss Déby",   title: "President",        wiki: "Mahamat Idriss Déby" },
   "196": { name: "Nikos Christodoulides", title: "President",        wiki: "Nikos Christodoulides" },
   "203": { name: "Petr Pavel",            title: "President",        wiki: "Petr Pavel" },
-  "204": { name: "Patrice Talon",         title: "President",        wiki: "Patrice Talon" },
+  "204": { name: "Romuald Wadagni",        title: "President",        wiki: "Romuald Wadagni" },
   "214": { name: "Luis Abinader",         title: "President",        wiki: "Luis Abinader" },
   "222": { name: "Nayib Bukele",          title: "President",        wiki: "Nayib Bukele" },
   "233": { name: "Alar Karis",            title: "President",        wiki: "Alar Karis" },
@@ -298,7 +298,7 @@ const TENSION_DATA = {
 
   "203": { name:"Czech Republic", level:1, summary:"The Czech Republic is a stable NATO and EU democracy. The country has been one of Ukraine's most consistent supporters, sending significant military and humanitarian aid. Domestic politics saw the centre-right ODS-led coalition governing with a stable majority.", reasons:["Ukraine war on regional doorstep — security concerns","Energy transition costs after Russian gas dependency","Minority Roma community facing discrimination"] },
 
-  "204": { name:"Benin", level:2, summary:"Benin has historically been a model of democratic governance in West Africa, but President Talon has presided over democratic backsliding including opposition exclusion from elections. The jihadist spillover from Burkina Faso into northern Benin is a growing security threat.", reasons:["Jihadist groups expanding from Burkina Faso into northern Benin","Democratic backsliding under Talon — opposition excluded","Tourism and economic pressure from regional instability"] },
+  "204": { name:"Benin", level:2, summary:"Benin elected former Finance Minister Romuald Wadagni as president on April 12, 2026 with 94% of the vote, succeeding term-limited Patrice Talon. Wadagni is the architect of Benin's recent economic policy and is expected to maintain institutional continuity. The jihadist spillover from Burkina Faso into northern Benin is the dominant security concern, with JNIM attacks intensifying.", reasons:["Jihadist groups (JNIM) expanding from Burkina Faso into northern Benin — attacks intensifying","Presidential transition to Wadagni — policy continuity expected but new administration untested","Opposition effectively excluded from elections under Talon's electoral rules","Tourism and economic pressure from regional instability"] },
 
   "214": { name:"Dominican Republic", level:2, summary:"The Dominican Republic is a relatively stable Caribbean democracy. President Abinader won re-election in 2024. Tensions with Haiti over migration and the Haitian crisis next door are major concerns, as is deep inequality.", reasons:["Haitian political collapse creating massive migration pressure","Deep inequality and poverty despite economic growth","Corruption and informal economy challenges","Drug trafficking transit routes"] },
 
