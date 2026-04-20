@@ -54,11 +54,11 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Third-largest eurozone economy with chronic high debt. The Meloni government has managed fiscal pressures while maintaining EU relationships and accessing Next Generation EU funds. Italy has emerged as a key hub for transatlantic energy infrastructure following reduced Russian gas flows." },
 
-  76:  { name:"Brazil", gdp:2280, gdpPerCap:10500, growth:1.6, debt:91.0, tradeBalance:110,
+  76:  { name:"Brazil", gdp:2280, gdpPerCap:10500, growth:1.9, debt:91.0, tradeBalance:110,
     exports:["Soybeans","Iron Ore","Petroleum","Poultry","Sugar","Vehicles"],
     partners:["China","United States","Argentina","Netherlands","EU"],
     sanctions:false,
-    summary:"South America's largest economy benefiting from strong commodity exports. The Lula government's fiscal framework has faced credibility challenges; the central bank raised rates significantly to anchor inflation expectations. Brazil's commodity wealth and BRICS role give it strategic leverage." },
+    summary:"South America's largest economy benefiting from strong commodity exports. Growth is projected at 1.9% for 2026 (IMF April 2026 WEO) — Brazil is a net energy exporter and the Iran-war oil price shock provides a modest positive boost (~0.2pp). The Lula government's fiscal framework has faced credibility challenges; the central bank raised rates significantly to anchor inflation expectations. Brazil's commodity wealth and BRICS role give it strategic leverage." },
 
   124: { name:"Canada", gdp:2290, gdpPerCap:57500, growth:1.5, debt:107.5, tradeBalance:22,
     exports:["Petroleum","Vehicles","Gold","Wheat","Machinery","Lumber"],
