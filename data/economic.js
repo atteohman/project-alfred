@@ -6,11 +6,11 @@
 // gdp: billions USD | gdpPerCap: USD | growth: % | debt: % of GDP
 // tradeBalance: billions USD (positive = surplus, negative = deficit)
 const ECON_DATA = {
-  840: { name:"United States", gdp:31800, gdpPerCap:94400, growth:2.4, debt:124.5, tradeBalance:-1050,
+  840: { name:"United States", gdp:31800, gdpPerCap:94400, growth:2.3, debt:124.5, tradeBalance:-1050,
     exports:["Technology","Aerospace","Pharmaceuticals","Financial Services","Agriculture","Petroleum"],
     partners:["Canada","Mexico","EU","Japan","UK"],
     sanctions:false,
-    summary:"World's largest nominal economy. The IMF April 2026 WEO (released April 14) projects US growth at 2.4% for 2026, unchanged from the January update — US energy producers benefit from elevated oil prices ($126/barrel), partially offsetting broader uncertainty from the Strait of Hormuz closure and the US-Israel-Iran war (Operation Epic Fury, from February 28, 2026). Islamabad permanent-deal talks broke down April 12; Trump ordered a US Navy blockade of Iranian ports on April 13; Trump extended the ceasefire on April 21 at Pakistan's request, though the blockade remains. The Iran shock — on top of 145%+ tariffs on China — has elevated recession risk. Growth had been supported by the One Big Beautiful Bill Act tax incentives, AI-driven investment, and a partial trade truce with China agreed in November 2025." },
+    summary:"World's largest nominal economy. The IMF April 2026 WEO (released April 14) projects US growth at 2.3% for 2026, revised down from 2.4% in January, reflecting higher trade barriers and Middle East war disruption — US energy producers benefit from elevated oil prices ($126/barrel), partially offsetting broader uncertainty from the Strait of Hormuz closure and the US-Israel-Iran war (Operation Epic Fury, from February 28, 2026). Islamabad permanent-deal talks broke down April 12; Trump ordered a US Navy blockade of Iranian ports on April 13; Trump extended the ceasefire on April 21 at Pakistan's request, though the blockade remains. The Iran shock — on top of 145%+ tariffs on China — has elevated recession risk. Growth had been supported by the One Big Beautiful Bill Act tax incentives, AI-driven investment, and a partial trade truce with China agreed in November 2025." },
 
   156: { name:"China", gdp:20700, gdpPerCap:14700, growth:4.4, debt:86.8, tradeBalance:1190,
     exports:["Electronics","Machinery","EVs","Steel","Chemicals","Solar Equipment"],
