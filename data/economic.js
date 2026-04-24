@@ -18,11 +18,11 @@ const ECON_DATA = {
     sanctions:false,
     summary:"World's second-largest economy facing a prolonged property sector correction and US tariff escalation. Growth is forecast at 4.4% for 2026 (IMF April 2026 WEO), supported by lower effective US tariff rates on Chinese goods, domestic stimulus, and strong manufacturing exports — particularly EVs and clean energy equipment. De-risking by Western multinationals continues to redirect some supply chains." },
 
-  392: { name:"Japan", gdp:4460, gdpPerCap:36000, growth:0.6, debt:257.0, tradeBalance:-42,
+  392: { name:"Japan", gdp:4460, gdpPerCap:36000, growth:0.8, debt:257.0, tradeBalance:-42,
     exports:["Vehicles","Machinery","Electronics","Precision Instruments","Chemicals"],
     partners:["United States","China","South Korea","Australia","EU"],
     sanctions:false,
-    summary:"Highly developed economy under PM Sanae Takaichi (Japan's first female PM, since October 2025), who launched a ¥13.9 trillion stimulus package. The Bank of Japan has gradually raised rates from negative territory; yen weakness has boosted export earnings. Demographic contraction and record public debt remain long-term structural challenges." },
+    summary:"Highly developed economy under PM Sanae Takaichi (Japan's first female PM, since October 2025), who launched a ¥13.9 trillion stimulus package. The IMF April 2026 WEO revised Japan's growth to 0.8% (down from 1.1% in January), citing weaker external demand and the energy price shock from the Middle East conflict. The Bank of Japan has gradually raised rates from negative territory; yen weakness has boosted export earnings. Demographic contraction and record public debt remain long-term structural challenges." },
 
   276: { name:"Germany", gdp:5050, gdpPerCap:60200, growth:0.8, debt:63.5, tradeBalance:268,
     exports:["Vehicles","Machinery","Chemicals","Pharmaceuticals","Electronics"],
