@@ -84,19 +84,19 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Manufacturing hub facing significant headwinds from US tariff policy. The Sheinbaum government has pushed judicial reforms while managing nearshoring investment momentum. US tariffs on Mexican goods under the USMCA renegotiation have added uncertainty, though Mexico's integrated supply chains with the US create mutual dependency." },
 
-  36:  { name:"Australia", gdp:1900, gdpPerCap:69000, growth:2.1, debt:48.0, tradeBalance:125,
+  36:  { name:"Australia", gdp:1900, gdpPerCap:69000, growth:2.0, debt:48.0, tradeBalance:125,
     exports:["Iron Ore","Coal","Gold","Natural Gas","Agriculture","Education"],
     partners:["China","Japan","South Korea","United States","UK"],
     sanctions:false,
     summary:"Resource-driven economy with a large services sector. China remains the dominant trading partner despite strategic tensions; a partial trade rapprochement restored some commodity flows. Strong immigration has supported labour supply and GDP growth above OECD peers. Critical minerals strategy is attracting US and Japanese investment." },
 
-  724: { name:"Spain", gdp:1730, gdpPerCap:35700, growth:2.2, debt:106.0, tradeBalance:-34,
+  724: { name:"Spain", gdp:1730, gdpPerCap:35700, growth:2.1, debt:106.0, tradeBalance:-34,
     exports:["Vehicles","Machinery","Food & Beverages","Pharmaceuticals","Tourism"],
     partners:["France","Germany","Portugal","Italy","United States"],
     sanctions:false,
     summary:"One of the eurozone's strongest growth performers, boosted by record tourism revenues and resilient domestic consumption. Spain has emerged as a leading destination for data centres and renewable energy investment. Persistent housing affordability issues and regional political tensions remain challenges." },
 
-  360: { name:"Indonesia", gdp:1510, gdpPerCap:5390, growth:5.1, debt:40.5, tradeBalance:40,
+  360: { name:"Indonesia", gdp:1510, gdpPerCap:5390, growth:5.0, debt:40.5, tradeBalance:40,
     exports:["Palm Oil","Coal","Natural Gas","Nickel","Rubber","Textiles"],
     partners:["China","United States","Japan","India","Singapore"],
     sanctions:false,
@@ -108,11 +108,11 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Gateway economy to Europe and home to ASML, the world's sole manufacturer of extreme ultraviolet (EUV) chip lithography machines. Dutch export controls on ASML equipment to China have become a flashpoint in US-China tech competition. Rotterdam handles over a third of all EU maritime trade." },
 
-  792: { name:"Turkey", gdp:1380, gdpPerCap:16100, growth:4.2, debt:30.5, tradeBalance:-78,
+  792: { name:"Turkey", gdp:1380, gdpPerCap:16100, growth:3.4, debt:30.5, tradeBalance:-78,
     exports:["Vehicles","Machinery","Textiles","Steel","Electronics","Food"],
     partners:["Germany","Russia","China","United States","Iraq"],
     sanctions:false,
-    summary:"Emerging market that has pivoted back to orthodox monetary policy after 2023–24 rate hikes tamed inflation from its 85% peak. Growth is recovering. Turkey continues to leverage its NATO membership and Black Sea gateway position as a geopolitical mediator between Russia and Ukraine." },
+    summary:"Emerging market that has pivoted back to orthodox monetary policy after 2023–24 rate hikes tamed inflation from its 85% peak. The IMF April 2026 WEO cut Turkey's growth to 3.4% (from 4.2% in January), citing higher energy costs from the Middle East war shock and weaker-than-expected domestic momentum. Turkey continues to leverage its NATO membership and Black Sea gateway position as a geopolitical mediator between Russia and Ukraine." },
 
   682: { name:"Saudi Arabia", gdp:1220, gdpPerCap:33000, growth:3.1, debt:26.5, tradeBalance:185,
     exports:["Crude Oil","Refined Products","Petrochemicals","Plastics","Dates"],
@@ -132,7 +132,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Central Europe's largest economy and the EU's most significant defence spender by share of GDP (~4%). The Tusk government reversed some of the previous administration's judicial changes, unblocking over €35B in EU recovery funds. Poland's strategic position as a NATO frontline state has driven unprecedented military investment." },
 
-  32:  { name:"Argentina", gdp:680, gdpPerCap:14500, growth:3.8, debt:86.0, tradeBalance:22,
+  32:  { name:"Argentina", gdp:680, gdpPerCap:14500, growth:3.5, debt:86.0, tradeBalance:22,
     exports:["Soybeans","Corn","Beef","Petroleum","Lithium"],
     partners:["Brazil","China","United States","Chile","EU"],
     sanctions:false,
@@ -180,7 +180,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Most industrialised economy in Africa. The Government of National Unity formed after the 2024 election has made progress on electricity sector reform, reducing load-shedding from its peak. Growth is recovering but unemployment remains near 33%. South Africa chairs the G20 in 2025, raising its diplomatic profile." },
 
-  818: { name:"Egypt", gdp:450, gdpPerCap:4100, growth:4.5, debt:91.5, tradeBalance:-28,
+  818: { name:"Egypt", gdp:450, gdpPerCap:4100, growth:4.2, debt:91.5, tradeBalance:-28,
     exports:["Petroleum Products","Natural Gas","Gold","Textiles","Agriculture"],
     partners:["United States","UAE","Saudi Arabia","Italy","Turkey"],
     sanctions:false,
