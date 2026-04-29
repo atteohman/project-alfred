@@ -161,7 +161,7 @@ const LEADER_DATA = {
   "748": { name: "Mswati III",            title: "King",             wiki: "Mswati III" },
   "752": { name: "Ulf Kristersson",       title: "Prime Minister",   wiki: "Ulf Kristersson" },
   "768": { name: "Faure Gnassingbé",      title: "President",        wiki: "Faure Gnassingbé" },
-  "780": { name: "Keith Rowley",          title: "Prime Minister",   wiki: "Keith Rowley" },
+  "780": { name: "Kamla Persad-Bissessar", title: "Prime Minister",   wiki: "Kamla Persad-Bissessar" },
   "784": { name: "Mohammed bin Zayed",    title: "President",        wiki: "Mohamed bin Zayed Al Nahyan" },
   "795": { name: "Serdar Berdimuhamedow", title: "President",        wiki: "Serdar Berdimuhamedow" },
   "834": { name: "Samia Suluhu Hassan",   title: "President",        wiki: "Samia Suluhu Hassan" }
