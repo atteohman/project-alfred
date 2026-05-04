@@ -159,7 +159,7 @@ const ALLIANCES = {
   asean: {
     id: "asean", label: "ASEAN", fullName: "Association of Southeast Asian Nations",
     color: "#c8a838", xf: 0.88, yf: 0.52,
-    founded: "August 8, 1967", hq: "Jakarta, Indonesia", memberCount: 10,
+    founded: "August 8, 1967", hq: "Jakarta, Indonesia", memberCount: 11,
     summary: "ASEAN was founded in 1967 at the height of the Cold War by five anti-communist Southeast Asian nations. It operates on the 'ASEAN Way' — consensus-based decision-making and strict non-interference in members' internal affairs. This principle has made ASEAN effective at managing interstate relations but slow to address internal crises. ASEAN's geographic centrality in the Indo-Pacific has made it an essential hub for regional diplomacy, though its reluctance to confront Myanmar over the 2021 military coup has tested its credibility.",
     events: [
       { y: 1967, e: "Founded in Bangkok by Indonesia, Malaysia, Philippines, Singapore, and Thailand as an anti-communist bloc." },
@@ -170,7 +170,8 @@ const ALLIANCES = {
       { y: 2003, e: "ASEAN Declaration of Concord II launches the ASEAN Community framework (economic, security, cultural pillars)." },
       { y: 2007, e: "ASEAN Charter adopted, giving the organization legal personality and binding commitments." },
       { y: 2015, e: "ASEAN Economic Community (AEC) officially established — single market of 600 million people." },
-      { y: 2021, e: "Myanmar military coup tests ASEAN principles; 5-Point Consensus largely ignored by junta." }
+      { y: 2021, e: "Myanmar military coup tests ASEAN principles; 5-Point Consensus largely ignored by junta." },
+      { y: 2025, e: "Timor-Leste formally admitted as ASEAN's 11th member at the 47th ASEAN Summit on 26 October 2025 — the bloc's first expansion since Cambodia joined in 1999." }
     ]
   },
   arab_league: {
@@ -275,6 +276,7 @@ const COUNTRIES = {
   LAO: { name: "Laos",              a: ["asean"] },
   MMR: { name: "Myanmar",           a: ["asean"] },
   KHM: { name: "Cambodia",          a: ["asean"] },
+  TLS: { name: "Timor-Leste",       a: ["asean"] },
   JOR: { name: "Jordan",            a: ["arab_league"] },
   IRQ: { name: "Iraq",              a: ["arab_league"] },
   KWT: { name: "Kuwait",            a: ["gcc","arab_league"] },
