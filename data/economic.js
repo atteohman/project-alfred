@@ -160,7 +160,7 @@ const ECON_DATA = {
     exports:["Crude Oil","Refined Products","Gold","Machinery","Re-exports"],
     partners:["India","China","Saudi Arabia","Japan","United States"],
     sanctions:false,
-    summary:"Rapidly diversified hub economy anchored by Dubai's finance, logistics, and tourism alongside Abu Dhabi's oil wealth. The UAE has attracted significant capital and talent flows amid global instability. Strong fintech, AI, and crypto sectors are emerging. The UAE plays an active role in regional diplomacy including Gaza ceasefire efforts." },
+    summary:"Rapidly diversified hub economy anchored by Dubai's finance, logistics, and tourism alongside Abu Dhabi's oil wealth. The UAE has attracted significant capital and talent flows amid global instability. Strong fintech, AI, and crypto sectors are emerging. The UAE plays an active role in regional diplomacy including Gaza ceasefire efforts. On May 4–5, 2026, Iran struck UAE territory with 15 ballistic missiles and 4 drones — the first Iranian attack on UAE soil — causing a fire at a Fujairah oil facility; UAE air defences intercepted most projectiles. The attack marks a significant new security risk to the hub economy and investor confidence." },
 
   372: { name:"Ireland", gdp:635, gdpPerCap:119000, growth:4.5, debt:41.0, tradeBalance:180,
     exports:["Pharmaceuticals","Medical Devices","Chemicals","Software","Finance"],
