@@ -34,7 +34,7 @@ const ECON_DATA = {
     exports:["Petroleum Products","Pharmaceuticals","IT Services","Textiles","Machinery"],
     partners:["United States","UAE","China","Saudi Arabia","EU"],
     sanctions:false,
-    summary:"World's third-largest economy by nominal GDP and its fastest-growing major economy. A young workforce, digital public infrastructure (UPI, ONDC), and manufacturing diversification underpin strong growth. India is attracting significant supply-chain relocation from China in electronics and pharmaceuticals." },
+    summary:"World's third-largest economy by nominal GDP and its fastest-growing major economy. A young workforce, digital public infrastructure (UPI, ONDC), and manufacturing diversification underpin strong growth. India is attracting significant supply-chain relocation from China in electronics and pharmaceuticals. The April 22, 2025 Pahalgam terrorist attack (26 civilians killed) triggered Operation Sindoor — India's missile and aerial strikes into Pakistan-administered Kashmir and Pakistani Punjab — followed by a US-mediated ceasefire on May 10, 2025. Bilateral trade, airspace, and visas remain suspended; the Indus Waters Treaty is in abeyance. The confrontation caused short-term market volatility but has not derailed India's structural growth trajectory." },
 
   826: { name:"United Kingdom", gdp:3430, gdpPerCap:49500, growth:0.8, debt:100.5, tradeBalance:-185,
     exports:["Financial Services","Pharmaceuticals","Machinery","Vehicles","Aerospace"],
@@ -292,7 +292,7 @@ const ECON_DATA = {
     exports:["Textiles","Garments","Rice","Leather","Chemicals"],
     partners:["China","United States","United Arab Emirates","United Kingdom","Afghanistan"],
     sanctions:false,
-    summary:"Economy stabilising after a severe balance-of-payments crisis that required an emergency IMF bailout in 2023. Inflation is declining from its 2023 peak above 35%. CPEC infrastructure remains Pakistan's flagship connectivity project. Political instability continues with former PM Imran Khan imprisoned since 2023." },
+    summary:"Economy stabilising after a severe balance-of-payments crisis that required an emergency IMF bailout in 2023. Inflation is declining from its 2023 peak above 35%. CPEC infrastructure remains Pakistan's flagship connectivity project. Political instability continues with former PM Imran Khan imprisoned since 2023. The May 2025 military confrontation with India (Operation Sindoor, following the Pahalgam attack) was ended by a US-mediated ceasefire on May 10, 2025, but India's subsequent suspension of the Indus Waters Treaty, closure of the Attari-Wagah border, and ban on bilateral trade have imposed ongoing economic costs. Heightened military expenditure and the trade ban complicate Pakistan's adherence to IMF programme targets, raising concerns over future disbursements." },
 
   50:  { name:"Bangladesh", gdp:520, gdpPerCap:3080, growth:6.2, debt:37.5, tradeBalance:-17,
     exports:["Ready-Made Garments","Knitwear","Jute","Leather","Pharmaceuticals"],
