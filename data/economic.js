@@ -70,7 +70,7 @@ const ECON_DATA = {
     exports:["Petroleum","Natural Gas","Metals","Wheat","Chemicals","Arms"],
     partners:["China","India","Turkey","Iran","Kazakhstan"],
     sanctions:true,
-    summary:"War-economy operating under extensive Western sanctions. Inflation has been persistent and the central bank holds rates above 20%. Trade has been fully reoriented toward China, India, and the Global South. Any ceasefire or peace process in Ukraine would reshape the economic outlook significantly. Long-term capital and talent flight is eroding productive capacity." },
+    summary:"War-economy operating under extensive Western sanctions. Inflation has been persistent and the central bank holds rates above 20%. Trade has been fully reoriented toward China, India, and the Global South. A US-brokered 72-hour ceasefire (May 9–11) was agreed but largely violated by both sides; Putin's Victory Day declaration that the war is 'coming to an end' and his offer of direct talks with Zelenskyy signal possible momentum toward negotiation, though formal peace talks remain stalled. Long-term capital and talent flight is eroding productive capacity." },
 
   410: { name:"South Korea", gdp:1870, gdpPerCap:36400, growth:1.9, debt:55.8, tradeBalance:45,
     exports:["Semiconductors","Vehicles","Ships","Petrochemicals","Electronics"],
@@ -376,13 +376,13 @@ const ECON_DATA = {
     exports:["Grain","Sunflower Oil","Iron Ore","Steel","Armaments"],
     partners:["EU","United States","Turkey","Egypt","China"],
     sanctions:false,
-    summary:"Economy recovering with massive Western financial support (~$50B/year in direct budget aid). Military production has become a significant economic sector. War damage estimates exceed $500 billion. EU accession negotiations are proceeding; any ceasefire scenario would unlock major reconstruction investment. Significant population loss due to casualties and displacement remains a structural challenge." },
+    summary:"Economy recovering with massive Western financial support (~$50B/year in direct budget aid). Military production has become a significant economic sector. War damage estimates exceed $500 billion. EU accession negotiations are proceeding. A US-brokered 72-hour ceasefire (May 9–11) was agreed but largely violated by both sides; peace talks remain stalled though Putin has signalled openness to direct negotiations in Moscow or a neutral country, keeping reconstruction investment scenarios on the horizon. Significant population loss due to casualties and displacement remains a structural challenge." },
 
   222: { name:"El Salvador", gdp:38, gdpPerCap:5760, growth:3.8, debt:73.0, tradeBalance:-5,
     exports:["Coffee","Sugar","Textiles","Gold","Ethanol"],
     partners:["United States","Honduras","Guatemala","China","Mexico"],
     sanctions:false,
-    summary:"Bukele's second term (2024–) continues his anti-gang security model, which has reduced homicide rates to among the lowest in the Americas, boosting tourism and FDI. The Bitcoin legal tender law remains, though the IMF secured its de-emphasisation as part of a 2024 deal. Remittances (~25% of GDP) remain the largest income source." },
+    summary:"Bukele's second term (2024–) continues his anti-gang security model, which has reduced homicide rates to among the lowest in the Americas, boosting tourism and FDI. The Bitcoin legal tender law remains, though the IMF secured its de-emphasisati on as part of a 2024 deal. Remittances (~25% of GDP) remain the largest income source." },
 
   624: { name:"Guinea-Bissau", gdp:2.2, gdpPerCap:1020, growth:5.5, debt:76.0, tradeBalance:-0.8,
     exports:["Cashew Nuts","Fish","Peanuts","Timber"],
