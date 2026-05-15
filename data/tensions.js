@@ -149,7 +149,7 @@ const LEADER_DATA = {
   "578": { name: "Jonas Gahr Støre",      title: "Prime Minister",   wiki: "Jonas Gahr Støre" },
   "598": { name: "James Marape",          title: "Prime Minister",   wiki: "James Marape" },
   "600": { name: "Santiago Peña",         title: "President",        wiki: "Santiago Peña Palacios" },
-  "620": { name: "Luís Montenegro",       title: "Prime Minister",   wiki: "Luís Montenegro" },
+  "620": { name: "António José Seguro",   title: "President",        wiki: "António José Seguro" },
   "624": { name: "Umaro Sissoco Embaló",  title: "President",        wiki: "Umaro Sissoco Embaló" },
   "626": { name: "José Maria Neves",      title: "President",        wiki: "José Maria Neves" },
   "642": { name: "Nicușor Dan",           title: "President",        wiki: "Nicușor Dan" },

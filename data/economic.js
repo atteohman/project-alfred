@@ -700,7 +700,7 @@ const ECON_DATA = {
     exports:["Machinery","Metals","Chemicals","Fuels","Agricultural Products"],
     partners:["Germany","Romania","Turkey","Italy","Greece"],
     sanctions:false,
-    summary:"Bulgaria is the EU's poorest member by GDP per capita but has very low public debt and hosts significant nearshoring investment due to competitive labour costs. After eight snap elections since 2021, the April 19, 2026 vote produced a majority for Rumen Radev's Progressive Bulgaria coalition (~44.7%), ending years of caretaker governments — though Radev's euroskeptic, Russia-friendly stance may complicate EU cohesion fund access and reform momentum. Bulgaria joined the Schengen area in 2024 and is working toward eurozone entry." },
+    summary:"Bulgaria is the EU's poorest member by GDP per capita but has very low public debt and hosts significant nearshoring investment due to competitive labour costs. After eight snap elections since 2021, the April 19, 2026 vote produced a majority for Rumen Radev's Progressive Bulgaria coalition (~44.7%), ending years of caretaker governments; Radev was confirmed as PM by parliament on May 8, 2026 — though his euroskeptic, Russia-friendly stance may complicate EU cohesion fund access and reform momentum. Bulgaria joined the Schengen area in 2024 and is working toward eurozone entry." },
 
   // Paraguay
   600: { name:"Paraguay", gdp:49, gdpPerCap:6500, growth:3.8, debt:42.0, tradeBalance:4,
