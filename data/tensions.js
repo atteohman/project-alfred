@@ -129,7 +129,7 @@ const LEADER_DATA = {
   "266": { name: "Brice Oligui Nguema",   title: "Transitional President", wiki: "Brice Clotaire Oligui Nguema" },
   "270": { name: "Adama Barrow",          title: "President",        wiki: "Adama Barrow" },
   "328": { name: "Irfaan Ali",            title: "President",        wiki: "Irfaan Ali" },
-  "352": { name: "Guðni Th. Jóhannesson", title: "President",        wiki: "Guðni Th. Jóhannesson" },
+  "352": { name: "Halla Tómasdóttir",      title: "President",        wiki: "Halla Tómasdóttir" },
   "372": { name: "Micheál Martin",        title: "Taoiseach",        wiki: "Micheál Martin" },
   "388": { name: "Andrew Holness",        title: "Prime Minister",   wiki: "Andrew Holness" },
   "426": { name: "Samuel Ntsokoane Matekane", title: "Prime Minister", wiki: "Sam Matekane" },
