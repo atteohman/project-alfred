@@ -90,7 +90,7 @@ const LEADER_DATA = {
   "682": { name: "Mohammed bin Salman",   title: "Crown Prince & Prime Minister", wiki: "Mohammed bin Salman" },
   "686": { name: "Bassirou Diomaye Faye", title: "President",       wiki: "Bassirou Diomaye Faye" },
   "688": { name: "Aleksandar Vučić",      title: "President",       wiki: "Aleksandar Vučić" },
-  "706": { name: "Hassan Sheikh Mohamud", title: "President",       wiki: "Hassan Sheikh Mohamud" },
+  "706": { name: "Hassan Sheikh Mohamud", title: "President (term disputed)", wiki: "Hassan Sheikh Mohamud" },
   "716": { name: "Emmerson Mnangagwa",    title: "President",       wiki: "Emmerson Mnangagwa" },
   "724": { name: "Pedro Sánchez",         title: "Prime Minister",  wiki: "Pedro Sánchez" },
   "728": { name: "Salva Kiir Mayardit",   title: "President",       wiki: "Salva Kiir Mayardit" },
