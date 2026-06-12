@@ -137,7 +137,7 @@ const ALLIANCES = {
       { y: 2024, e: "UAE, Iran, Egypt, Ethiopia join as full members. Argentina declines under new president Milei." },
       { y: 2025, e: "Indonesia joins in January as the 10th member. Saudi Arabia formally joins in July at the Rio Summit, bringing BRICS to 11 full members." },
       { y: 2025, e: "10 Partner Countries admitted: Belarus, Bolivia, Cuba, Kazakhstan, Malaysia, Nigeria, Thailand, Uganda, Uzbekistan, Vietnam — expanding BRICS's associate orbit to 21 states." },
-      { y: 2026, e: "India assumes BRICS rotating chairmanship; Turkey — which applied for full BRICS membership in September 2024 but was offered only partner status — reaffirms its bid for full membership amid transatlantic rifts, signalling a potential historic crack in NATO alignment." }
+      { y: 2026, e: "India assumes BRICS rotating chairmanship; Turkey — which applied for full BRICS membership in September 2024 but was offered only partner status — reaffirms its bid for full membership amid transatlantic rifts, signalling a potential historic crack in NATO alignment. BRICS fails to issue a joint statement on the 2026 US-Israel-Iran war, exposing deep internal divisions between members." }
     ]
   },
   quad: {
