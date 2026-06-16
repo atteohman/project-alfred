@@ -298,7 +298,7 @@ const ECON_DATA = {
     exports:["Ready-Made Garments","Knitwear","Jute","Leather","Pharmaceuticals"],
     partners:["United States","EU","India","China","Canada"],
     sanctions:false,
-    summary:"Remarkable development story built on garment exports. The Hasina government fell in a 2024 student uprising; an interim government led by Muhammad Yunus is overseeing a democratic transition. The world's second-largest apparel exporter continues to grow, now targeting higher-value manufacturing." },
+    summary:"Remarkable development story built on garment exports. Following the 2024 student-led ouster of Sheikh Hasina and an 18-month Yunus-led interim administration, the BNP's Tarique Rahman was sworn in as Prime Minister on February 17, 2026 after a landslide election win. His government has set a goal of a $1 trillion economy by 2034 and launched a 600 billion BDT incentive package to revive closed factories, but faces ~30% non-performing loans and Bangladesh's looming graduation from LDC status (November 2026), which will strip away key tariff concessions for exporters. The world's second-largest apparel exporter continues to grow, now targeting higher-value manufacturing." },
 
   368: { name:"Iraq", gdp:298, gdpPerCap:6750, growth:3.8, debt:47.5, tradeBalance:28,
     exports:["Crude Oil","Natural Gas","Dates","Sulphur"],
