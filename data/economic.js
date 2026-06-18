@@ -178,7 +178,7 @@ const ECON_DATA = {
     exports:["Gold","Platinum","Coal","Iron Ore","Vehicles","Wine"],
     partners:["China","United States","Germany","UK","India"],
     sanctions:false,
-    summary:"Most industrialised economy in Africa. The Government of National Unity formed after the 2024 election has made progress on electricity sector reform, reducing load-shedding from its peak. Growth is recovering but unemployment remains near 33%. South Africa chairs the G20 in 2025, raising its diplomatic profile." },
+    summary:"Most industrialised economy in Africa. The Government of National Unity formed after the 2024 election has made progress on electricity sector reform, reducing load-shedding from its peak. Growth is recovering but unemployment remains near 33%. South Africa chaired the G20 in 2025, but the US barred it from the 2026 G20 Miami summit — the bloc's first-ever exclusion of a member — and suspended aid after President Trump cited disputed claims of Afrikaner persecution; South Africa has rejected the allegations and skipped subsequent G20 sherpa meetings in protest." },
 
   818: { name:"Egypt", gdp:450, gdpPerCap:4100, growth:4.2, debt:91.5, tradeBalance:-28,
     exports:["Petroleum Products","Natural Gas","Gold","Textiles","Agriculture"],
