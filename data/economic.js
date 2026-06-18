@@ -497,7 +497,7 @@ const ECON_DATA = {
     exports:["Natural Gas","Zinc","Gold","Soybeans","Tin"],
     partners:["Brazil","Argentina","Colombia","United States","China"],
     sanctions:false,
-    summary:"New right-wing President Rodrigo Paz Pereira took office in November 2025, ending 20 years of MAS government. He is pursuing radical fiscal austerity — a 30%+ spending cut — to address exhausted foreign currency reserves and fuel shortages inherited from the Arce government. Lithium production remains a long-term asset; private-sector partnerships are being expanded." },
+    summary:"New right-wing President Rodrigo Paz Pereira took office in November 2025, ending 20 years of MAS government. He is pursuing radical fiscal austerity — a 30%+ spending cut — to address exhausted foreign currency reserves and fuel shortages inherited from the Arce government. Months of nationwide protests and road blockades over the austerity drive and a since-annulled land mortgage law have compounded the damage, with official estimates putting cumulative losses from the unrest at roughly US$2.76 billion by mid-June 2026. Lithium production remains a long-term asset; private-sector partnerships are being expanded." },
 
   // DR Congo
   180: { name:"DR Congo", gdp:76, gdpPerCap:764, growth:6.8, debt:24.0, tradeBalance:7,
