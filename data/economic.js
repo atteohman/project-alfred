@@ -220,7 +220,7 @@ const ECON_DATA = {
     exports:["Petroleum","Coal","Coffee","Flowers","Gold"],
     partners:["United States","Panama","China","Ecuador","Mexico"],
     sanctions:false,
-    summary:"Upper-middle-income economy with a growing services sector and improving security situation. President Petro's left-wing government has sought to reduce fossil fuel extraction, creating investment uncertainty for oil and coal sectors. Colombia's biodiversity and proximity to US markets position it well for nearshoring in some sectors." },
+    summary:"Upper-middle-income economy with a growing services sector and improving security situation. President Petro's left-wing government has sought to reduce fossil fuel extraction, creating investment uncertainty for oil and coal sectors. Colombia's biodiversity and proximity to US markets position it well for nearshoring in some sectors. Right-wing outsider Abelardo de la Espriella won the June 21, 2026 presidential runoff by under 250,000 votes — the narrowest margin in Colombian history — and is set to take office August 7, 2026; markets are watching for a reversal of Petro-era restrictions on oil and coal extraction." },
 
   152: { name:"Chile", gdp:345, gdpPerCap:17200, growth:2.5, debt:37.0, tradeBalance:23,
     exports:["Copper","Lithium","Fruit","Fish Meal","Cellulose"],
@@ -346,7 +346,7 @@ const ECON_DATA = {
     exports:["Petroleum","Gold","Bauxite","Agricultural Products"],
     partners:["China","Cuba","Russia","Turkey","Colombia"],
     sanctions:true,
-    summary:"In January 2026, the US captured Nicolás Maduro; Acting President Delcy Rodríguez assumed power. The US lifted sanctions on Rodríguez on April 2, 2026 and authorised PDVSA to sell Venezuelan oil directly to US companies — the first significant US sanctions relief in years and a potential structural shift for the oil sector. Partial dollarisation continues; hyperinflation has moderated but underlying economic dysfunction persists." },
+    summary:"In January 2026, the US captured Nicolás Maduro; Acting President Delcy Rodríguez assumed power. The US lifted sanctions on Rodríguez on April 2, 2026 and authorised PDVSA to sell Venezuelan oil directly to US companies — the first significant US sanctions relief in years and a potential structural shift for the oil sector. Partial dollarisation continues; hyperinflation has moderated but underlying economic dysfunction persists. On June 24, 2026, back-to-back magnitude 7.2/7.5 earthquakes near Caracas — Venezuela's strongest since 1900 — killed at least 188 people and damaged or destroyed roughly 250 buildings, adding major reconstruction costs and short-term economic disruption atop the fragile post-Maduro transition." },
 
   364: { name:"Iran", gdp:720, gdpPerCap:8000, growth:-6.1, debt:31.0, tradeBalance:26,
     exports:["Crude Oil","Petroleum Products","Petrochemicals","Pistachios","Carpets"],
@@ -504,7 +504,7 @@ const ECON_DATA = {
     exports:["Cobalt","Copper","Coltan","Gold","Timber"],
     partners:["China","Zambia","South Korea","Finland","UAE"],
     sanctions:false,
-    summary:"Holds over 70% of global cobalt reserves — a critical input for EV batteries — yet remains among the world's poorest countries. Renewed conflict in eastern DRC, including advances by M23 rebels backed by Rwanda, has disrupted mining operations in 2025. The mineral wealth–conflict nexus remains profound." },
+    summary:"Holds over 70% of global cobalt reserves — a critical input for EV batteries — yet remains among the world's poorest countries. Renewed conflict in eastern DRC, including advances by M23 rebels backed by Rwanda, has disrupted mining operations in 2025. The mineral wealth–conflict nexus remains profound. A Bundibugyo ebolavirus outbreak declared a WHO Public Health Emergency of International Concern on May 16, 2026 has surpassed 1,000 cases (1,094 confirmed, 277 deaths as of June 23) concentrated in gold-mining areas of Ituri province, layering a public-health shock atop the conflict-driven economic disruption." },
 
   // Tanzania
   834: { name:"Tanzania", gdp:92, gdpPerCap:1370, growth:5.5, debt:39.5, tradeBalance:-1,
