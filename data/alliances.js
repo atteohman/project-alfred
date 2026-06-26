@@ -203,7 +203,8 @@ const ALLIANCES = {
       { y: 2011, e: "GCC deploys troops to Bahrain to suppress Arab Spring protests, prioritizing regime stability." },
       { y: 2015, e: "Saudi-led GCC coalition begins military intervention in Yemen against Houthi forces." },
       { y: 2017, e: "Saudi Arabia, UAE, Bahrain, and Egypt blockade Qatar over alleged ties to Iran and Islamists." },
-      { y: 2021, e: "Al-Ula Declaration ends Qatar blockade; GCC reconciliation achieved." }
+      { y: 2021, e: "Al-Ula Declaration ends Qatar blockade; GCC reconciliation achieved." },
+      { y: 2026, e: "Iran's war with Israel and the US (from Feb 2026) strikes Bahrain directly and tests Gulf unity; on June 25, Secretary of State Rubio meets GCC states in Manama, declaring 'zero support' among members for Iranian tolls on Strait of Hormuz shipping." }
     ]
   }
 };
