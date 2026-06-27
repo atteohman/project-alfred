@@ -504,7 +504,7 @@ const ECON_DATA = {
     exports:["Cobalt","Copper","Coltan","Gold","Timber"],
     partners:["China","Zambia","South Korea","Finland","UAE"],
     sanctions:false,
-    summary:"Holds over 70% of global cobalt reserves — a critical input for EV batteries — yet remains among the world's poorest countries. Renewed conflict in eastern DRC, including advances by M23 rebels backed by Rwanda, has disrupted mining operations in 2025. The mineral wealth–conflict nexus remains profound. A Bundibugyo ebolavirus outbreak declared a WHO Public Health Emergency of International Concern on May 16, 2026 has surpassed 1,000 cases (1,118 confirmed, 291 deaths as of June 24) concentrated in gold-mining areas of Ituri province, layering a public-health shock atop the conflict-driven economic disruption." },
+    summary:"Holds over 70% of global cobalt reserves — a critical input for EV batteries — yet remains among the world's poorest countries. Renewed conflict in eastern DRC, including advances by M23 rebels backed by Rwanda, has disrupted mining operations in 2025. The mineral wealth–conflict nexus remains profound. A Bundibugyo ebolavirus outbreak declared a WHO Public Health Emergency of International Concern on May 16, 2026 has surpassed 1,000 cases (1,155 confirmed, 304 deaths as of June 25) concentrated in gold-mining areas of Ituri province, layering a public-health shock atop the conflict-driven economic disruption." },
 
   // Tanzania
   834: { name:"Tanzania", gdp:92, gdpPerCap:1370, growth:5.5, debt:39.5, tradeBalance:-1,
