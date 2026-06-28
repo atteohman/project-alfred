@@ -469,7 +469,7 @@ const ECON_DATA = {
     exports:["Aluminium","Petroleum Products","Textiles","Finance","Tourism"],
     partners:["Saudi Arabia","UAE","United States","Japan","India"],
     sanctions:false,
-    summary:"Small island economy with a large financial services sector and the ALBA aluminium smelter. High public debt relative to Gulf neighbours, sustained by a 2021 Saudi bailout. Bahrain is diversifying into fintech, logistics, and Formula 1 tourism. Heavily reliant on Saudi Arabia for political and fiscal support." },
+    summary:"Small island economy with a large financial services sector and the ALBA aluminium smelter. High public debt relative to Gulf neighbours, sustained by a 2021 Saudi bailout. Bahrain is diversifying into fintech, logistics, and Formula 1 tourism. Heavily reliant on Saudi Arabia for political and fiscal support. The 2026 Iran-US war has struck Bahraini soil four times, including repeated Iranian missile and drone attacks near the US Fifth Fleet's regional headquarters, elevating war-risk insurance costs and clouding the outlook for trade and financial-sector activity." },
 
   // Jordan
   400: { name:"Jordan", gdp:56, gdpPerCap:4850, growth:2.8, debt:90.0, tradeBalance:-9,
@@ -609,7 +609,7 @@ const ECON_DATA = {
     exports:["Crude Oil","Refined Products","Fertilizers","Chemical Products"],
     partners:["China","India","Japan","South Korea","United States"],
     sanctions:false,
-    summary:"Kuwait is one of the world's wealthiest states per capita, almost entirely dependent on oil. The Kuwait Investment Authority (KIA) is one of the world's oldest and largest sovereign wealth funds (~$800B). Chronic political gridlock between parliament and the Al-Sabah ruling family has blocked economic diversification plans for decades." },
+    summary:"Kuwait is one of the world's wealthiest states per capita, almost entirely dependent on oil. The Kuwait Investment Authority (KIA) is one of the world's oldest and largest sovereign wealth funds (~$800B). Chronic political gridlock between parliament and the Al-Sabah ruling family has blocked economic diversification plans for decades. The 2026 Iran-US war has struck Kuwaiti soil repeatedly, including a June 3 missile and drone attack on Kuwait International Airport that killed one person and severely damaged the terminal, and subsequent strikes on Ali Al Salem Air Base, disrupting trade and raising regional war-risk costs." },
 
   // Ecuador
   218: { name:"Ecuador", gdp:128, gdpPerCap:6900, growth:1.5, debt:57.5, tradeBalance:-2,
