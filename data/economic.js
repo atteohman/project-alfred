@@ -6,7 +6,7 @@
 // gdp: billions USD | gdpPerCap: USD | growth: % | debt: % of GDP
 // tradeBalance: billions USD (positive = surplus, negative = deficit)
 const ECON_DATA = {
-  840: { name:"United States", gdp:31800, gdpPerCap:94400, growth:2.4, debt:124.5, tradeBalance:-1050,
+  840: { name:"United States", gdp:31800, gdpPerCap:94400, growth:2.3, debt:124.5, tradeBalance:-1050,
     exports:["Technology","Aerospace","Pharmaceuticals","Financial Services","Agriculture","Petroleum"],
     partners:["Canada","Mexico","EU","Japan","UK"],
     sanctions:false,
