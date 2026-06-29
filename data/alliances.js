@@ -38,7 +38,8 @@ const ALLIANCES = {
       { y: 2016, e: "UK votes 52-48% to leave the EU — first ever departure of a member state." },
       { y: 2020, e: "Brexit completed. UK formally leaves the single market and customs union." },
       { y: 2022, e: "Ukraine and Moldova granted EU candidate status following Russian invasion." },
-      { y: 2025, e: "Armenia's parliament votes to begin EU membership application process (March 2025), marking a historic westward pivot after withdrawal from the CSTO." }
+      { y: 2025, e: "Armenia's parliament votes to begin EU membership application process (March 2025), marking a historic westward pivot after withdrawal from the CSTO." },
+      { y: 2026, e: "Hungary's new PM Péter Magyar lifts Budapest's 17-month veto after resolving a dispute over Ukraine's ethnic-Hungarian minority rights; the EU unblocks accession talks (June 12) and formally opens the first 'Fundamentals' negotiating cluster for Ukraine and Moldova (June 15) — though Hungary blocks a further procedural step later in June, clouding Kyiv's goal of opening all six clusters by mid-July." }
     ]
   },
   five_eyes: {
