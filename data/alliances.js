@@ -72,7 +72,8 @@ const ALLIANCES = {
       { y: 2014, e: "Russia expelled following annexation of Crimea. G8 returns to G7 format." },
       { y: 2021, e: "Cornwall Summit: G7 backs 'Build Back Better World' as alternative to China's Belt and Road Initiative." },
       { y: 2022, e: "G7 coordinates unprecedented sanctions package against Russia following Ukraine invasion." },
-      { y: 2023, e: "Hiroshima Summit: G7 adopts new guidelines on economic coercion, targeting China's trade practices." }
+      { y: 2023, e: "Hiroshima Summit: G7 adopts new guidelines on economic coercion, targeting China's trade practices." },
+      { y: 2026, e: "Évian-les-Bains Summit (France): on the summit's sidelines, Trump personally signed the US-Iran Islamabad Memorandum ceasefire at the Palace of Versailles hosted by President Macron, with Iran's President Pezeshkian co-signing remotely — a landmark diplomatic outcome on the G7's margins." }
     ]
   },
   aukus: {
