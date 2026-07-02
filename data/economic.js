@@ -66,7 +66,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Resource-rich economy facing pressure from US tariffs on steel, aluminium, and autos under the Trump trade policy. Canada has responded with retaliatory measures while seeking USMCA renegotiation. Energy exports to Asia are growing as pipelines to the Pacific come online." },
 
-  643: { name:"Russia", gdp:2250, gdpPerCap:15500, growth:0.8, debt:18.0, tradeBalance:180,
+  643: { name:"Russia", gdp:2250, gdpPerCap:15500, growth:1.1, debt:18.0, tradeBalance:180,
     exports:["Petroleum","Natural Gas","Metals","Wheat","Chemicals","Arms"],
     partners:["China","India","Turkey","Iran","Kazakhstan"],
     sanctions:true,
