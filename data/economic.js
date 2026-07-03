@@ -30,7 +30,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Europe's largest economy, recovering from a two-year contraction. The new CDU-led government that won the February 2025 election reformed the constitutional debt brake to unlock a €500B defence and infrastructure fund. Automotive sector restructuring continues as EV adoption accelerates. The IMF April 2026 WEO cut German growth to 0.8% (from 1.1%), reflecting the Iran war energy price shock, US tariff headwinds on key export industries, and continued weakness in industrial orders." },
 
-  356: { name:"India", gdp:4500, gdpPerCap:3130, growth:6.5, debt:82.5, tradeBalance:-250,
+  356: { name:"India", gdp:4500, gdpPerCap:3130, growth:6.3, debt:82.5, tradeBalance:-250,
     exports:["Petroleum Products","Pharmaceuticals","IT Services","Textiles","Machinery"],
     partners:["United States","UAE","China","Saudi Arabia","EU"],
     sanctions:false,
