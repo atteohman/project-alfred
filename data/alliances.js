@@ -19,7 +19,8 @@ const ALLIANCES = {
       { y: 2022, e: "Russia's invasion of Ukraine triggers NATO's largest military buildup since the Cold War." },
       { y: 2023, e: "Finland becomes the 31st member, doubling NATO's direct land border with Russia." },
       { y: 2024, e: "Sweden becomes the 32nd member, completing full Nordic integration into NATO." },
-      { y: 2026, e: "Seven allies (Belgium, Denmark, France, Netherlands, Norway, Turkey, UK) agree to jointly develop ballistic missile defense capabilities — sensors, interceptors, and tactical control systems." }
+      { y: 2025, e: "The Hague Summit: all 32 allies commit to spending at least 5% of GDP on defence and security by 2035 — the highest collective target in NATO history, up from the 2% benchmark set in 2014. Spain received an exemption; a progress review is set for 2029." },
+      { y: 2026, e: "Seven allies (Belgium, Denmark, France, Netherlands, Norway, Turkey, UK) agree to jointly develop ballistic missile defense capabilities — sensors, interceptors, and tactical control systems. In April, President Trump called NATO a 'paper tiger' and threatened US withdrawal after allies declined to send warships to the Strait of Hormuz during the US-Iran war — the most serious challenge to Alliance cohesion since its founding." }
     ]
   },
   eu: {
@@ -139,7 +140,7 @@ const ALLIANCES = {
       { y: 2024, e: "UAE, Iran, Egypt, Ethiopia join as full members. Argentina declines under new president Milei." },
       { y: 2025, e: "Indonesia joins in January as the 10th member. Saudi Arabia formally joins in July at the Rio Summit, bringing BRICS to 11 full members." },
       { y: 2025, e: "10 Partner Countries admitted: Belarus, Bolivia, Cuba, Kazakhstan, Malaysia, Nigeria, Thailand, Uganda, Uzbekistan, Vietnam — expanding BRICS's associate orbit to 21 states." },
-      { y: 2026, e: "India assumes BRICS rotating chairmanship; Turkey — which applied for full BRICS membership in September 2024 but was offered only partner status — reaffirms its bid for full membership amid transatlantic rifts, signalling a potential historic crack in NATO alignment. BRICS fails to issue a joint statement on the 2026 US-Israel-Iran war, exposing deep internal divisions between members." }
+      { y: 2026, e: "India assumes BRICS rotating chairmanship; Turkey — which applied for full BRICS membership in September 2024 but was offered only partner status — reaffirms its bid for full membership amid transatlantic rifts, signalling a potential historic crack in NATO alignment. BRICS fails to issue a joint statement on the 2026 US-Israel-Iran war, exposing deep internal divisions between members. In May, Russian FM Lavrov announces BRICS will not rush further expansion, prioritising consolidation of the existing 11-member bloc over new admissions. The 18th BRICS Summit is scheduled for New Delhi, September 12–13, 2026." }
     ]
   },
   quad: {
