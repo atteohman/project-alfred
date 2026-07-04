@@ -1,5 +1,5 @@
 // Political tension and leadership data
-// Last updated: 2026-Q2
+// Last updated: 2026-Q3
 
 // ─── Leader Data (Wikipedia article titles for image fetching) ────────────────
 const LEADER_DATA = {

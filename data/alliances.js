@@ -1,5 +1,5 @@
 // Alliance network data
-// Last updated: 2026-Q2
+// Last updated: 2026-Q3
 
 // ─── Alliance Definitions ─────────────────────────────────────────────────────
 const ALLIANCES = {
