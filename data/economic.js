@@ -36,7 +36,7 @@ const ECON_DATA = {
     sanctions:false,
     summary:"World's third-largest economy by nominal GDP and its fastest-growing major economy. A young workforce, digital public infrastructure (UPI, ONDC), and manufacturing diversification underpin strong growth. India is attracting significant supply-chain relocation from China in electronics and pharmaceuticals. The April 22, 2025 Pahalgam terrorist attack (26 civilians killed) triggered Operation Sindoor — India's missile and aerial strikes into Pakistan-administered Kashmir and Pakistani Punjab — followed by a US-mediated ceasefire on May 10, 2025. Bilateral trade, airspace, and visas remain suspended; the Indus Waters Treaty is in abeyance. The confrontation caused short-term market volatility but has not derailed India's structural growth trajectory." },
 
-  826: { name:"United Kingdom", gdp:3430, gdpPerCap:49500, growth:1.0, debt:100.5, tradeBalance:-185,
+  826: { name:"United Kingdom", gdp:3430, gdpPerCap:49500, growth:0.8, debt:100.5, tradeBalance:-185,
     exports:["Financial Services","Pharmaceuticals","Machinery","Vehicles","Aerospace"],
     partners:["United States","EU","China","India","UAE"],
     sanctions:false,
