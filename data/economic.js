@@ -72,11 +72,11 @@ const ECON_DATA = {
     sanctions:true,
     summary:"War-economy operating under extensive Western sanctions. Inflation has been persistent and the central bank holds rates above 20%. Trade has been fully reoriented toward China, India, and the Global South. A US-brokered 72-hour ceasefire (May 9–11) was agreed but largely violated by both sides; Putin's Victory Day declaration that the war is 'coming to an end' and his offer of direct talks with Zelenskyy signal possible momentum toward negotiation, though formal peace talks remain stalled. Long-term capital and talent flight is eroding productive capacity." },
 
-  410: { name:"South Korea", gdp:1870, gdpPerCap:36400, growth:1.9, debt:55.8, tradeBalance:45,
+  410: { name:"South Korea", gdp:1870, gdpPerCap:36400, growth:2.6, debt:55.8, tradeBalance:45,
     exports:["Semiconductors","Vehicles","Ships","Petrochemicals","Electronics"],
     partners:["China","United States","Vietnam","Japan","Australia"],
     sanctions:false,
-    summary:"Highly export-dependent economy that navigated a political crisis following President Yoon's brief martial law declaration in late 2024. Recovery in semiconductor markets, led by AI chip demand, has boosted exports. Samsung and SK Hynix are major beneficiaries of HBM memory demand." },
+    summary:"Highly export-dependent economy. The IMF July 2026 WEO Update (July 8) raised Korea's 2026 growth forecast to 2.6% (from 1.9% in April) — the largest upward revision among major economies — driven by a semiconductor and AI-hardware export boom that has outweighed the energy-price drag from the Middle East conflict. Q1 2026 growth came in at 7.5%, more than four times the April projection. Samsung and SK Hynix are major beneficiaries of global HBM memory demand. President Lee Jae-myung (elected June 2025) has stabilised the political situation following President Yoon's brief martial law declaration in late 2024." },
 
   484: { name:"Mexico", gdp:1590, gdpPerCap:11900, growth:1.5, debt:48.2, tradeBalance:-12,
     exports:["Vehicles","Electronics","Machinery","Petroleum","Agricultural Products"],
