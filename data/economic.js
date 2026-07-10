@@ -24,11 +24,11 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Highly developed economy under PM Sanae Takaichi (Japan's first female PM, since October 2025), who launched a ¥13.9 trillion stimulus package. The IMF April 2026 WEO revised Japan's growth to 0.8% (down from 1.1% in January); the July 2026 WEO Update lowered it further to 0.6%, citing weaker external demand and the energy price shock from the Middle East conflict. The Bank of Japan has gradually raised rates from negative territory; yen weakness has boosted export earnings. Demographic contraction and record public debt remain long-term structural challenges." },
 
-  276: { name:"Germany", gdp:5050, gdpPerCap:60200, growth:0.8, debt:63.5, tradeBalance:268,
+  276: { name:"Germany", gdp:5050, gdpPerCap:60200, growth:0.7, debt:63.5, tradeBalance:268,
     exports:["Vehicles","Machinery","Chemicals","Pharmaceuticals","Electronics"],
     partners:["United States","France","Netherlands","China","Italy"],
     sanctions:false,
-    summary:"Europe's largest economy, recovering from a two-year contraction. The new CDU-led government that won the February 2025 election reformed the constitutional debt brake to unlock a €500B defence and infrastructure fund. Automotive sector restructuring continues as EV adoption accelerates. The IMF April 2026 WEO cut German growth to 0.8% (from 1.1%), reflecting the Iran war energy price shock, US tariff headwinds on key export industries, and continued weakness in industrial orders." },
+    summary:"Europe's largest economy, recovering from a two-year contraction. The new CDU-led government that won the February 2025 election reformed the constitutional debt brake to unlock a €500B defence and infrastructure fund. Automotive sector restructuring continues as EV adoption accelerates. The IMF April 2026 WEO cut German growth to 0.8% (from 1.1%), reflecting the Iran war energy price shock, US tariff headwinds on key export industries, and continued weakness in industrial orders. The IMF July 2026 WEO Update (July 8) revised Germany's 2026 growth down further to 0.7%, citing continued energy headwinds and weaker industrial output." },
 
   356: { name:"India", gdp:4500, gdpPerCap:3130, growth:6.4, debt:82.5, tradeBalance:-250,
     exports:["Petroleum Products","Pharmaceuticals","IT Services","Textiles","Machinery"],
@@ -42,11 +42,11 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Highly service-driven economy anchored by London's global financial centre. The Labour government that took office in 2024 has focused on fiscal consolidation and public investment. A partial trade reset with the EU has reduced some post-Brexit friction. The IMF April 2026 WEO cut UK growth to 0.8% — the steepest G7 downgrade — citing heavy exposure to the Iran war energy shock through oil and gas imports and financial market sensitivity to Middle East disruption. PM Keir Starmer announced his resignation on June 22, 2026 amid falling poll numbers — the sixth UK PM to resign outside Downing Street in seven years — with Labour leadership nominations opening July 9; on day one, 322 of 403 Labour MPs formally nominated Burnham — the sole declared candidate — with his appointment as PM anticipated around July 20, 2026." },
 
-  250: { name:"France", gdp:3150, gdpPerCap:47800, growth:0.9, debt:115.8, tradeBalance:-105,
+  250: { name:"France", gdp:3150, gdpPerCap:47800, growth:0.6, debt:115.8, tradeBalance:-105,
     exports:["Aerospace","Pharmaceuticals","Luxury Goods","Vehicles","Agriculture"],
     partners:["Germany","United States","Italy","Belgium","Spain"],
     sanctions:false,
-    summary:"Diversified economy with world-leading aerospace (Airbus), luxury, and agriculture sectors. Political fragmentation following the 2024 snap elections has complicated fiscal consolidation, keeping the deficit above EU treaty limits. The defence sector has expanded amid increased NATO commitments." },
+    summary:"Diversified economy with world-leading aerospace (Airbus), luxury, and agriculture sectors. Political fragmentation following the 2024 snap elections has complicated fiscal consolidation, keeping the deficit above EU treaty limits. The defence sector has expanded amid increased NATO commitments. The IMF July 2026 WEO Update (July 8) cut France's 2026 growth forecast to 0.6% (down 0.3pp from 0.9% in April), citing energy headwinds from the Middle East war and weaker consumer momentum." },
 
   380: { name:"Italy", gdp:2310, gdpPerCap:39200, growth:0.5, debt:139.8, tradeBalance:57,
     exports:["Machinery","Vehicles","Pharmaceuticals","Fashion & Textiles","Food & Wine"],
@@ -54,11 +54,11 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Third-largest eurozone economy with chronic high debt. The Meloni government has managed fiscal pressures while maintaining EU relationships and accessing Next Generation EU funds. Italy has emerged as a key hub for transatlantic energy infrastructure following reduced Russian gas flows. The IMF April 2026 WEO cut Italy's 2026 growth to 0.5% (from 0.8%), reflecting high energy price sensitivity — Italy lacks domestic hydrocarbon resources and relies heavily on gas and oil imports disrupted by the Iran-Hormuz crisis." },
 
-  76:  { name:"Brazil", gdp:2280, gdpPerCap:10500, growth:1.9, debt:91.0, tradeBalance:110,
+  76:  { name:"Brazil", gdp:2280, gdpPerCap:10500, growth:2.4, debt:91.0, tradeBalance:110,
     exports:["Soybeans","Iron Ore","Petroleum","Poultry","Sugar","Vehicles"],
     partners:["China","United States","Argentina","Netherlands","EU"],
     sanctions:false,
-    summary:"South America's largest economy benefiting from strong commodity exports. Growth is projected at 1.9% for 2026 (IMF April 2026 WEO) — Brazil is a net energy exporter and the Iran-war oil price shock provides a modest positive boost (~0.2pp). The Lula government's fiscal framework has faced credibility challenges; the central bank raised rates significantly to anchor inflation expectations. Brazil's commodity wealth and BRICS role give it strategic leverage." },
+    summary:"South America's largest economy benefiting from strong commodity exports. The IMF July 2026 WEO Update (July 8) upgraded Brazil's 2026 growth forecast to 2.4% (from 1.9% in April), driven by a stronger-than-expected agricultural harvest, Brazil's oil-exporter status benefiting from elevated energy prices, greater fiscal support, and robust private consumption. The Lula government's fiscal framework has faced credibility challenges; the central bank raised rates significantly to anchor inflation expectations. Brazil's commodity wealth and BRICS role give it strategic leverage." },
 
   124: { name:"Canada", gdp:2290, gdpPerCap:57500, growth:1.1, debt:107.5, tradeBalance:22,
     exports:["Petroleum","Vehicles","Gold","Wheat","Machinery","Lumber"],
