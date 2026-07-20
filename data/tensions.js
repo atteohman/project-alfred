@@ -105,7 +105,7 @@ const LEADER_DATA = {
   "800": { name: "Yoweri Museveni",       title: "President",       wiki: "Yoweri Museveni" },
   "804": { name: "Volodymyr Zelenskyy",   title: "President",       wiki: "Volodymyr Zelenskyy" },
   "818": { name: "Abdel Fattah el-Sisi",  title: "President",       wiki: "Abdel Fattah el-Sisi" },
-  "826": { name: "Andy Burnham",           title: "Prime Minister-designate (Labour leader from July 17; PM expected July 21, 2026)", wiki: "Andy Burnham" },
+  "826": { name: "Andy Burnham",           title: "Prime Minister",  wiki: "Andy Burnham" },
   "840": { name: "Donald Trump",          title: "President",       wiki: "Donald Trump" },
   "854": { name: "Ibrahim Traoré",        title: "Transitional President", wiki: "Ibrahim Traoré (politician)" },
   "858": { name: "Yamandú Orsi",          title: "President",       wiki: "Yamandú Orsi" },
