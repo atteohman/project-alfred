@@ -184,7 +184,7 @@ const ECON_DATA = {
     exports:["Petroleum Products","Natural Gas","Gold","Textiles","Agriculture"],
     partners:["United States","UAE","Saudi Arabia","Italy","Turkey"],
     sanctions:false,
-    summary:"Strategic location controlling the Suez Canal provides critical revenue, though Houthi Red Sea attacks in 2024–25 significantly disrupted canal traffic and revenues. The 2024 IMF deal and pound devaluation are enabling a gradual stabilisation. Gulf investment pledges, particularly from UAE, are supporting growth recovery." },
+    summary:"Strategic location controlling the Suez Canal provides critical revenue, though Houthi Red Sea attacks in 2024–25 significantly disrupted canal traffic and revenues. The 2024 IMF deal and pound devaluation are enabling a gradual stabilisation. Gulf investment pledges, particularly from UAE, are supporting growth recovery. On July 30, 2026, Egypt was struck for the first time in the widening US-Iran war: an unidentified drone caused fires at the Mediterranean port of Damietta — damaging a US-owned storage facility and a Greek tanker — ending Cairo's exemption from the conflict and introducing a new downside risk to investor confidence and tourism." },
 
   566: { name:"Nigeria", gdp:415, gdpPerCap:1790, growth:3.3, debt:39.5, tradeBalance:12,
     exports:["Crude Oil","Natural Gas","Cocoa","Rubber","Sesame"],
