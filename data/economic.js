@@ -232,7 +232,7 @@ const ECON_DATA = {
     exports:["Copper","Gold","Lead","Zinc","Natural Gas","Agriculture"],
     partners:["China","United States","Canada","EU","Brazil"],
     sanctions:false,
-    summary:"Mining-dependent economy that has maintained growth despite political instability — multiple presidential crises since 2021. Copper and lithium production continues to expand, underpinning export revenues. Infrastructure investment, including the Chancay port (Chinese-funded), is reshaping regional logistics." },
+    summary:"Mining-dependent economy that has maintained growth despite political instability — multiple presidential crises since 2021. Keiko Fujimori was inaugurated as President on July 28, 2026, following a narrow June 7 runoff win (50.3% to 49.7% over Roberto Sánchez) — her fourth presidential bid. She has pledged to reduce investment permit processing times by 40%, implement an iron-fisted anti-crime policy modelled on El Salvador's Bukele, and raise the minimum wage by 15%. Copper and lithium production continues to expand, underpinning export revenues. Infrastructure investment, including the Chancay port (Chinese-funded), is reshaping regional logistics." },
 
   203: { name:"Czech Republic", gdp:375, gdpPerCap:34800, growth:2.2, debt:42.5, tradeBalance:18,
     exports:["Vehicles","Machinery","Electronics","Metals","Pharmaceuticals"],
