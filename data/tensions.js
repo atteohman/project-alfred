@@ -27,7 +27,7 @@ const LEADER_DATA = {
   "152": { name: "José Antonio Kast",      title: "President",       wiki: "José Antonio Kast" },
   "156": { name: "Xi Jinping",            title: "President & General Secretary", wiki: "Xi Jinping" },
   "158": { name: "Lai Ching-te",          title: "President",       wiki: "Lai Ching-te" },
-  "170": { name: "Gustavo Petro",         title: "President",       wiki: "Gustavo Petro" },
+  "170": { name: "Abelardo de la Espriella", title: "President",     wiki: "Abelardo de la Espriella" },
   "178": { name: "Denis Sassou Nguesso",  title: "President",       wiki: "Denis Sassou Nguesso" },
   "180": { name: "Félix Tshisekedi",      title: "President",       wiki: "Félix Tshisekedi" },
   "188": { name: "Laura Fernández",        title: "President",       wiki: "Laura Fernández Delgado" },
