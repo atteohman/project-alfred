@@ -180,11 +180,11 @@ const ECON_DATA = {
     sanctions:false,
     summary:"Most industrialised economy in Africa. The Government of National Unity formed after the 2024 election has made progress on electricity sector reform, reducing load-shedding from its peak. Growth is recovering but unemployment remains near 33%. South Africa chaired the G20 in 2025, but the US barred it from the 2026 G20 Miami summit — the bloc's first-ever exclusion of a member — and suspended aid after President Trump cited disputed claims of Afrikaner persecution; South Africa has rejected the allegations and skipped subsequent G20 sherpa meetings in protest." },
 
-  818: { name:"Egypt", gdp:450, gdpPerCap:4100, growth:4.2, debt:91.5, tradeBalance:-28,
+  818: { name:"Egypt", gdp:450, gdpPerCap:4100, growth:4.6, debt:91.5, tradeBalance:-28,
     exports:["Petroleum Products","Natural Gas","Gold","Textiles","Agriculture"],
     partners:["United States","UAE","Saudi Arabia","Italy","Turkey"],
     sanctions:false,
-    summary:"Strategic location controlling the Suez Canal provides critical revenue, though Houthi Red Sea attacks in 2024–25 significantly disrupted canal traffic and revenues. The 2024 IMF deal and pound devaluation are enabling a gradual stabilisation. Gulf investment pledges, particularly from UAE, are supporting growth recovery. On July 30, 2026, Egypt was struck for the first time in the widening US-Iran war: an unidentified drone caused fires at the Mediterranean port of Damietta — damaging a US-owned storage facility and a Greek tanker — ending Cairo's exemption from the conflict and introducing a new downside risk to investor confidence and tourism." },
+    summary:"Strategic location controlling the Suez Canal provides critical revenue, though Houthi Red Sea attacks in 2024–25 significantly disrupted canal traffic and revenues. The 2024 IMF deal and pound devaluation are enabling a gradual stabilisation. Gulf investment pledges, particularly from UAE, are supporting growth recovery. The IMF July 2026 WEO Update (July 8) upgraded Egypt's 2026 growth forecast to 4.6% (from 4.2% in the April WEO), reflecting stronger domestic momentum and sustained Gulf investment inflows — a 0.4pp upward revision even as the regional war weighed on other MENA economies. On July 30, 2026, Egypt was struck for the first time in the widening US-Iran war: an unidentified drone caused fires at the Mediterranean port of Damietta — damaging a US-owned storage facility and a Greek tanker — ending Cairo's exemption from the conflict and introducing a new downside risk to investor confidence and tourism." },
 
   566: { name:"Nigeria", gdp:415, gdpPerCap:1790, growth:3.3, debt:39.5, tradeBalance:12,
     exports:["Crude Oil","Natural Gas","Cocoa","Rubber","Sesame"],
