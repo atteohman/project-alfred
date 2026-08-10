@@ -210,6 +210,15 @@ const ALLIANCES = {
       { y: 2021, e: "Al-Ula Declaration ends Qatar blockade; GCC reconciliation achieved." },
       { y: 2026, e: "Iran's war with Israel and the US (from Feb 2026) strikes Bahrain directly and tests Gulf unity; on June 25, Secretary of State Rubio meets GCC states in Manama, declaring 'zero support' among members for Iranian tolls on Strait of Hormuz shipping." }
     ]
+  },
+  mjda: {
+    id: "mjda", label: "MJDA", fullName: "Mecca Joint Defence Agreement",
+    color: "#3d8b4f", xf: 0.61, yf: 0.56,
+    founded: "August 7, 2026", hq: "No permanent HQ", memberCount: 3,
+    summary: "The Mecca Joint Defence Agreement (MJDA) is a trilateral mutual-defence pact signed on August 7, 2026, in Mecca, Saudi Arabia, by Saudi Crown Prince Mohammed bin Salman, Turkish President Recep Tayyip Erdoğan, and Pakistani Prime Minister Shehbaz Sharif. Patterned on NATO's Article 5 principle, the agreement provides that an armed attack against any one of the three states shall be regarded as an attack against all three, and commits signatories to enhanced defence cooperation. It emerged from the security vacuum created by doubts about US reliability as a Gulf guarantor during the 2026 US-Israel-Iran war, in which Iranian strikes had reached all three countries' interests. Pakistan described the pact as 'purely defensive and open to others.'",
+    events: [
+      { y: 2026, e: "Mecca Joint Defence Agreement signed on August 7, 2026 at Al-Safa Palace in Mecca by Saudi Arabia, Turkey, and Pakistan — a trilateral Article 5-style collective-defence pact (attack on one = attack on all three). The pact was triggered by Iran's sustained strikes on all three countries' territories and interests since February 2026 and growing doubts about Washington's reliability as a Gulf security guarantor. Turkey's participation represents its deepest Middle East security commitment outside NATO. Pakistan described the agreement as 'purely defensive and open to others.'" }
+    ]
   }
 };
 
@@ -226,7 +235,7 @@ const COUNTRIES = {
   JPN: { name: "Japan",             a: ["g7","quad"] },
   ESP: { name: "Spain",             a: ["nato","eu"] },
   POL: { name: "Poland",            a: ["nato","eu"] },
-  TUR: { name: "Turkey",            a: ["nato"] },
+  TUR: { name: "Turkey",            a: ["nato","mjda"] },
   NLD: { name: "Netherlands",       a: ["nato","eu"] },
   BEL: { name: "Belgium",           a: ["nato","eu"] },
   NOR: { name: "Norway",            a: ["nato"] },
@@ -263,11 +272,11 @@ const COUNTRIES = {
   UZB: { name: "Uzbekistan",        a: ["sco"] },
   CHN: { name: "China",             a: ["sco","brics"] },
   IND: { name: "India",             a: ["sco","brics","quad"] },
-  PAK: { name: "Pakistan",          a: ["sco"] },
+  PAK: { name: "Pakistan",          a: ["sco","mjda"] },
   IRN: { name: "Iran",              a: ["sco","brics"] },
   BRA: { name: "Brazil",            a: ["brics"] },
   ZAF: { name: "South Africa",      a: ["brics"] },
-  SAU: { name: "Saudi Arabia",      a: ["brics","gcc","arab_league"] },
+  SAU: { name: "Saudi Arabia",      a: ["brics","gcc","arab_league","mjda"] },
   ARE: { name: "UAE",               a: ["brics","gcc","arab_league"] },
   EGY: { name: "Egypt",             a: ["brics","arab_league"] },
   ETH: { name: "Ethiopia",          a: ["brics"] },
