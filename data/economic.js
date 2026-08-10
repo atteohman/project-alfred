@@ -462,7 +462,7 @@ const ECON_DATA = {
     exports:["Petroleum","LNG","Petrochemicals","Metals","Fish"],
     partners:["China","UAE","India","South Korea","Japan"],
     sanctions:false,
-    summary:"Moderate Gulf state pursuing Vision 2040 economic diversification. Oman functions as a key diplomatic back-channel between Iran and Western powers, hosting sensitive negotiations. Fiscal position has strengthened significantly following post-2020 debt concerns." },
+    summary:"Moderate Gulf state pursuing Vision 2040 economic diversification. Oman has emerged as the principal diplomatic intermediary of the 2026 US-Iran war, hosting back-channel Iran-US contacts and leading mediation of the Strait of Hormuz shipping crisis. On August 5, 2026, Iran and Oman agreed on the geographical coordinates of proposed Hormuz commercial shipping routes; on August 6, Iran's Foreign Ministry announced a Hormuz shipping deal with Oman had been agreed in principle — Bloomberg reported it would establish two separate channels (Iranian-controlled entry, Oman-controlled exit) with Iran seeking to bar US and Israeli warships and require compensation from hostile nations; terms remain under negotiation and no final deal has been signed. Fiscal position has strengthened significantly following post-2020 debt concerns." },
 
   // Bahrain
   48:  { name:"Bahrain", gdp:49, gdpPerCap:31500, growth:3.0, debt:127.0, tradeBalance:6,
