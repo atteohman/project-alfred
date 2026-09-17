@@ -159,7 +159,7 @@ const LEADER_DATA = {
   "705": { name: "Robert Golob",          title: "Prime Minister",   wiki: "Robert Golob" },
   "710": { name: "Cyril Ramaphosa",       title: "President",        wiki: "Cyril Ramaphosa" },
   "748": { name: "Mswati III",            title: "King",             wiki: "Mswati III" },
-  "752": { name: "Ulf Kristersson",       title: "Prime Minister",   wiki: "Ulf Kristersson" },
+  "752": { name: "Magdalena Andersson",    title: "Prime Minister-designate (election Sep 13 2026)", wiki: "Magdalena Andersson" },
   "768": { name: "Faure Gnassingbé",      title: "President",        wiki: "Faure Gnassingbé" },
   "780": { name: "Kamla Persad-Bissessar", title: "Prime Minister",   wiki: "Kamla Persad-Bissessar" },
   "784": { name: "Mohammed bin Zayed",    title: "President",        wiki: "Mohamed bin Zayed Al Nahyan" },
