@@ -1,5 +1,5 @@
 // Economic data — edit this file to update figures
-// Last updated: 2026-09-17
+// Last updated: 2026-09-18
 
 // ── Economic Data ─────────────────────────────────────────────────────────────
 // Key: ISO 3166-1 numeric code (as used by topojson world-atlas)
