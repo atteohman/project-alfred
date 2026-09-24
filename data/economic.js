@@ -148,7 +148,7 @@ const ECON_DATA = {
     exports:["Machinery","Vehicles","Pharmaceuticals","Steel","Paper","Technology"],
     partners:["Germany","United States","Norway","Denmark","Finland"],
     sanctions:false,
-    summary:"Innovation-driven economy that joined NATO in March 2024, completing Nordic integration into the alliance. Defence spending is rising toward 3% of GDP. Low public debt provides fiscal space. Household debt remains elevated but the housing market has started to stabilise after sharp post-2022 price corrections. The September 17, 2026 general election returned a centre-left majority by a single seat; Magdalena Andersson is PM-designate and parliament may vote on a new prime minister no earlier than September 29, with the incumbent right-wing government continuing in caretaker capacity." },
+    summary:"Innovation-driven economy that joined NATO in March 2024, completing Nordic integration into the alliance. Defence spending is rising toward 3% of GDP. Low public debt provides fiscal space. Household debt remains elevated but the housing market has started to stabilise after sharp post-2022 price corrections. The September 13, 2026 general election returned a centre-left majority; Magdalena Andersson was formally tasked by the Riksdag Speaker on September 18, 2026 to form a new government; parliament may vote on a new prime minister by mid-October 2026, with the incumbent right-wing government continuing in caretaker capacity." },
 
   578: { name:"Norway", gdp:590, gdpPerCap:106000, growth:2.2, debt:39.0, tradeBalance:195,
     exports:["Crude Oil","Natural Gas","Fish","Metals","Shipping Services"],
