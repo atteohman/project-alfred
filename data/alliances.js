@@ -1,5 +1,5 @@
 // Alliance network data
-// Last updated: 2026-09-25
+// Last updated: 2026-09-28
 
 // ─── Alliance Definitions ─────────────────────────────────────────────────────
 const ALLIANCES = {
@@ -123,7 +123,8 @@ const ALLIANCES = {
       { y: 2021, e: "Iran granted observer status on path to full membership." },
       { y: 2022, e: "SCO holds largest-ever joint military exercises following Russia's Ukraine invasion." },
       { y: 2023, e: "Iran becomes full member. SCO now includes all major Eurasian non-Western powers." },
-      { y: 2024, e: "Belarus joins as full member; SCO formally encompasses the full Russia-China bloc architecture." }
+      { y: 2024, e: "Belarus joins as full member; SCO formally encompasses the full Russia-China bloc architecture." },
+      { y: 2026, e: "Bishkek Summit (August 31–September 1): 26th SCO heads-of-state meeting, held in Bishkek, Kyrgyzstan on the organisation's 25th anniversary. Leaders adopted the Bishkek Declaration and 28 documents covering security, AI, energy cooperation, and regional logistics, and approved amendments to the SCO Charter; the proposed SCO Development Bank was not launched. On September 2, Turkish President Erdoğan publicly stated Turkey would consider full SCO membership while maintaining its NATO and Western relationships." }
     ]
   },
   brics: {
