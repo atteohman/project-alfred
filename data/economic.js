@@ -1,5 +1,5 @@
 // Economic data — edit this file to update figures
-// Last updated: 2026-10-01
+// Last updated: 2026-10-03
 
 // ── Economic Data ─────────────────────────────────────────────────────────────
 // Key: ISO 3166-1 numeric code (as used by topojson world-atlas)
@@ -16,7 +16,7 @@ const ECON_DATA = {
     exports:["Electronics","Machinery","EVs","Steel","Chemicals","Solar Equipment"],
     partners:["ASEAN","EU","United States","Japan","South Korea"],
     sanctions:false,
-    summary:"World's second-largest economy facing a prolonged property sector correction and US tariff escalation. Growth is forecast at 4.6% for 2026 (IMF July 2026 WEO Update, up from 4.4% in April), supported by lower effective US tariff rates on Chinese goods, domestic stimulus, and strong manufacturing exports — particularly EVs and clean energy equipment. De-risking by Western multinationals continues to redirect some supply chains." },
+    summary:"World's second-largest economy facing a prolonged property sector correction and US tariff escalation. Growth is forecast at 4.6% for 2026 (IMF July 2026 WEO Update, up from 4.4% in April), supported by lower effective US tariff rates on Chinese goods, domestic stimulus, and strong manufacturing exports — particularly EVs and clean energy equipment. The Trump-Xi summit (September 23–25, 2026, White House) extended the November 2025 trade truce by two months to January 10, 2027, with both sides reaching consensus on lowering tariffs on a $60 billion batch of non-sensitive goods but setting no timeline for adoption; a broader trade accord was pushed into 2027. De-risking by Western multinationals continues to redirect some supply chains." },
 
   392: { name:"Japan", gdp:4460, gdpPerCap:36000, growth:0.6, debt:257.0, tradeBalance:-42,
     exports:["Vehicles","Machinery","Electronics","Precision Instruments","Chemicals"],
