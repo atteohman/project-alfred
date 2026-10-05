@@ -1,5 +1,5 @@
 // Alliance network data
-// Last updated: 2026-09-30
+// Last updated: 2026-10-05
 
 // ─── Alliance Definitions ─────────────────────────────────────────────────────
 const ALLIANCES = {
@@ -22,7 +22,8 @@ const ALLIANCES = {
       { y: 2025, e: "The Hague Summit: all 32 allies commit to spending at least 5% of GDP on defence and security by 2035 — the highest collective target in NATO history, up from the 2% benchmark set in 2014. Spain received an exemption; a progress review is set for 2029." },
       { y: 2026, e: "Seven allies (Belgium, Denmark, France, Netherlands, Norway, Turkey, UK) agree to jointly develop ballistic missile defense capabilities — sensors, interceptors, and tactical control systems. In April, President Trump called NATO a 'paper tiger' and threatened US withdrawal after allies declined to send warships to the Strait of Hormuz during the US-Iran war — the most serious challenge to Alliance cohesion since its founding." },
       { y: 2026, e: "Ankara Summit (July 7–8): the alliance's second summit hosted by Turkey (after Istanbul 2004). The communiqué has all 32 allies affirm an 'ironclad commitment' to Article 5 collective defence and formally designate Russia as a threat to Euro-Atlantic security. European allies and Canada pledge €70 billion annually in military assistance to Ukraine for both 2026 and 2027 (€140 billion total). Trump attends and meets separately with President Erdoğan, President Zelensky, and Syrian transitional leader Ahmad al-Sharaa. On July 8, at the summit's close, Trump declared the US-Iran ceasefire 'over' following Iran's July 7 attack on three commercial ships in the Strait of Hormuz and a subsequent exchange of US and Iranian strikes; the US revoked its 60-day Iranian oil-sales license." },
-      { y: 2026, e: "September 30: NATO condemned escalatory nuclear rhetoric from Russia following a major overnight ballistic missile and drone attack on Kyiv — the latest in a sustained Russian aerial campaign as both Kyiv and Moscow separately confirmed plans to potentially resume US-brokered trilateral peace talks in October 2026." }
+      { y: 2026, e: "September 30: NATO condemned escalatory nuclear rhetoric from Russia following a major overnight ballistic missile and drone attack on Kyiv — the latest in a sustained Russian aerial campaign as both Kyiv and Moscow separately confirmed plans to potentially resume US-brokered trilateral peace talks in October 2026." },
+      { y: 2026, e: "October 1: Putin, speaking at the Valdai Discussion Club in Moscow, formally rejected any ceasefire on long-range strikes with Ukraine and issued an explicit nuclear warning over Kaliningrad — stating Russia would deploy 'all weapons' including nuclear arms if NATO attempted to attack its Baltic exclave, the most direct nuclear threat from Moscow to the alliance since the Ukraine war began." }
     ]
   },
   eu: {
