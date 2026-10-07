@@ -1,5 +1,5 @@
 // Alliance network data
-// Last updated: 2026-10-05
+// Last updated: 2026-10-07
 
 // ─── Alliance Definitions ─────────────────────────────────────────────────────
 const ALLIANCES = {
@@ -212,7 +212,8 @@ const ALLIANCES = {
       { y: 2015, e: "Saudi-led GCC coalition begins military intervention in Yemen against Houthi forces." },
       { y: 2017, e: "Saudi Arabia, UAE, Bahrain, and Egypt blockade Qatar over alleged ties to Iran and Islamists." },
       { y: 2021, e: "Al-Ula Declaration ends Qatar blockade; GCC reconciliation achieved." },
-      { y: 2026, e: "Iran's war with Israel and the US (from Feb 2026) strikes Bahrain directly and tests Gulf unity; on June 25, Secretary of State Rubio meets GCC states in Manama, declaring 'zero support' among members for Iranian tolls on Strait of Hormuz shipping." }
+      { y: 2026, e: "Iran's war with Israel and the US (from Feb 2026) strikes Bahrain directly and tests Gulf unity; on June 25, Secretary of State Rubio meets GCC states in Manama, declaring 'zero support' among members for Iranian tolls on Strait of Hormuz shipping." },
+      { y: 2026, e: "October 4–5 (Operation Yemen Dawn): Saudi Arabia deployed ~100 warplanes supporting Yemen's Presidential Leadership Council against Houthi forces; PLC forces recaptured the Dhubab, Bab, and Hadeid districts near the Bab el-Mandeb Strait, severing the Dhubab–Mokha road; Houthis claimed retaliatory strikes on King Khalid International Airport in Riyadh and the Aramco Rabigh refinery — the most significant GCC-backed offensive push in Yemen in years." }
     ]
   },
   mjda: {
@@ -221,7 +222,8 @@ const ALLIANCES = {
     founded: "August 7, 2026", hq: "No permanent HQ", memberCount: 3,
     summary: "The Mecca Joint Defence Agreement (MJDA) is a trilateral mutual-defence pact signed on August 7, 2026, in Mecca, Saudi Arabia, by Saudi Crown Prince Mohammed bin Salman, Turkish President Recep Tayyip Erdoğan, and Pakistani Prime Minister Shehbaz Sharif. Patterned on NATO's Article 5 principle, the agreement provides that an armed attack against any one of the three states shall be regarded as an attack against all three, and commits signatories to enhanced defence cooperation. It emerged from the security vacuum created by doubts about US reliability as a Gulf guarantor during the 2026 US-Israel-Iran war, in which Iranian strikes had reached all three countries' interests. Pakistan described the pact as 'purely defensive and open to others.'",
     events: [
-      { y: 2026, e: "Mecca Joint Defence Agreement signed on August 7, 2026 at Al-Safa Palace in Mecca by Saudi Arabia, Turkey, and Pakistan — a trilateral Article 5-style collective-defence pact (attack on one = attack on all three). The pact was triggered by Iran's sustained strikes on all three countries' territories and interests since February 2026 and growing doubts about Washington's reliability as a Gulf security guarantor. Turkey's participation represents its deepest Middle East security commitment outside NATO. Pakistan described the agreement as 'purely defensive and open to others.'" }
+      { y: 2026, e: "Mecca Joint Defence Agreement signed on August 7, 2026 at Al-Safa Palace in Mecca by Saudi Arabia, Turkey, and Pakistan — a trilateral Article 5-style collective-defence pact (attack on one = attack on all three). The pact was triggered by Iran's sustained strikes on all three countries' territories and interests since February 2026 and growing doubts about Washington's reliability as a Gulf security guarantor. Turkey's participation represents its deepest Middle East security commitment outside NATO. Pakistan described the agreement as 'purely defensive and open to others.'" },
+      { y: 2026, e: "October 4–5 (Operation Yemen Dawn): Saudi Arabia (MJDA founding member) deployed ~100 warplanes in support of Yemen's Presidential Leadership Council forces against Houthi positions near the Bab el-Mandeb Strait; PLC forces captured Dhubab district and its airport — the first significant offensive military action by any MJDA member since the pact was signed on August 7." }
     ]
   }
 };
