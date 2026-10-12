@@ -124,7 +124,7 @@ const LEADER_DATA = {
   "204": { name: "Romuald Wadagni",        title: "President",        wiki: "Romuald Wadagni" },
   "214": { name: "Luis Abinader",         title: "President",        wiki: "Luis Abinader" },
   "222": { name: "Nayib Bukele",          title: "President",        wiki: "Nayib Bukele" },
-  "233": { name: "Alar Karis",            title: "President",        wiki: "Alar Karis" },
+  "233": { name: "Ülle Madise",           title: "President",        wiki: "Ülle Madise" },
   "242": { name: "Sitiveni Rabuka",       title: "Prime Minister",   wiki: "Sitiveni Rabuka" },
   "266": { name: "Brice Oligui Nguema",   title: "Transitional President", wiki: "Brice Clotaire Oligui Nguema" },
   "270": { name: "Adama Barrow",          title: "President",        wiki: "Adama Barrow" },
