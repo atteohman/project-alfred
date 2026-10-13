@@ -1,5 +1,5 @@
 // Alliance network data
-// Last updated: 2026-10-11
+// Last updated: 2026-10-13
 
 // ─── Alliance Definitions ─────────────────────────────────────────────────────
 const ALLIANCES = {
@@ -214,7 +214,8 @@ const ALLIANCES = {
       { y: 2021, e: "Al-Ula Declaration ends Qatar blockade; GCC reconciliation achieved." },
       { y: 2026, e: "Iran's war with Israel and the US (from Feb 2026) strikes Bahrain directly and tests Gulf unity; on June 25, Secretary of State Rubio meets GCC states in Manama, declaring 'zero support' among members for Iranian tolls on Strait of Hormuz shipping." },
       { y: 2026, e: "October 4–5 (Operation Yemen Dawn): Saudi Arabia deployed ~100 warplanes supporting Yemen's Presidential Leadership Council against Houthi forces; PLC forces recaptured the Dhubab, Bab, and Hadeid districts near the Bab el-Mandeb Strait, severing the Dhubab–Mokha road; Houthis claimed retaliatory strikes on King Khalid International Airport in Riyadh and the Aramco Rabigh refinery — the most significant GCC-backed offensive push in Yemen in years." },
-      { y: 2026, e: "October 10, 2026: A Houthi missile/drone strike on King Khalid International Airport in Riyadh killed at least 12 people and wounded 309, with three planes damaged — the deadliest Houthi strike on Saudi civilian infrastructure since the Iran-Houthi escalation began; Trump said the US 'may' join the fight against the Houthis." }
+      { y: 2026, e: "October 10, 2026: A Houthi missile/drone strike on King Khalid International Airport in Riyadh killed at least 12 people and wounded 309, with three planes damaged — the deadliest Houthi strike on Saudi civilian infrastructure since the Iran-Houthi escalation began; Trump said the US 'may' join the fight against the Houthis." },
+      { y: 2026, e: "October 12–13, 2026: Houthis threatened a 'swift and painful' response if the US joins Saudi Arabia's strikes against them (CBS News); Riyadh's King Khalid International Airport remained closed following the October 10 strike; Saudi Arabia reported fresh Houthi missile and drone threats as the GCC-backed Operation Yemen Dawn offensive continued near the Bab el-Mandeb Strait." }
     ]
   },
   mjda: {
